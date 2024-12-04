@@ -77,7 +77,7 @@ const projects = [
 		image: "/BBTV.png"
 	},
 ];
-
+//samok
 const categories = [
 	'All',
 	'Web Development',
