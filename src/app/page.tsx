@@ -53,14 +53,22 @@ export default function Home() {
 	const featuredProjects = [
 		{
 			title: 'QuickEase',
-			category: 'Web App',
+			category: 'Web and Mobile App',
 			url: 'https://quick-ease-alpha.vercel.app/',
 			year: '2024',
 			description:
 				'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
 			link: 'https://quick-ease-alpha.vercel.app/',
 		},
-		// Add more featured projects here
+    {
+			title: 'VortexNews',
+			category: 'Web App and Mobile',
+			url: 'https://lonergun141.github.io/VortexMedia/',
+			year: '2024',
+			description:
+				'A simple site to view news and articles from various sources.',
+			link: 'https://lonergun141.github.io/VortexMedia/',
+		},
 	];
 
 	return (
@@ -112,7 +120,7 @@ export default function Home() {
 						transition={{ duration: 0.6 }}
 						viewport={{ once: true }}
 						className="text-5xl md:text-6xl font-light mb-24 text-brand-primary">
-						Selected <span className="font-medium">Work</span>
+						Project <span className="font-medium">Experiences</span>
 					</motion.h2>
 					<div className="grid grid-cols-4 auto-rows-[320px] gap-6">
 						{projects.map((project, index) => (
