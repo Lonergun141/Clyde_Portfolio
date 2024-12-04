@@ -32,7 +32,7 @@ const Profile = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="text-6xl sm:text-8xl font-light tracking-tight text-center"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-center"
           >
             THE
             <br />
