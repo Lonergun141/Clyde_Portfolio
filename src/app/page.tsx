@@ -1,101 +1,150 @@
-import Image from "next/image";
+'use client';
+
+import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { useScroll, useTransform } from 'framer-motion';
+import Footer from '@/components/sections/Footer';
+import ProjectCard from '@/components/ProjectCard';
+import FeaturedProjects from '@/components/sections/FeaturedProjects';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-              Hello World
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+	const containerRef = useRef(null);
+	const { scrollYProgress } = useScroll({
+		target: containerRef,
+		offset: ['start start', 'end start'],
+	});
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+	const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+	const projects = [
+		{
+			title: 'Mobile Development',
+			description:
+				'Creating seamless mobile experiences with React Native. Building cross-platform applications that deliver native performance.',
+			tags: ['React Native', 'TypeScript', 'Mobile', 'UI/UX'],
+			image: '/mobile.png',
+			size: 'large' as const,
+		},
+		{
+			title: 'Web Development',
+			description:
+				'Crafting modern web applications using Next.js and React. Focus on performance, accessibility, and user experience.',
+			tags: ['Next.js', 'React', 'TailwindCSS', 'TypeScript'],
+			image: '/web.png',
+			size: 'small' as const,
+		},
+		{
+			title: 'UI/UX Design',
+			description:
+				'Designing intuitive interfaces and comprehensive design systems that enhance user engagement and satisfaction.',
+			tags: ['Figma', 'Design Systems', 'Prototyping', 'User Research'],
+			image: '/design.png',
+		},
+		{
+			title: 'Former Video Editor and Photographer',
+			description:
+				'Developed and edited videos for events and marketing purposes.',
+			tags: ['Lightroom', 'Premiere Pro', 'Photoshop', 'Cannon'],
+			image: '/tech.png',
+		},
+	];
+
+	const featuredProjects = [
+		{
+			title: 'QuickEase',
+			category: 'Web App',
+			url: 'https://quick-ease-alpha.vercel.app/',
+			year: '2024',
+			description:
+				'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
+			link: 'https://quick-ease-alpha.vercel.app/',
+		},
+		// Add more featured projects here
+	];
+
+	return (
+		<main className="min-h-screen bg-background font-inter">
+			{/* Hero Section */}
+			<div ref={containerRef} className="relative h-screen">
+				<motion.div
+					style={{ y, opacity }}
+					className="absolute inset-0 flex items-center justify-center px-6">
+					<div className="max-w-7xl mx-auto w-full">
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 1 }}
+							className="space-y-8">
+							<p className="text-brand-secondary tracking-widest uppercase text-sm">
+								Portfolio 2024
+							</p>
+							<h1 className="text-[clamp(3rem,15vw,12rem)] font-light leading-[0.9] tracking-tight text-brand-primary">
+								CLYDE
+								<span className="block font-medium">GEVERO</span>
+							</h1>
+							<div className="flex flex-col md:flex-row gap-8 text-lg">
+								<span className="text-brand-secondary">Mobile Developer</span>
+								<span className="hidden md:block text-border-dark">/</span>
+								<span className="text-brand-secondary">Web Developer</span>
+								<span className="hidden md:block text-border-dark">/</span>
+								<span className="text-brand-secondary">UI/UX Designer</span>
+							</div>
+						</motion.div>
+					</div>
+				</motion.div>
+			</div>
+
+			{/* Featured Projects */}
+			<FeaturedProjects projects={featuredProjects} />
+
+			{/* Projects Section */}
+			<motion.section
+				initial={{ opacity: 0 }}
+				whileInView={{ opacity: 1 }}
+				transition={{ duration: 0.8 }}
+				viewport={{ once: true, margin: '-100px' }}
+				className="mt-32 py-24 bg-background-light relative overflow-hidden">
+				<div className="max-w-8xl mx-auto px-6">
+					<motion.h2
+						initial={{ opacity: 0, x: -20 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.6 }}
+						viewport={{ once: true }}
+						className="text-5xl md:text-6xl font-light mb-24 text-brand-primary">
+						Selected <span className="font-medium">Work</span>
+					</motion.h2>
+					<div className="grid grid-cols-4 auto-rows-[320px] gap-6">
+						{projects.map((project, index) => (
+							<motion.div
+								key={project.title}
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{
+									duration: 0.7,
+									delay: index * 0.15,
+									ease: [0.23, 1, 0.32, 1],
+								}}
+								viewport={{ once: true, margin: '-50px' }}
+								className={`
+									relative
+									${project.size === 'large' ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}
+									${index === 3 ? 'col-span-2' : ''}
+								`}>
+								<ProjectCard {...project} />
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</motion.section>
+
+			<motion.footer
+				initial={{ opacity: 0 }}
+				whileInView={{ opacity: 1 }}
+				transition={{ duration: 0.8 }}
+				viewport={{ once: true }}>
+				<Footer />
+			</motion.footer>
+		</main>
+	);
 }
