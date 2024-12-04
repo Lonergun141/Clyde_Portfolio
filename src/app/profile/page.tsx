@@ -1,4 +1,4 @@
-import { technologies } from "@/lib/constants";
+import Image from 'next/image';
 
 const Profile = () => {
   const mainTechnologies = [
@@ -7,7 +7,7 @@ const Profile = () => {
 
   const creativeTools = [
     'Adobe Lightroom', 'Adobe Premiere Pro', 'Canon Photography', 'UI/UX Design', 
-     'Video Editing'
+    'Video Editing'
   ];
 
   return (
@@ -21,7 +21,7 @@ const Profile = () => {
               About <span className="font-medium">Me</span>
             </h1>
             <p className="text-base sm:text-lg text-brand-secondary/80 leading-relaxed">
-              I'm a versatile creator specializing in frontend development and digital media. 
+              I&apos;m a versatile creator specializing in frontend development and digital media. 
               Combining my passion for code with videography and design, I create engaging 
               digital experiences across web, mobile, and video platforms.
             </p>
@@ -29,8 +29,14 @@ const Profile = () => {
 
           {/* Profile Image */}
           <div className="col-span-1 md:col-span-2 md:row-span-2 h-[250px] md:h-auto relative overflow-hidden">
-            <div className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: "url('/clyde.jpg')" }} />
+            <Image
+              src="/clyde.jpg"
+              alt="Profile Image"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         </div>
 

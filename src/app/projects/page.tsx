@@ -103,8 +103,6 @@ export default function Projects() {
 
 	return (
 		<main className="min-h-screen bg-background pt-24 px-8 pb-8">
-			{' '}
-			{/* Added pt-24 for navbar spacing */}
 			<div className="max-w-7xl mx-auto">
 				<h1 className="text-4xl font-bold text-brand-primary mb-8">Projects</h1>
 
@@ -158,6 +156,7 @@ export default function Projects() {
 										sizes="(max-width: 768px) 100vw,
 												(max-width: 1200px) 50vw,
 												33vw"
+										priority={index < 6}
 									/>
 								</div>
 							)}
@@ -182,12 +181,11 @@ export default function Projects() {
 									{project.title}
 								</h2>
 
-								{/* Description */}
+						
 								<p className="text-brand-secondary text-sm mb-4 flex-grow">
 									{project.description}
 								</p>
 
-								{/* Technologies */}
 								<div className="flex flex-wrap gap-2 mb-4">
 									{project.technologies.map((tech, techIndex) => (
 										<span
@@ -208,7 +206,7 @@ export default function Projects() {
 									rel="noopener noreferrer"
 									className="inline-flex items-center text-sm font-medium text-brand-primary 
                                                              hover:text-brand-secondary transition-colors duration-300
-                                                             group-hover:translate-x-1 transform transition-transform"
+                                                             group-hover:translate-x-1 transform"
 								>
 									View Project
 									<svg 

@@ -34,7 +34,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 				{/* Header */}
 				<div className="mb-16 max-w-3xl">
 					<h2 className="text-5xl font-light text-brand-primary mb-4">Featured work</h2>
-					<p className="text-lg text-brand-secondary">Selected projects I've worked on</p>
+					<p className="text-lg text-brand-secondary">Selected projects I&apos;ve worked on</p>
 				</div>
 
 				{/* Project Showcase */}

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface ProjectCardProps {
   title: string;
   description: string;
@@ -11,11 +13,15 @@ const ProjectCard = ({ title, description, tags, image }: ProjectCardProps) => {
                     hover:translate-y-[-4px] border border-border-dark hover:border-accent-purple-light">
       {/* Image Section */}
       {image && (
-        <div className="h-48 rounded-t-xl overflow-hidden">
-          <img 
+        <div className="relative h-48 rounded-t-xl overflow-hidden">
+          <Image 
             src={image}
             alt={title}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw,
+                   (max-width: 1200px) 50vw,
+                   33vw"
           />
         </div>
       )}

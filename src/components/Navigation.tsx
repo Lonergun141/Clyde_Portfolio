@@ -1,27 +1,29 @@
+import Link from 'next/link';
+
 const Navigation = () => {
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-black/5">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <a 
+        <Link 
           href="/" 
           className="font-mono text-lg font-medium text-brand-primary hover:text-brand-secondary transition-colors"
         >
           cg/
-        </a>
+        </Link>
 
         <div className="flex items-center space-x-6 sm:space-x-8">
-          <a 
+          <Link 
             href="/projects"
             className="font-medium text-sm text-brand-secondary/80 hover:text-brand-primary transition-colors"
           >
             Projects
-          </a>
-          <a 
+          </Link>
+          <Link 
             href="/profile" 
             className="font-medium text-sm text-brand-secondary/80 hover:text-brand-primary transition-colors"
           >
             About
-          </a>
+          </Link>
           <a 
             href="https://github.com/Lonergun141" 
             target="_blank"

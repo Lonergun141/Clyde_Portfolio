@@ -67,7 +67,7 @@ export default function Footer() {
             >
               <div className="space-y-4">
                 <h2 className="text-3xl md:text-4xl font-light">
-                  Let's create something
+                  Let&apos;s create something
                   <span className="block font-medium">amazing together</span>
                 </h2>
                 <p className="text-neutral-400 max-w-md">
