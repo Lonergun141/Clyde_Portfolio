@@ -46,7 +46,7 @@ export default function Home() {
 			description:
 				'Developed and edited videos for events and marketing purposes.',
 			tags: ['Lightroom', 'Premiere Pro', 'Photoshop', 'Cannon'],
-			image: '/tech.png',
+			image: '/IMG_9748.JPG',
 		},
 	];
 
@@ -54,7 +54,7 @@ export default function Home() {
 		{
 			title: 'QuickEase',
 			category: 'Web and Mobile App',
-			url: 'https://quick-ease-alpha.vercel.app/',
+			url: 'https://quick-ease-alpha.vercel.app/SignIn',
 			year: '2024',
 			description:
 				'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
@@ -122,7 +122,7 @@ export default function Home() {
 						className="text-5xl md:text-6xl font-light mb-24 text-brand-primary">
 						Project <span className="font-medium">Experiences</span>
 					</motion.h2>
-					<div className="grid grid-cols-4 auto-rows-[320px] gap-6">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 						{projects.map((project, index) => (
 							<motion.div
 								key={project.title}
@@ -134,11 +134,7 @@ export default function Home() {
 									ease: [0.23, 1, 0.32, 1],
 								}}
 								viewport={{ once: true, margin: '-50px' }}
-								className={`
-									relative
-									${project.size === 'large' ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}
-									${index === 3 ? 'col-span-2' : ''}
-								`}>
+							>
 								<ProjectCard {...project} />
 							</motion.div>
 						))}

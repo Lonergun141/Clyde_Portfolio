@@ -3,61 +3,39 @@ interface ProjectCardProps {
   description: string;
   tags: string[];
   image?: string;
-  size?: 'small' | 'large';
 }
 
-const ProjectCard = ({ title, description, tags, image, size = 'small' }: ProjectCardProps) => {
+const ProjectCard = ({ title, description, tags, image }: ProjectCardProps) => {
   return (
-    <div className={`
-      relative w-full h-full group overflow-hidden
-      bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-sm
-      border border-white/20 rounded-3xl
-      transition-all duration-500 hover:shadow-2xl
-      ${size === 'large' ? 'p-8' : 'p-6'}
-    `}>
-      {/* Background Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-      {/* Content Container */}
-      <div className="relative h-full flex flex-col justify-between">
-        {/* Header */}
-        <div className="space-y-4">
-          <h3 className={`
-            font-medium text-brand-primary
-            group-hover:translate-x-1 transition-transform duration-300
-            ${size === 'large' ? 'text-2xl' : 'text-xl'}
-          `}>
-            {title}
-          </h3>
-          <p className={`
-            text-brand-secondary/80
-            ${size === 'large' ? 'text-lg' : 'text-base'}
-          `}>
-            {description}
-          </p>
+    <div className="w-full bg-background-light rounded-xl transition-all duration-300 
+                    hover:translate-y-[-4px] border border-border-dark hover:border-accent-purple-light">
+      {/* Image Section */}
+      {image && (
+        <div className="h-48 rounded-t-xl overflow-hidden">
+          <img 
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
         </div>
+      )}
 
-        {/* Image */}
-        {image && (
-          <div className={`
-            relative mt-4 overflow-hidden rounded-2xl
-            ${size === 'large' ? 'h-full' : 'h-full'}
-          `}>
-            <div 
-              className="w-full h-full bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700"
-              style={{ backgroundImage: `url(${image})` }}
-            />
-          </div>
-        )}
+      {/* Content Section */}
+      <div className="p-6 space-y-3">
+        <h3 className="text-xl font-medium text-brand-primary">
+          {title}
+        </h3>
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mt-4">
+        <p className="text-brand-secondary text-sm">
+          {description}
+        </p>
+
+        <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
             <span 
               key={tag} 
-              className="px-3 py-1.5 bg-white/30 backdrop-blur-sm 
-                        text-brand-primary rounded-full text-sm
-                        border border-white/20"
+              className="px-2.5 py-1 bg-background-accent text-brand-secondary
+                       rounded-md text-xs font-medium"
             >
               {tag}
             </span>
