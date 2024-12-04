@@ -18,7 +18,7 @@ const Profile = () => {
       {/* Hero Section */}
       <div className="relative h-screen">
         <Image
-          src="/clyde.jpg"
+          src="/IMG_6221.jpg"
           alt="Profile Image"
           fill
           className="object-cover opacity-60"
