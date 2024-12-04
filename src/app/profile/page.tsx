@@ -118,7 +118,7 @@ const Profile = () => {
             className="max-w-2xl mx-auto text-center"
           >
             <p className="text-3xl sm:text-4xl font-light leading-relaxed text-white/90">
-              "Creating digital experiences that merge technical precision with artistic vision"
+              &ldquo;Creating digital experiences that merge technical precision with artistic vision&rdquo;
             </p>
           </motion.div>
         </section>
