@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import PageTransition from '@/components/PageTransition';
 
 const projects = [
 	{
@@ -102,132 +103,134 @@ export default function Projects() {
 	});
 
 	return (
-		<main className="min-h-screen bg-background pt-24 px-8 pb-8">
-			<div className="max-w-7xl mx-auto">
-				<h1 className="text-4xl font-bold text-brand-primary mb-8">Projects</h1>
+		<PageTransition>
+			<main className="min-h-screen bg-background pt-24 px-8 pb-8">
+				<div className="max-w-7xl mx-auto">
+					<h1 className="text-4xl font-bold text-brand-primary mb-8">Projects</h1>
 
-				{/* Search and Filter Section */}
-				<div className="mb-8 space-y-4">
-					<input
-						type="text"
-						placeholder="Search projects..."
-						className="w-full md:w-96 px-4 py-2 rounded-lg border border-border-DEFAULT 
-                     focus:border-border-dark focus:outline-none
-                     bg-background-light text-brand-primary"
-						onChange={(e) => setSearchTerm(e.target.value)}
-					/>
+					{/* Search and Filter Section */}
+					<div className="mb-8 space-y-4">
+						<input
+							type="text"
+							placeholder="Search projects..."
+							className="w-full md:w-96 px-4 py-2 rounded-lg border border-border-DEFAULT 
+                         focus:border-border-dark focus:outline-none
+                         bg-background-light text-brand-primary"
+							onChange={(e) => setSearchTerm(e.target.value)}
+						/>
 
-					<div className="flex flex-wrap gap-2">
-						{categories.map((category) => (
-							<button
-								key={category}
-								onClick={() => setSelectedCategory(category)}
-								className={`px-4 py-2 rounded-lg text-sm transition-colors duration-300
+						<div className="flex flex-wrap gap-2">
+							{categories.map((category) => (
+								<button
+									key={category}
+									onClick={() => setSelectedCategory(category)}
+									className={`px-4 py-2 rounded-lg text-sm transition-colors duration-300
                           ${
 										selectedCategory === category
 											? 'bg-brand-primary text-background-light'
 											: 'bg-background-light text-brand-primary border border-border-DEFAULT'
 									}`}>
-								{category}
-							</button>
-						))}
+									{category}
+								</button>
+							))}
+						</div>
 					</div>
-				</div>
 
-				{/* Projects Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{filteredProjects.map((project, index) => (
-						<div
-							key={index}
-							className="group bg-background-light rounded-xl border border-border-DEFAULT
+					{/* Projects Grid */}
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{filteredProjects.map((project, index) => (
+							<div
+								key={index}
+								className="group bg-background-light rounded-xl border border-border-DEFAULT
                              hover:border-border-dark transition-all duration-300
                              hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]
                              flex flex-col h-full"
-						>
-							{project.categories.some(cat =>
-								["UI/UX Design", "Photography", "Video Editing"].includes(cat)
-							) && project.image && (
-								<div className="relative w-full h-56 rounded-t-xl overflow-hidden">
-									<Image
-										src={project.image}
-										alt={project.title}
-										fill
-										className="object-cover transform group-hover:scale-105 transition-transform duration-500"
-										sizes="(max-width: 768px) 100vw,
-												(max-width: 1200px) 50vw,
-												33vw"
-										priority={index < 6}
-									/>
-								</div>
-							)}
-							
-							<div className="p-6 flex flex-col flex-grow">
-								{/* Categories */}
-								<div className="flex flex-wrap gap-2 mb-3">
-									{project.categories.map((category, catIndex) => (
-										<span
-											key={catIndex}
-											className="px-2.5 py-1 text-xs font-medium bg-background-accent 
+							>
+								{project.categories.some(cat =>
+									["UI/UX Design", "Photography", "Video Editing"].includes(cat)
+								) && project.image && (
+									<div className="relative w-full h-56 rounded-t-xl overflow-hidden">
+										<Image
+											src={project.image}
+											alt={project.title}
+											fill
+											className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+											sizes="(max-width: 768px) 100vw,
+													(max-width: 1200px) 50vw,
+													33vw"
+											priority={index < 6}
+										/>
+									</div>
+								)}
+								
+								<div className="p-6 flex flex-col flex-grow">
+									{/* Categories */}
+									<div className="flex flex-wrap gap-2 mb-3">
+										{project.categories.map((category, catIndex) => (
+											<span
+												key={catIndex}
+												className="px-2.5 py-1 text-xs font-medium bg-background-accent 
                                                              rounded-full text-brand-secondary"
-										>
-											{category}
-										</span>
-									))}
-								</div>
+											>
+												{category}
+											</span>
+										))}
+									</div>
 
-								{/* Title */}
-								<h2 className="text-xl font-semibold text-brand-primary mb-2 
+									{/* Title */}
+									<h2 className="text-xl font-semibold text-brand-primary mb-2 
                                                              group-hover:text-brand-secondary transition-colors duration-300">
-									{project.title}
-								</h2>
+										{project.title}
+									</h2>
 
-						
-								<p className="text-brand-secondary text-sm mb-4 flex-grow">
-									{project.description}
-								</p>
+							
+									<p className="text-brand-secondary text-sm mb-4 flex-grow">
+										{project.description}
+									</p>
 
-								<div className="flex flex-wrap gap-2 mb-4">
-									{project.technologies.map((tech, techIndex) => (
-										<span
-											key={techIndex}
-											className="px-3 py-1 text-xs font-medium bg-background
+									<div className="flex flex-wrap gap-2 mb-4">
+										{project.technologies.map((tech, techIndex) => (
+											<span
+												key={techIndex}
+												className="px-3 py-1 text-xs font-medium bg-background
                                                              border border-border-DEFAULT rounded-full
                                                              text-brand-secondary"
-										>
-											{tech}
-										</span>
-									))}
-								</div>
+											>
+												{tech}
+											</span>
+										))}
+									</div>
 
-								{/* Link */}
-								<a
-									href={project.link}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="inline-flex items-center text-sm font-medium text-brand-primary 
+									{/* Link */}
+									<a
+										href={project.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="inline-flex items-center text-sm font-medium text-brand-primary 
                                                              hover:text-brand-secondary transition-colors duration-300
                                                              group-hover:translate-x-1 transform"
-								>
-									View Project
-									<svg 
-										className="ml-1 w-4 h-4" 
-										fill="none" 
-										viewBox="0 0 24 24" 
-										stroke="currentColor"
 									>
-										<path 
-											strokeLinecap="round" 
-											strokeLinejoin="round" 
-											strokeWidth={2} 
-											d="M9 5l7 7-7 7" 
-										/>
-									</svg>
-								</a>
+										View Project
+										<svg 
+											className="ml-1 w-4 h-4" 
+											fill="none" 
+											viewBox="0 0 24 24" 
+											stroke="currentColor"
+										>
+											<path 
+												strokeLinecap="round" 
+												strokeLinejoin="round" 
+												strokeWidth={2} 
+												d="M9 5l7 7-7 7" 
+											/>
+										</svg>
+									</a>
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+		</PageTransition>
 	);
 }
