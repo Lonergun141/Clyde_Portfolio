@@ -1,16 +1,18 @@
 'use client';
 import { useState } from 'react';
-import Image from 'next/image';
+import { motion } from 'framer-motion';
+import ProjectCard from '@/components/ProjectCard';
 
 const projects = [
 	{
 		title: 'QuickEase Web',
 		description:
-			'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification. Designed for efficiency, it saves time and complements traditional study methods.',
+			'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification.',
 		technologies: ['React', 'Tailwind', 'Vite', 'Redux', 'RestAPI'],
 		link: 'https://github.com/Lonergun141/QuickEase',
 		categories: ['Web Development', 'UI/UX Design'],
 		image: '/web.png',
+		year: '2024'
 	},
 	{
 		title: 'QuickEase Mobile',
@@ -50,7 +52,6 @@ const projects = [
 		technologies: ['HTML', 'CSS', 'JavaScript', 'PHP'],
 		link: 'https://github.com/Lonergun141/IT2R9-WST-Final-Project',
 		categories: ['Web Development'],
-		image: '/path-to-your-image.jpg',
 	},
 	{
 		title: "Dahilayan Wedding Shoot",
@@ -77,7 +78,7 @@ const projects = [
 		image: "/BBTV.png"
 	},
 ];
-//samok
+
 const categories = [
 	'All',
 	'Web Development',
@@ -102,131 +103,74 @@ export default function Projects() {
 	});
 
 	return (
-		<main className="min-h-screen bg-background pt-24 px-8 pb-8">
-			<div className="max-w-7xl mx-auto">
-				<h1 className="text-4xl font-bold text-brand-primary mb-8">Projects</h1>
+		<main className="min-h-screen bg-white pt-32 px-8 pb-16">
+			<div className="max-w-6xl mx-auto">
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.8 }}
+					className="mb-24"
+				>
+					<h1 className="text-sm tracking-[0.3em] uppercase text-black/40 font-light mb-16">
+						Archive
+					</h1>
 
-				{/* Search and Filter Section */}
-				<div className="mb-8 space-y-4">
-					<input
-						type="text"
-						placeholder="Search projects..."
-						className="w-full md:w-96 px-4 py-2 rounded-lg border border-border-DEFAULT 
-                     focus:border-border-dark focus:outline-none
-                     bg-background-light text-brand-primary"
-						onChange={(e) => setSearchTerm(e.target.value)}
-					/>
+					{/* Search and Filter Section */}
+					<div className="space-y-8">
+						<input
+							type="text"
+							placeholder="Search projects..."
+							className="w-full md:w-96 px-4 py-3 
+                     border-b border-black/10 focus:border-black/20
+                     bg-transparent text-black/70 text-sm
+                     focus:outline-none font-light"
+							onChange={(e) => setSearchTerm(e.target.value)}
+						/>
 
-					<div className="flex flex-wrap gap-2">
-						{categories.map((category) => (
-							<button
-								key={category}
-								onClick={() => setSelectedCategory(category)}
-								className={`px-4 py-2 rounded-lg text-sm transition-colors duration-300
+						<div className="flex flex-wrap gap-6">
+							{categories.map((category) => (
+								<button
+									key={category}
+									onClick={() => setSelectedCategory(category)}
+									className={`text-xs tracking-wider uppercase transition-all duration-300
                           ${
 										selectedCategory === category
-											? 'bg-brand-primary text-background-light'
-											: 'bg-background-light text-brand-primary border border-border-DEFAULT'
+											? 'text-black font-light'
+											: 'text-black/40 hover:text-black/60 font-extralight'
 									}`}>
-								{category}
-							</button>
-						))}
+									{category}
+								</button>
+							))}
+						</div>
 					</div>
-				</div>
+				</motion.div>
 
 				{/* Projects Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{filteredProjects.map((project, index) => (
-						<div
-							key={index}
-							className="group bg-background-light rounded-xl border border-border-DEFAULT
-                             hover:border-border-dark transition-all duration-300
-                             hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]
-                             flex flex-col h-full"
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+					{filteredProjects.map((project) => (
+						<motion.div
+							key={project.title}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.4 }}
 						>
-							{project.categories.some(cat =>
-								["UI/UX Design", "Photography", "Video Editing"].includes(cat)
-							) && project.image && (
-								<div className="relative w-full h-56 rounded-t-xl overflow-hidden">
-									<Image
-										src={project.image}
-										alt={project.title}
-										fill
-										className="object-cover transform group-hover:scale-105 transition-transform duration-500"
-										sizes="(max-width: 768px) 100vw,
-												(max-width: 1200px) 50vw,
-												33vw"
-										priority={index < 6}
-									/>
-								</div>
-							)}
-							
-							<div className="p-6 flex flex-col flex-grow">
-								{/* Categories */}
-								<div className="flex flex-wrap gap-2 mb-3">
-									{project.categories.map((category, catIndex) => (
-										<span
-											key={catIndex}
-											className="px-2.5 py-1 text-xs font-medium bg-background-accent 
-                                                             rounded-full text-brand-secondary"
-										>
-											{category}
-										</span>
-									))}
-								</div>
-
-								{/* Title */}
-								<h2 className="text-xl font-semibold text-brand-primary mb-2 
-                                                             group-hover:text-brand-secondary transition-colors duration-300">
-									{project.title}
-								</h2>
-
-						
-								<p className="text-brand-secondary text-sm mb-4 flex-grow">
-									{project.description}
-								</p>
-
-								<div className="flex flex-wrap gap-2 mb-4">
-									{project.technologies.map((tech, techIndex) => (
-										<span
-											key={techIndex}
-											className="px-3 py-1 text-xs font-medium bg-background
-                                                             border border-border-DEFAULT rounded-full
-                                                             text-brand-secondary"
-										>
-											{tech}
-										</span>
-									))}
-								</div>
-
-								{/* Link */}
-								<a
-									href={project.link}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="inline-flex items-center text-sm font-medium text-brand-primary 
-                                                             hover:text-brand-secondary transition-colors duration-300
-                                                             group-hover:translate-x-1 transform"
-								>
-									View Project
-									<svg 
-										className="ml-1 w-4 h-4" 
-										fill="none" 
-										viewBox="0 0 24 24" 
-										stroke="currentColor"
-									>
-										<path 
-											strokeLinecap="round" 
-											strokeLinejoin="round" 
-											strokeWidth={2} 
-											d="M9 5l7 7-7 7" 
-										/>
-									</svg>
-								</a>
-							</div>
-						</div>
+							<ProjectCard
+								title={project.title}
+								description={project.description}
+								tags={project.technologies}
+								image={project.image}
+								year={project.year}
+								link={project.link}
+							/>
+						</motion.div>
 					))}
 				</div>
+
+				{filteredProjects.length === 0 && (
+					<p className="text-center text-black/40 font-light mt-16">
+						No projects found matching your criteria.
+					</p>
+				)}
 			</div>
 		</main>
 	);

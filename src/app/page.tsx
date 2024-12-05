@@ -1,10 +1,7 @@
 'use client';
-
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useScroll, useTransform } from 'framer-motion';
-import Footer from '@/components/sections/Footer';
-import ProjectCard from '@/components/ProjectCard';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
 
 export default function Home() {
@@ -24,7 +21,7 @@ export default function Home() {
 				'Creating seamless mobile experiences with React Native. Building cross-platform applications that deliver native performance.',
 			tags: ['React Native', 'TypeScript', 'Mobile', 'UI/UX'],
 			image: '/mobile.png',
-			size: 'large' as const,
+			year: '2024',
 		},
 		{
 			title: 'Web Development',
@@ -54,49 +51,40 @@ export default function Home() {
 		{
 			title: 'QuickEase',
 			category: 'Web and Mobile App',
-			url: 'https://quick-ease-alpha.vercel.app/SignIn',
+			url: 'https://quick-ease-alpha.vercel.app/',
 			year: '2024',
 			description:
 				'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
 			link: 'https://quick-ease-alpha.vercel.app/',
-		},
-    {
-			title: 'VortexNews',
-			category: 'Web App and Mobile',
-			url: 'https://lonergun141.github.io/VortexMedia/',
-			year: '2024',
-			description:
-				'A simple site to view news and articles from various sources.',
-			link: 'https://lonergun141.github.io/VortexMedia/',
 		},
 	];
 
 	return (
 		<main className="min-h-screen bg-background font-inter">
 			{/* Hero Section */}
-			<div ref={containerRef} className="relative h-screen">
+			<div ref={containerRef} className="relative h-screen bg-white">
 				<motion.div
 					style={{ y, opacity }}
-					className="absolute inset-0 flex items-center justify-center px-6">
+					className="absolute inset-0 flex items-center justify-center px-6 bg-gradient-to-b from-transparent to-white/30">
 					<div className="max-w-7xl mx-auto w-full">
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 1 }}
-							className="space-y-8">
-							<p className="text-brand-secondary tracking-widest uppercase text-sm">
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 1.5, ease: "easeOut" }}
+								className="space-y-16">
+							<p className="text-black/50 tracking-[0.4em] uppercase text-[10px] font-light">
 								Portfolio 2024
 							</p>
-							<h1 className="text-[clamp(3rem,15vw,12rem)] font-light leading-[0.9] tracking-tight text-brand-primary">
+							<h1 className="text-[clamp(3rem,15vw,12rem)] font-thin leading-[0.8] tracking-[-0.04em] text-black">
 								CLYDE
-								<span className="block font-medium">GEVERO</span>
+								<span className="block font-extralight mt-4">GEVERO</span>
 							</h1>
-							<div className="flex flex-col md:flex-row gap-8 text-lg">
-								<span className="text-brand-secondary">Mobile Developer</span>
-								<span className="hidden md:block text-border-dark">/</span>
-								<span className="text-brand-secondary">Web Developer</span>
-								<span className="hidden md:block text-border-dark">/</span>
-								<span className="text-brand-secondary">UI/UX Designer</span>
+							<div className="flex flex-col md:flex-row gap-16 text-sm font-extralight tracking-wider">
+								<span className="text-black/60">Mobile Developer</span>
+								<span className="hidden md:block text-black/20">―</span>
+								<span className="text-black/60">Web Developer</span>
+								<span className="hidden md:block text-black/20">―</span>
+								<span className="text-black/60">UI/UX Designer</span>
 							</div>
 						</motion.div>
 					</div>
@@ -107,48 +95,64 @@ export default function Home() {
 			<FeaturedProjects projects={featuredProjects} />
 
 			{/* Projects Section */}
-			<motion.section
-				initial={{ opacity: 0 }}
-				whileInView={{ opacity: 1 }}
-				transition={{ duration: 0.8 }}
-				viewport={{ once: true, margin: '-100px' }}
-				className="mt-32 py-24 bg-background-light relative overflow-hidden">
+			<section className="py-32 bg-black text-white">
 				<div className="max-w-8xl mx-auto px-6">
 					<motion.h2
-						initial={{ opacity: 0, x: -20 }}
-						whileInView={{ opacity: 1, x: 0 }}
-						transition={{ duration: 0.6 }}
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
 						viewport={{ once: true }}
-						className="text-5xl md:text-6xl font-light mb-24 text-brand-primary">
-						Project <span className="font-medium">Experiences</span>
+						className="text-2xl tracking-tight mb-16">
+						Experiences
 					</motion.h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
 						{projects.map((project, index) => (
-							<motion.div
+							<motion.article
 								key={project.title}
-								initial={{ opacity: 0, y: 30 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{
-									duration: 0.7,
-									delay: index * 0.15,
-									ease: [0.23, 1, 0.32, 1],
-								}}
-								viewport={{ once: true, margin: '-50px' }}
+								initial={{ opacity: 0 }}
+								whileInView={{ opacity: 1 }}
+								transition={{ duration: 0.6, delay: index * 0.1 }}
+								viewport={{ once: true }}
+								className="group cursor-pointer"
 							>
-								<ProjectCard {...project} />
-							</motion.div>
+								<div className="aspect-[16/9] overflow-hidden mb-4">
+									<motion.img
+										src={project.image}
+										alt={project.title}
+										className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
+										whileHover={{ scale: 1.05 }}
+									/>
+								</div>
+								
+								<div className="space-y-2">
+									<div className="flex items-center justify-between">
+										<h3 className="text-lg font-light tracking-wide">{project.title}</h3>
+										<span className="text-sm text-gray-400">{project.year}</span>
+									</div>
+									
+									<p className="text-sm text-gray-400 font-light leading-relaxed">
+										{project.description}
+									</p>
+									
+									<div className="flex flex-wrap gap-2">
+										{project.tags.map((tag) => (
+											<span 
+												key={tag}
+												className="text-xs text-gray-400 border border-gray-800 px-2 py-1"
+											>
+												{tag}
+											</span>
+										))}
+									</div>
+								</div>
+							</motion.article>
 						))}
 					</div>
 				</div>
-			</motion.section>
+			</section>
 
-			<motion.footer
-				initial={{ opacity: 0 }}
-				whileInView={{ opacity: 1 }}
-				transition={{ duration: 0.8 }}
-				viewport={{ once: true }}>
-				<Footer />
-			</motion.footer>
+
 		</main>
 	);
 }

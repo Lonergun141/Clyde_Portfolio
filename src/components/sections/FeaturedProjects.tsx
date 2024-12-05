@@ -35,155 +35,140 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 	}, [handleNext, isAutoPlaying]);
 
 	return (
-		<section className="py-16 md:py-24 bg-background-dark min-h-screen flex items-center">
-			<div className="max-w-[110rem] mx-auto w-full px-4 sm:px-6 lg:px-8">
-				{/* Header */}
-				<div className="mb-12 md:mb-16 max-w-3xl">
-					<h2 className="text-4xl md:text-5xl font-light text-brand-primary mb-4">
-						Featured work
+		<section className="py-32 md:py-40 bg-background-dark">
+			<div className="max-w-[160rem] mx-auto w-full px-4 sm:px-6 lg:px-8">
+				{/* Minimalist Header */}
+				<div className="mb-24 md:mb-32">
+					<h2 className="text-6xl md:text-7xl font-light text-brand-primary tracking-[-0.02em]">
+						Selected Works
 					</h2>
-					<p className="text-base md:text-lg text-brand-secondary">
-						Selected projects I&apos;ve worked on
-					</p>
 				</div>
 
-				{/* Project Showcase */}
 				<div className="relative">
 					<AnimatePresence mode="wait">
 						<motion.div
 							key={currentIndex}
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: -20 }}
-							transition={{ duration: 0.5, ease: 'easeInOut' }}
-							className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
-							{/* Project Info */}
-							<div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
-								<div className="space-y-4">
-									<motion.p
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										className="text-brand-secondary uppercase tracking-wider text-sm">
-										{projects[currentIndex].category}
-									</motion.p>
-									<motion.h3
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										className="text-3xl md:text-4xl font-medium text-brand-primary">
-										{projects[currentIndex].title}
-									</motion.h3>
-									<motion.p
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										className="text-brand-secondary text-base md:text-lg leading-relaxed">
-										{projects[currentIndex].description}
-									</motion.p>
-								</div>
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+							className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-start">
+							
+							{/* Cinematic Project Preview */}
+							<div className="order-2 lg:order-1">
+								<motion.div
+									initial={{ opacity: 0, scale: 0.95 }}
+									animate={{ opacity: 1, scale: 1 }}
+									transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+									className="relative aspect-[16/9] group overflow-hidden">
+									<div className="absolute inset-0 w-full h-full">
+										<iframe
+											src={projects[currentIndex].url}
+											className="w-[200%] h-[200%] border-0 absolute 
+												top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+												scale-50 origin-center
+												transition-transform duration-700 ease-out
+												group-hover:scale-[0.51]"
+											style={{ 
+												pointerEvents: 'none',
+												transform: 'translate(-50%, -50%) scale(0.5)',
+											}}
+										/>
+									</div>
+									<div
+										className="absolute inset-0 bg-gradient-to-t 
+											from-background-dark via-transparent to-transparent 
+											opacity-60 mix-blend-multiply pointer-events-none"
+									/>
+								</motion.div>
+							</div>
 
-								<div className="flex flex-wrap items-center gap-4 md:gap-6">
-									<span className="text-brand-secondary">{projects[currentIndex].year}</span>
+							{/* Minimal Project Info */}
+							<div className="order-1 lg:order-2 lg:pl-16">
+								<div className="space-y-8">
+									<motion.div
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										className="space-y-6">
+										<p className="text-brand-secondary/70 uppercase tracking-[0.2em] text-sm">
+											{projects[currentIndex].category} • {projects[currentIndex].year}
+										</p>
+										<h3 className="text-5xl md:text-6xl font-light text-brand-primary tracking-[-0.02em]">
+											{projects[currentIndex].title}
+										</h3>
+										<p className="text-xl md:text-2xl text-brand-secondary/80 leading-relaxed font-light">
+											{projects[currentIndex].description}
+										</p>
+									</motion.div>
+
+									{/* Minimal Link */}
 									{projects[currentIndex].link && (
 										<a
 											href={projects[currentIndex].link}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="inline-flex items-center gap-2 text-brand-primary 
-                                hover:text-brand-secondary transition-all duration-300 group">
-											<span className="text-lg">View Project</span>
+											className="inline-flex items-center text-brand-primary hover:text-brand-primary/80 
+												transition-all duration-300 group text-lg tracking-wide">
+											<span className="border-b border-current pb-1">View Project</span>
 											<svg
-												className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1"
+												className="w-5 h-5 ml-3 transform transition-transform duration-300 group-hover:translate-x-1"
 												fill="none"
 												stroke="currentColor"
 												viewBox="0 0 24 24">
 												<path
 													strokeLinecap="round"
 													strokeLinejoin="round"
-													strokeWidth={1.5}
+													strokeWidth={1}
 													d="M17 8l4 4m0 0l-4 4m4-4H3"
 												/>
 											</svg>
 										</a>
 									)}
-								</div>
 
-								{/* Navigation Controls */}
-								<div className="flex items-center gap-6 pt-8">
-									<button
-										onClick={() => {
-											setIsAutoPlaying(false);
-											handlePrev();
-										}}
-										className="p-2 hover:bg-background-light rounded-full transition-colors">
-										<svg
-											className="w-6 h-6 text-brand-primary"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24">
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={1.5}
-												d="M15 19l-7-7 7-7"
-											/>
-										</svg>
-									</button>
-									<div className="flex gap-2">
-										{projects.map((_, index) => (
-											<button
-												key={index}
-												onClick={() => {
-													setIsAutoPlaying(false);
-													setCurrentIndex(index);
-												}}
-												className={`h-1.5 rounded-full transition-all duration-300 ${
-													index === currentIndex
-														? 'w-12 bg-brand-primary'
-														: 'w-6 bg-border-dark hover:bg-border-dark/80'
-												}`}
-											/>
-										))}
+									{/* Minimal Navigation */}
+									<div className="flex items-center gap-12 pt-16">
+										<button
+											onClick={() => {
+												setIsAutoPlaying(false);
+												handlePrev();
+											}}
+											className="text-brand-primary hover:text-brand-primary/80 transition-colors">
+											<span className="sr-only">Previous project</span>
+											<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 19l-7-7 7-7" />
+											</svg>
+										</button>
+										
+										<div className="flex-1 flex justify-center gap-3">
+											{projects.map((_, index) => (
+												<button
+													key={index}
+													onClick={() => {
+														setIsAutoPlaying(false);
+														setCurrentIndex(index);
+													}}
+													className={`h-[1px] transition-all duration-500 ${
+														index === currentIndex
+															? 'w-16 bg-brand-primary'
+															: 'w-8 bg-brand-secondary/30 hover:bg-brand-secondary/50'
+													}`}
+												/>
+											))}
+										</div>
+
+										<button
+											onClick={() => {
+												setIsAutoPlaying(false);
+												handleNext();
+											}}
+											className="text-brand-primary hover:text-brand-primary/80 transition-colors">
+											<span className="sr-only">Next project</span>
+											<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5l7 7-7 7" />
+											</svg>
+										</button>
 									</div>
-									<button
-										onClick={() => {
-											setIsAutoPlaying(false);
-											handleNext();
-										}}
-										className="p-2 hover:bg-background-light rounded-full transition-colors">
-										<svg
-											className="w-6 h-6 text-brand-primary"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24">
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={1.5}
-												d="M9 5l7 7-7 7"
-											/>
-										</svg>
-									</button>
 								</div>
-							</div>
-
-							{/* Project Preview */}
-							<div className="lg:col-span-8">
-								<motion.div
-									initial={{ opacity: 0, scale: 0.95 }}
-									animate={{ opacity: 1, scale: 1 }}
-									transition={{ duration: 0.5 }}
-									className="relative aspect-[16/10] rounded-xl overflow-hidden 
-                                    bg-background-light border border-border-dark
-                                    shadow-lg hover:shadow-xl transition-shadow duration-300">
-									<iframe
-										src={projects[currentIndex].url}
-										className="w-full h-full border-0"
-										style={{ pointerEvents: 'none' }}
-									/>
-									<div
-										className="absolute inset-0 bg-gradient-to-b from-transparent 
-                                    to-background-dark/10 pointer-events-none"
-									/>
-								</motion.div>
 							</div>
 						</motion.div>
 					</AnimatePresence>
