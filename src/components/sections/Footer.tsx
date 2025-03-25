@@ -24,7 +24,7 @@ export default function Footer() {
     {
       school: "University of Science and Technology of Southern Philippines",
       degree: "Bachelor of Science in Information Technology",
-      year: "2020 - 2024"
+      year: "2020 - 2025"
     }
   ];
 
