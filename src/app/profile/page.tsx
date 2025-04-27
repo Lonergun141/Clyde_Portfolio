@@ -17,10 +17,10 @@ const Profile = () => {
       {/* Hero Section */}
       <div className="relative h-screen bg-black">
         <Image
-          src="/IMG_6221.jpg"
+          src="/pff.jfif"
           alt="Profile Image"
           fill
-          className="object-cover grayscale contrast-125 brightness-90"
+          className="object-cover"
           priority
           sizes="100vw"
         />
