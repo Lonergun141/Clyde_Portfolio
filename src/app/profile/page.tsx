@@ -9,7 +9,6 @@ const Profile = () => {
 
   const creativeTools = [
     'Adobe Lightroom', 'Adobe Premiere Pro', 'UI/UX Design', 'Figma', 'Canva', 'Photoshop', 
-    'Video Editing'
   ];
 
   return (
@@ -17,10 +16,10 @@ const Profile = () => {
       {/* Hero Section */}
       <div className="relative h-screen bg-black">
         <Image
-          src="/pff.jfif"
+          src="/USTP CDO-0297- Gevero, Clyde H 012A3380.JPG"
           alt="Profile Image"
           fill
-          className="object-cover"
+          className="object-contain"
           priority
           sizes="100vw"
         />

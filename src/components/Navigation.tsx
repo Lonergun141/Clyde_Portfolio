@@ -35,7 +35,6 @@ const GitHubButton = () => (
 
 const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
 	<button
-		
 		className="sm:hidden fixed right-4 z-50 w-10 h-10 flex flex-col justify-center items-center gap-1.5"
 		onClick={onClick}
 		aria-label={isOpen ? 'Close menu' : 'Open menu'}>
@@ -61,6 +60,15 @@ const DesktopMenu = () => (
 	<div className="hidden sm:flex items-center gap-12">
 		<NavLink href="/projects">Projects</NavLink>
 		<NavLink href="/profile">Developer</NavLink>
+		<Link
+			className="relative text-xs uppercase tracking-[0.2em] font-light text-black/60 hover:text-black/90 transition-colors duration-500"
+			href="/Gevero_CV.pdf"
+			download
+			target='_blank'
+			>
+			Download CV
+		</Link>
+
 		<GitHubButton />
 	</div>
 );
@@ -69,8 +77,7 @@ const BackButton = () => (
 	<Link
 		href="/"
 		className="fixed top-4 left-4 z-50 text-xs uppercase tracking-[0.2em] font-light text-white hover:text-black/90 transition-colors duration-500"
-		aria-label="Go back"
-	>
+		aria-label="Go back">
 		← Back
 	</Link>
 );
