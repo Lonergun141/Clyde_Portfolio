@@ -1,14 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  tags: string[];
-  image?: string;
-  year?: string;
-  link?: string;
-}
+import { ProjectCardProps } from '@/lib/types/types';
 
 const PlaceholderSVG = () => (
   <svg 

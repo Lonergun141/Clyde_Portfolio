@@ -2,19 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-interface FeaturedProject {
-	title: string;
-	category: string;
-	url: string;
-	year: string;
-	description?: string;
-	link?: string;
-}
-
-interface FeaturedProjectsProps {
-	projects: FeaturedProject[];
-}
+import { FeaturedProjectsProps } from '@/lib/types/types';
 
 export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 	const [currentIndex, setCurrentIndex] = useState(0);
