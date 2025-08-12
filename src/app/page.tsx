@@ -101,7 +101,7 @@ export default function Home() {
 								animate={{ opacity: 1, x: 0 }}
 								transition={{ duration: 1, delay: 0.5 }}
 								className="text-black/50 tracking-[0.4em] uppercase text-xs font-light">
-								Portfolio 2025
+								Portfolio {new Date().getFullYear()}
 							</motion.p>
 
 							<h1 className="text-[clamp(3rem,15vw,12rem)] font-thin leading-[0.8] tracking-[-0.04em] text-black">
