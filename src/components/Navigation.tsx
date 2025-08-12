@@ -64,8 +64,7 @@ const DesktopMenu = () => (
 			className="relative text-xs uppercase tracking-[0.2em] font-light text-black/60 hover:text-black/90 transition-colors duration-500"
 			href="/Gevero_CV.pdf"
 			download
-			target='_blank'
-			>
+			target="_blank">
 			Download CV
 		</Link>
 
@@ -125,6 +124,13 @@ export default function Navigation() {
 					<NavLink href="/profile" onClick={() => setIsOpen(false)}>
 						Developer
 					</NavLink>
+					<Link
+						className="relative text-xs uppercase tracking-[0.2em] font-light text-black/60 hover:text-black/90 transition-colors duration-500"
+						href="/Gevero_CV.pdf"
+						download
+						target="_blank">
+						Download CV
+					</Link>
 					<GitHubButton />
 				</div>
 			</div>
