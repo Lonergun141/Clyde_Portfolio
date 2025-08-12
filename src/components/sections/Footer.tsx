@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { socialLinks, contactDetails, education } from '@/lib/constants';
+import { socialLinks, contactDetails, education } from '@/lib/constants/constants';
 
 export default function Footer() {
 	return (

@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { mainTechnologies, creativeTools } from '@/lib/constants/skills';
+import { mainTechnologies, creativeTools } from '@/lib/constants/constants';
 
 const Profile = () => {
 
