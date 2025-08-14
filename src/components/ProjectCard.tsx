@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Github, Figma, ExternalLink, Globe } from 'lucide-react';
+
 import { ProjectCardProps } from '@/lib/types/types';
 
 const PlaceholderSVG = () => (
@@ -21,24 +23,43 @@ const PlaceholderSVG = () => (
   </svg>
 );
 
-const ProjectCard = ({ title, description, tags, image, year, link }: ProjectCardProps) => {
-  const CardWrapper = ({ children }: { children: React.ReactNode }) => {
-    if (!link) return <div className="relative w-full">{children}</div>;
-    
-    return (
-      <Link 
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="relative w-full block group"
-      >
-        {children}
-      </Link>
-    );
+const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCardProps) => {
+  const getLinkIcon = (linkType: string) => {
+    const iconProps = { size: 10, className: "transition-colors duration-500 group-hover:text-black/60" };
+    switch (linkType) {
+      case 'github':
+        return <Github {...iconProps} />;
+      case 'figma':
+        return <Figma {...iconProps} />;
+      case 'live':
+        return <Globe {...iconProps} />;
+      case 'other':
+        return <ExternalLink {...iconProps} />;
+      default:
+        return <ExternalLink {...iconProps} />;
+    }
   };
 
+  const getLinkLabel = (linkType: string) => {
+    switch (linkType) {
+      case 'github':
+        return 'Repository';
+      case 'figma':
+        return 'Design';
+      case 'live':
+        return 'Live Demo';
+      case 'other':
+        return 'View';
+      default:
+        return 'Link';
+    }
+  };
+
+  const availableLinks = Object.entries(links).filter(([_, url]) => url && url !== '#');
+  const hasLinks = availableLinks.length > 0;
+
   return (
-    <CardWrapper>
+    <div className="relative w-full group">
       {/* Image Container */}
       <div className="aspect-[16/9] overflow-hidden mb-6 relative bg-black/5">
         {image ? (
@@ -89,8 +110,35 @@ const ProjectCard = ({ title, description, tags, image, year, link }: ProjectCar
         </p>
       </div>
 
+      {/* Links Section */}
+      {hasLinks && (
+        <div className="mt-6 border-t border-black/5 pt-4 transition-colors duration-500 group-hover:border-black/10">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {availableLinks.map(([linkType, url]) => (
+              <Link
+                key={linkType}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[9px] tracking-[0.15em] uppercase font-extralight
+                         text-black/40 hover:text-black/70 transition-colors duration-300
+                         border-b border-transparent hover:border-black/20
+                         pb-0.5 group/link"
+              >
+                <span className="text-black/30 group-hover/link:text-black/50 transition-colors duration-300">
+                  {getLinkIcon(linkType)}
+                </span>
+                <span className="break-words">
+                  {getLinkLabel(linkType)}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Technical Details (Tags) */}
-      <div className="mt-6 border-t border-black/5 pt-4 transition-colors duration-500 group-hover:border-black/10">
+      <div className={`${hasLinks ? 'mt-6' : 'mt-6'} border-t border-black/5 pt-4 transition-colors duration-500 group-hover:border-black/10`}>
         <div className="flex flex-wrap gap-x-6 gap-y-3">
           {tags.map((tag) => (
             <span 
@@ -104,8 +152,8 @@ const ProjectCard = ({ title, description, tags, image, year, link }: ProjectCar
           ))}
         </div>
       </div>
-    </CardWrapper>
+    </div>
   );
 };
 
-export default ProjectCard; 
+export default ProjectCard;

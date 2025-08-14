@@ -3,16 +3,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '@/components/ProjectCard';
 import { Lock } from 'lucide-react';
+import { Project } from '@/lib/types/types';
 
-type Project = {
-	title: string;
-	description: string;
-	technologies: string[];
-	link: string;
-	categories: string[];
-	image?: string;
-	year?: string;
-};
 
 const projects: Project[] = [
 	{
@@ -20,7 +12,10 @@ const projects: Project[] = [
 		description:
 			'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification.',
 		technologies: ['React', 'Tailwind', 'Vite', 'Redux', 'RestAPI'],
-		link: 'https://github.com/Lonergun141/QuickEase',
+		links: {
+			github: 'https://github.com/Lonergun141/QuickEase',
+			figma: 'https://www.figma.com/design/d1lYnIMuJg9gXzVJK9AzFk/QuickEase-WEB?node-id=0-1&t=mBS73VMQFCjhi5dB-1', 
+		},
 		categories: ['Web Development', 'UI/UX Design'],
 		image: '/web.png',
 		year: '2024',
@@ -30,7 +25,10 @@ const projects: Project[] = [
 		description:
 			'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification. Designed for efficiency, it saves time and complements traditional study methods.',
 		technologies: ['ReactNative', 'Expo', 'NativeWind', 'Redux', 'RestAPI'],
-		link: 'https://bitbucket.org/capstonecgnt/quickease/src/main/',
+		links: {
+			github: 'https://bitbucket.org/capstonecgnt/quickease/src/main/',
+			figma: 'https://www.figma.com/design/02JyQUHe2MOu9Dxp8pXivL/QuickEase?node-id=0-1&t=ZrNjJgmkDgKIoPqx-1', 
+		},
 		categories: ['Mobile', 'UI/UX Design'],
 		image: '/mobile.png',
 	},
@@ -38,14 +36,20 @@ const projects: Project[] = [
 		title: 'VortexNews Mobile',
 		description: 'A simple site to view news and articles from various sources.',
 		technologies: ['ReactNative', 'Redux', 'Expo', 'RestAPI'],
-		link: 'https://bitbucket.org/capstonecgnt/vortex_news_mobile/src/main/',
+		links: {
+			github: 'https://bitbucket.org/capstonecgnt/vortex_news_mobile/src/main/',
+			figma: 'https://www.figma.com/design/02JyQUHe2MOu9Dxp8pXivL/QuickEase?node-id=828-290&t=ZrNjJgmkDgKIoPqx-1', 
+		},
 		categories: ['Mobile', 'UI/UX Design'],
 	},
 	{
 		title: 'VortexNews Web',
 		description: 'A simple site to view news and articles from various sources.',
 		technologies: ['React', 'Redux', 'Vite', 'RestAPI'],
-		link: 'https://github.com/Lonergun141/VortexMedia',
+		links: {
+			github: 'https://github.com/Lonergun141/VortexMedia',
+			figma: 'https://www.figma.com/design/02JyQUHe2MOu9Dxp8pXivL/QuickEase?node-id=684-276&t=ZrNjJgmkDgKIoPqx-1', 
+		},
 		categories: ['Web Development', 'UI/UX Design'],
 		image: '/vortexm.png',
 	},
@@ -53,7 +57,10 @@ const projects: Project[] = [
 		title: 'FurEverMatch',
 		description: 'A tinder-like app for dogs to find their forever match',
 		technologies: ['ReactNative', 'Redux', 'Expo'],
-		link: 'https://bitbucket.org/it2r9-teampura/r_fem/src/main/',
+		links: {
+			github: 'https://bitbucket.org/it2r9-teampura/r_fem/src/main/',
+			figma: 'https://www.figma.com/design/afvDReFmVmcLH6z3I5stXn/FurEverMatch?node-id=0-1&t=FSCGOT219KVRsT7Y-1', 
+		},
 		categories: ['Mobile', 'UI/UX Design'],
 		image: '/frever.png',
 	},
@@ -61,14 +68,19 @@ const projects: Project[] = [
 		title: 'LAMDAG - Recipe Website',
 		description: 'A simple recipe website',
 		technologies: ['HTML', 'CSS', 'JavaScript', 'PHP'],
-		link: 'https://github.com/Lonergun141/IT2R9-WST-Final-Project',
+		links: {
+			github: 'https://github.com/Lonergun141/IT2R9-WST-Final-Project.git',
+			figma: 'https://www.figma.com/design/fLsFxeqVxhKLyes9ouvXZe/Weebsisteam?node-id=0-1&t=yp33DFcBBQ50sY0D-1',
+		},
 		categories: ['Web Development'],
 	},
 	{
 		title: 'Dahilayan Wedding Shoot',
 		description: 'Wedding shoot on Dahilayan Resort',
 		technologies: ['Video Editing', 'Premiere Pro', 'Photoshop'],
-		link: 'https://www.facebook.com/share/v/1D7mrSGCff/',
+		links: {
+			other: 'https://www.facebook.com/share/v/1D7mrSGCff/',
+		},
 		categories: ['Video Editing'],
 		image: '/wed.png',
 	},
@@ -76,7 +88,9 @@ const projects: Project[] = [
 		title: 'Dahilayan Pre-Wedding Shoot',
 		description: 'Wedding shoot on Dahilayan Resort',
 		technologies: ['Video Editing', 'Premiere Pro', 'Photoshop'],
-		link: 'https://www.facebook.com/share/v/14iNNp9JbV/',
+		links: {
+			other: 'https://www.facebook.com/share/v/14iNNp9JbV/',
+		},
 		categories: ['Video Editing'],
 		image: '/weddings.png',
 	},
@@ -85,7 +99,9 @@ const projects: Project[] = [
 		description:
 			'Banog2x Festival Manolo Fortich Videography, Photography, Technical Assistant, and Video Editing',
 		technologies: ['Video Editing', 'Premiere Pro', 'Photoshop', 'OBS'],
-		link: 'https://www.facebook.com/hashtag/banogbanogfestival2022',
+		links: {
+			other: 'https://www.facebook.com/hashtag/banogbanogfestival2022',
+		},
 		categories: ['Video Editing', 'Photography'],
 		image: '/BBTV.png',
 	},
@@ -93,7 +109,7 @@ const projects: Project[] = [
 		title: '(Signed NDA) CHED Regional Office X Theses and Dissertations Archive Library',
 		description: 'Masters theses Digital repository for CHED regional office X archives',
 		technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
-		link: '#',
+		links: {},
 		categories: ['Web Development'],
 		image: '/CHED.png',
 	},
@@ -101,7 +117,7 @@ const projects: Project[] = [
 		title: '(Signed NDA) CHED Regional Office X Maintenance Monitoring System',
 		description: 'ICT Hardware and Software maintenance tracker for CHED',
 		technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
-		link: '#',
+		links: {},
 		categories: ['Web Development'],
 		image: '/CHED.png',
 	},
@@ -109,7 +125,7 @@ const projects: Project[] = [
 		title: '(Signed NDA) CHED Regional Office X Form Controller System',
 		description: 'Form Controller/Manager for CHED',
 		technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
-		link: '#',
+		links: {},
 		categories: ['Web Development'],
 		image: '/CHED.png',
 	},
@@ -214,7 +230,7 @@ export default function Projects() {
 								tags={project.technologies}
 								image={project.image}
 								year={project.year}
-								link={project.link}
+								links={project.links}
 							/>
 						</motion.div>
 					))}

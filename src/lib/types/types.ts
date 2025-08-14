@@ -1,16 +1,30 @@
 export interface FeaturedProject {
-  title: string;
-  category: string;
-  url: string;
-  year: string;
-  description?: string;
-  link?: string;
+	title: string;
+	category: string;
+	url: string;
+	year: string;
+	description?: string;
+	link?: string;
 }
 
 export interface FeaturedProjectsProps {
-  projects: FeaturedProject[];
+	projects: FeaturedProject[];
 }
 
+export interface Project {
+	title: string;
+	description: string;
+	technologies: string[];
+	links: {
+		github?: string;
+		figma?: string;
+		live?: string;
+		other?: string;
+	};
+	categories: string[];
+	image?: string;
+	year?: string;
+}
 
 export interface ProjectCardProps {
   title: string;
@@ -18,5 +32,10 @@ export interface ProjectCardProps {
   tags: string[];
   image?: string;
   year?: string;
-  link?: string;
+  links: {
+    github?: string;
+    figma?: string;
+    live?: string;
+    other?: string;
+  };
 }

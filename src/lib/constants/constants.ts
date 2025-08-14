@@ -102,3 +102,5 @@ export const featuredProjects = [
 		link: 'https://quick-ease-alpha.vercel.app/',
 	},
 ];
+
+
