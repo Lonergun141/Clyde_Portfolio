@@ -2,7 +2,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Github, Figma, ExternalLink, Globe } from 'lucide-react';
 
-import { ProjectCardProps } from '@/lib/types/types';
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  tags: string[];
+  image?: string;
+  year?: string;
+  links: {
+    github?: string;
+    figma?: string;
+    live?: string;
+    other?: string;
+  };
+}
 
 const PlaceholderSVG = () => (
   <svg 
@@ -55,7 +67,7 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
     }
   };
 
-  const availableLinks = Object.entries(links).filter(([_, url]) => url && url !== '#');
+  const availableLinks = Object.entries(links).filter(([, url]) => url && url !== '#');
   const hasLinks = availableLinks.length > 0;
 
   return (
