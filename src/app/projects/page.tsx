@@ -14,7 +14,7 @@ const projects: Project[] = [
 		technologies: ['React', 'Tailwind', 'Vite', 'Redux', 'RestAPI'],
 		links: {
 			github: 'https://github.com/Lonergun141/QuickEase',
-			figma: 'https://www.figma.com/design/d1lYnIMuJg9gXzVJK9AzFk/QuickEase-WEB?node-id=0-1&t=mBS73VMQFCjhi5dB-1', 
+			figma: 'https://www.figma.com/design/d1lYnIMuJg9gXzVJK9AzFk/QuickEase-WEB?node-id=0-1&t=H00IXSWGgC6DD91X-1', 
 		},
 		categories: ['Web Development', 'UI/UX Design'],
 		image: '/web.png',
@@ -27,7 +27,7 @@ const projects: Project[] = [
 		technologies: ['ReactNative', 'Expo', 'NativeWind', 'Redux', 'RestAPI'],
 		links: {
 			github: 'https://bitbucket.org/capstonecgnt/quickease/src/main/',
-			figma: 'https://www.figma.com/design/02JyQUHe2MOu9Dxp8pXivL/QuickEase?node-id=0-1&t=ZrNjJgmkDgKIoPqx-1', 
+			figma: 'https://www.figma.com/design/mU4TyGyGioaRDqPypFM6TZ/QuickEase-App-Mobile?node-id=0-1&t=xDSyyhWJi5RXAJ3U-1', 
 		},
 		categories: ['Mobile', 'UI/UX Design'],
 		image: '/mobile.png',
