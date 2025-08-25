@@ -5,31 +5,16 @@ export const mainTechnologies = [
 	'TailwindCSS',
 	'React Native',
 	'Python',
-	'Java',
+	'AppScript',
 ];
 
 export const creativeTools = [
 	'Adobe Lightroom',
 	'Adobe Premiere Pro',
-	'UI/UX Design',
 	'Figma',
 	'Canva',
 	'Photoshop',
-];
-
-export const technologies = [
-	'React',
-	'TypeScript',
-	'Next.js',
-	'Tailwind CSS',
-	'JavaScript',
-	'HTML5',
-	'CSS3',
-	'Git',
-	'Node.js',
-	'REST APIs',
-	'GraphQL',
-	'Figma',
+	'OBS Studio',
 ];
 
 export const socialLinks = [
