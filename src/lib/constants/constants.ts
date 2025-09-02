@@ -67,10 +67,10 @@ export const works = [
 		image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
 	},
 	{
-		title: 'Multimedia Artist',
+		title: 'Graphics, Video and Photo',
 		description: 'Developed and edited videos for events and marketing purposes.',
 		tags: ['Lightroom', 'Premiere Pro', 'Photoshop', 'Cannon'],
-		image: '/IMG_9748.JPG',
+		 image: "https://images.unsplash.com/photo-1551302175-952301267d19??ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
 	},
 ];
 
@@ -97,6 +97,7 @@ export const featuredProjects = [
 
 export const greetings = [
 	{ text: 'Hello', language: 'English' },
+	{ text: 'Bai', language: 'Visaya' },
 	{ text: 'Kumusta', language: 'Filipino' },
 	{ text: 'Hola', language: 'Spanish' },
 	{ text: 'Bonjour', language: 'French' },
