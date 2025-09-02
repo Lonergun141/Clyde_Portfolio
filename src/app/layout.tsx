@@ -1,39 +1,37 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/sections/Footer";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import './globals.css';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/sections/Footer';
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+	src: './fonts/GeistVF.woff',
+	variable: '--font-geist-sans',
+	weight: '100 900',
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+	src: './fonts/GeistMonoVF.woff',
+	variable: '--font-geist-mono',
+	weight: '100 900',
 });
 
 export const metadata: Metadata = {
-  title: "Clyde Gevero | Frontend Developer",
-  description: "Frontend developer specializing in React and TypeScript",
+	title: 'Clyde Gevero | Frontend Developer',
+	description: 'Frontend developer specializing in React and TypeScript',
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navigation />
-        {children}
-      </body>
-      <Footer />
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				<Navigation />
+				{children}
+				<Footer />
+			</body>
+		</html>
+	);
 }

@@ -42,15 +42,13 @@ export const education = [
 	},
 ];
 
-//HomePage Constants
-
-export const projects = [
+export const works = [
 	{
 		title: 'Mobile Development',
 		description:
 			'Creating seamless mobile experiences with React Native. Building cross-platform applications that deliver native performance.',
 		tags: ['React Native', 'TypeScript', 'Mobile', 'UI/UX'],
-		image: '/mobile.png',
+		image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
 		year: '2024',
 	},
 	{
@@ -58,7 +56,7 @@ export const projects = [
 		description:
 			'Crafting modern web applications using Next.js and React. Focus on performance, accessibility, and user experience.',
 		tags: ['Next.js', 'React', 'TailwindCSS', 'TypeScript'],
-		image: '/web.png',
+		image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
 		size: 'small' as const,
 	},
 	{
@@ -66,10 +64,10 @@ export const projects = [
 		description:
 			'Designing intuitive interfaces and comprehensive design systems that enhance user engagement and satisfaction.',
 		tags: ['Figma', 'Design Systems', 'Prototyping', 'User Research'],
-		image: '/design.png',
+		image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
 	},
 	{
-		title: 'Former Video Editor and Photographer',
+		title: 'Multimedia Artist',
 		description: 'Developed and edited videos for events and marketing purposes.',
 		tags: ['Lightroom', 'Premiere Pro', 'Photoshop', 'Cannon'],
 		image: '/IMG_9748.JPG',
@@ -78,7 +76,16 @@ export const projects = [
 
 export const featuredProjects = [
 	{
-		title: 'QuickEase',
+		title: 'QuickEase Web App',
+		category: 'Web and Mobile App',
+		url: 'https://quick-ease-alpha.vercel.app/',
+		year: '2024',
+		description:
+			'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
+		link: 'https://quick-ease-alpha.vercel.app/',
+	},
+	{
+		title: 'QuickEase Android App',
 		category: 'Web and Mobile App',
 		url: 'https://quick-ease-alpha.vercel.app/',
 		year: '2024',
@@ -87,5 +94,3 @@ export const featuredProjects = [
 		link: 'https://quick-ease-alpha.vercel.app/',
 	},
 ];
-
-

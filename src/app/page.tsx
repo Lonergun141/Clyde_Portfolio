@@ -1,181 +1,214 @@
 'use client';
-import { motion } from 'framer-motion';
-import { useRef } from 'react';
-import { useScroll, useTransform } from 'framer-motion';
+
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState } from 'react';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
-import { projects, featuredProjects } from '@/lib/constants/constants';
+import { works, featuredProjects } from '@/lib/constants/constants';
 
 export default function Home() {
 	const containerRef = useRef(null);
-	const { scrollYProgress } = useScroll({
-		target: containerRef,
-		offset: ['start start', 'end start'],
+	const projectRef = useRef(null);
+	const [selectedProject, setSelectedProject] = useState<number | null>(null);
+
+	const { scrollYProgress: projectScrollY } = useScroll({
+		target: projectRef,
+		offset: ['start end', 'end start'],
 	});
 
-	const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-	const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-	const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-
-
+	const imageY = useTransform(projectScrollY, [0, 1], ['20%', '-20%']);
+	const imageScale = useTransform(projectScrollY, [0, 0.5, 1], [1.2, 1, 1.2]);
+	const textY = useTransform(projectScrollY, [0, 1], ['0%', '10%']);
 
 	return (
 		<main className="min-h-screen bg-background font-inter">
 			{/* Hero Section */}
-			<div ref={containerRef} className="relative h-screen bg-white">
-				<motion.div
-					style={{ y, opacity, scale }}
-					className="absolute inset-0 flex items-center justify-center px-6 bg-gradient-to-b from-transparent via-white/50 to-white">
-					<div className="max-w-7xl mx-auto w-full relative">
-						{/* Subtle geometric background patterns */}
-						<motion.div 
+			<div
+				ref={containerRef}
+				className="relative min-h-screen bg-white flex items-center justify-center px-6">
+				<div className="max-w-4xl mx-auto w-full">
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
+						className="space-y-12">
+						<motion.p
 							initial={{ opacity: 0 }}
-							animate={{ opacity: 0.03 }}
-							transition={{ duration: 2 }}
-							className="absolute -top-[20vh] left-0 right-0 text-[20vw] text-black font-bold select-none pointer-events-none overflow-hidden">
-							DEVELOPER
-						</motion.div>
+							animate={{ opacity: 1 }}
+							transition={{ duration: 1, delay: 0.3 }}
+							className="text-black/40 text-xs font-light tracking-[0.3em] uppercase">
+							Portfolio {new Date().getFullYear()}
+						</motion.p>
 
-						{/* Floating elements in background */}
-						<motion.div
-							animate={{ 
-								y: [0, -20, 0],
-								rotate: [0, 5, 0]
-							}}
-							transition={{ 
-								duration: 10,
-								repeat: Infinity,
-								ease: "easeInOut"
-							}}
-							className="absolute top-20 right-20 w-32 h-32 rounded-full bg-gradient-to-br from-blue-50 to-purple-50 opacity-20"
-						/>
-
-						<motion.div
-							initial={{ opacity: 0, y: 50 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 1.8, ease: [0.19, 1, 0.22, 1] }}
-							className="space-y-16 relative z-10">
-							<motion.p 
-								initial={{ opacity: 0, x: -20 }}
-								animate={{ opacity: 1, x: 0 }}
+						<div className="space-y-4">
+							<motion.h1
+								initial={{ opacity: 0, y: 30 }}
+								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 1, delay: 0.5 }}
-								className="text-black/50 tracking-[0.4em] uppercase text-xs font-light">
-								Portfolio {new Date().getFullYear()}
-							</motion.p>
+								className="text-[clamp(4rem,12vw,8rem)] font-extralight leading-[0.9] tracking-[-0.02em] text-black">
+								CLYDE
+							</motion.h1>
 
-							<h1 className="text-[clamp(3rem,15vw,12rem)] font-thin leading-[0.8] tracking-[-0.04em] text-black">
-								<motion.span
-									initial={{ opacity: 0, y: 50 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 1, delay: 0.3 }}
-									className="block">
-									CLYDE
-								</motion.span>
-								<motion.span
-									initial={{ opacity: 0, y: 50 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 1, delay: 0.5 }}
-									className="block font-extralight mt-4 bg-gradient-to-r from-black via-black/80 to-black/60 text-transparent bg-clip-text">
-									GEVERO
-								</motion.span>
-							</h1>
+							<motion.h1
+								initial={{ opacity: 0, y: 30 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 1, delay: 0.7 }}
+								className="text-[clamp(4rem,12vw,8rem)] font-thin leading-[0.9] tracking-[-0.02em] text-black">
+								GEVERO
+							</motion.h1>
+						</div>
 
-							<div className="flex flex-col md:flex-row gap-16 text-sm font-extralight tracking-wider">
-								{['Mobile Developer', 'Web Developer', 'UI/UX Designer'].map((text, index) => (
-									<motion.span
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 1, delay: 0.9 }}
+							className="space-y-3 pt-8">
+							{['(01) Mobile Developer', '(02) Web Developer', '(03) UI/UX Designer'].map(
+								(text, index) => (
+									<motion.div
 										key={text}
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										whileHover={{ scale: 1.05 }}
-										transition={{ duration: 0.8, delay: 0.8 + index * 0.2 }}
-										className="text-black/60 hover:text-black transition-colors duration-300 cursor-default"
-									>
+										initial={{ opacity: 0, x: -20 }}
+										animate={{ opacity: 1, x: 0 }}
+										transition={{ duration: 0.8, delay: 1.1 + index * 0.1 }}
+										className="text-sm font-light text-black/60 tracking-wide hover:text-black transition-colors duration-300 cursor-default">
 										{text}
-										{index < 2 && (
-											<motion.span 
-												className="hidden md:inline text-black/20 ml-16"
-												animate={{ opacity: [0.2, 0.5, 0.2] }}
-												transition={{ duration: 2, repeat: Infinity }}
-											>
-												|
-											</motion.span>
-										)}
-									</motion.span>
-								))}
-							</div>
+									</motion.div>
+								)
+							)}
 						</motion.div>
-					</div>
-				</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 1, delay: 1.5 }}
+							className="absolute bottom-12 left-1/2 transform -translate-x-1/2">
+							<motion.div
+								animate={{ y: [0, 8, 0] }}
+								transition={{
+									duration: 2,
+									repeat: Number.POSITIVE_INFINITY,
+									ease: 'easeInOut',
+								}}
+								className="w-px h-12 bg-black/20"></motion.div>
+						</motion.div>
+					</motion.div>
+				</div>
 			</div>
 
 			{/* Featured Projects */}
 			<FeaturedProjects projects={featuredProjects} />
 
 			{/* Projects Section */}
-			<section className="py-32 bg-black text-white">
-				<div className="max-w-[90vw] mx-auto">
-					<motion.h2
-						initial={{ opacity: 0, y: 20 }}
+			<section className="relative bg-black">
+				<div className="py-24 md:py-32 max-w-6xl mx-auto px-6">
+					<motion.div
+						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8 }}
-							viewport={{ once: true }}
-							className="text-2xl tracking-tight mb-24 px-6"
-						>
-						Experiences
-					</motion.h2>
-					
-					<div className="space-y-32">
-						{projects.map((project, index) => (
+						transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+						viewport={{ once: true }}
+						className="mb-20 md:mb-32 text-center">
+						<p className="text-white/60 uppercase tracking-[0.3em] text-sm font-medium mb-4">
+							Selected Work
+						</p>
+						<h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-light tracking-tight">
+							Experiences
+						</h2>
+					</motion.div>
+				</div>
+
+				{/* Full-screen project cards */}
+				<div className="space-y-0">
+					{works.map((project, index) => {
+						return (
 							<motion.article
 								key={project.title}
 								initial={{ opacity: 0 }}
 								whileInView={{ opacity: 1 }}
-								transition={{ duration: 0.8, delay: index * 0.2 }}
-								viewport={{ once: true, margin: "-100px" }}
-								className="group relative flex flex-col md:flex-row items-center gap-8 md:gap-16"
-							>
-								<div className="w-full md:w-1/2 relative aspect-[16/9] overflow-hidden">
-									<motion.img
-										src={project.image}
+								transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+								viewport={{ once: true, margin: '-20%' }}
+								className="relative h-screen flex items-center justify-center overflow-hidden cursor-pointer group"
+								onClick={() =>
+									setSelectedProject(selectedProject === index ? null : index)
+								}>
+								<motion.div
+									style={{ y: imageY, scale: imageScale }}
+									className="absolute inset-0 w-full h-full">
+									<img
+										src={
+											project.image ||
+											'/placeholder.svg?height=1200&width=1920&query=abstract project background'
+										}
 										alt={project.title}
-										className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
-										whileHover={{ scale: 1.02 }}
+										className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000"
 									/>
-								</div>
-								
-								<div className="w-full md:w-1/2 space-y-6 px-6">
-									<div className="space-y-2">
-										<motion.h3 
-											className="text-4xl font-light tracking-wide"
-											whileHover={{ x: 20 }}
-											transition={{ duration: 0.3 }}
-										>
-											{project.title}
-										</motion.h3>
-										<span className="text-sm text-gray-400">{project.year}</span>
-									</div>
-									
-									<p className="text-lg text-gray-400 font-light leading-relaxed max-w-xl">
-										{project.description}
-									</p>
-									
-									<div className="flex flex-wrap gap-3">
-										{project.tags.map((tag) => (
-											<span 
-												key={tag}
-												className="text-sm text-gray-400 border border-gray-800 px-3 py-1.5 hover:border-gray-600 transition-colors"
-											>
-												{tag}
-											</span>
-										))}
-									</div>
-								</div>
+									<div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-700" />
+								</motion.div>
+
+								{/* Project content overlay */}
+								<motion.div
+									style={{ y: textY }}
+									className="relative z-10 text-center max-w-4xl mx-auto px-6">
+									{/* Project number */}
+									<motion.span
+										initial={{ opacity: 0, y: 30 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.8, delay: 0.2 }}
+										className="block text-8xl md:text-9xl font-serif font-light text-white/20 leading-none mb-4">
+										{String(index + 1).padStart(2, '0')}
+									</motion.span>
+
+									{/* Project title */}
+									<motion.h3
+										initial={{ opacity: 0, y: 30 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.8, delay: 0.4 }}
+										className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-light leading-tight mb-6 group-hover:scale-105 transition-transform duration-500">
+										{project.title}
+									</motion.h3>
+
+									{/* Project year and category */}
+									<motion.div
+										initial={{ opacity: 0, y: 30 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.8, delay: 0.6 }}
+										className="flex items-center justify-center gap-8 mb-8">
+										<span className="text-white/60 uppercase tracking-[0.2em] text-sm">
+											{project.year}
+										</span>
+										<span className="text-white/40">|</span>
+									</motion.div>
+
+									{/* Expandable project details */}
+									<motion.div
+										initial={{ opacity: 0, height: 0 }}
+										animate={{
+											opacity: selectedProject === index ? 1 : 0,
+											height: selectedProject === index ? 'auto' : 0,
+										}}
+										transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+										className="overflow-hidden">
+										<div className="space-y-6 pt-8">
+											<p className="text-lg md:text-xl text-white/80 leading-relaxed font-light max-w-2xl mx-auto">
+												{project.description}
+											</p>
+
+											{/* Tags */}
+											<div className="flex flex-wrap justify-center gap-3">
+												{project.tags.map((tag) => (
+													<span
+														key={tag}
+														className="text-sm text-white/70 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors duration-300">
+														{tag}
+													</span>
+												))}
+											</div>
+										</div>
+									</motion.div>
+								</motion.div>
 							</motion.article>
-						))}
-					</div>
+						);
+					})}
 				</div>
 			</section>
-
-
 		</main>
 	);
 }
