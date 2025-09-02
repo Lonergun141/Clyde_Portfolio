@@ -87,10 +87,23 @@ export const featuredProjects = [
 	{
 		title: 'QuickEase Android App',
 		category: 'Web and Mobile App',
-		url: 'https://quick-ease-alpha.vercel.app/',
+		url: 'https://drive.google.com/file/d/1kFRlyijqySLolmyW1NhOfsvf0GiJEOzr/view?usp=sharing',
 		year: '2024',
 		description:
 			'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
 		link: 'https://quick-ease-alpha.vercel.app/',
 	},
+];
+
+export const greetings = [
+	{ text: 'Hello', language: 'English' },
+	{ text: 'Kumusta', language: 'Filipino' },
+	{ text: 'Hola', language: 'Spanish' },
+	{ text: 'Bonjour', language: 'French' },
+	{ text: 'Guten Tag', language: 'German' },
+	{ text: 'Ciao', language: 'Italian' },
+	{ text: 'こんにちは', language: 'Japanese' },
+	{ text: '안녕하세요', language: 'Korean' },
+	{ text: 'Olá', language: 'Portuguese' },
+	{ text: 'Привет', language: 'Russian' },
 ];

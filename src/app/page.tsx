@@ -1,14 +1,24 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
 import { works, featuredProjects } from '@/lib/constants/constants';
+import { greetings } from '@/lib/constants/constants';
 
 export default function Home() {
 	const containerRef = useRef(null);
 	const projectRef = useRef(null);
 	const [selectedProject, setSelectedProject] = useState<number | null>(null);
+	const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentGreetingIndex((prev) => (prev + 1) % greetings.length);
+		}, 3000);
+
+		return () => clearInterval(interval);
+	}, []);
 
 	const { scrollYProgress: projectScrollY } = useScroll({
 		target: projectRef,
@@ -20,7 +30,7 @@ export default function Home() {
 	const textY = useTransform(projectScrollY, [0, 1], ['0%', '10%']);
 
 	return (
-		<main className="min-h-screen bg-background font-inter">
+		<main className="min-h-screen bg-background">
 			{/* Hero Section */}
 			<div
 				ref={containerRef}
@@ -41,11 +51,13 @@ export default function Home() {
 
 						<div className="space-y-4">
 							<motion.h1
+								key={currentGreetingIndex}
 								initial={{ opacity: 0, y: 30 }}
 								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 1, delay: 0.5 }}
+								exit={{ opacity: 0, y: -30 }}
+								transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
 								className="text-[clamp(4rem,12vw,8rem)] font-extralight leading-[0.9] tracking-[-0.02em] text-black">
-								CLYDE
+								{greetings[currentGreetingIndex].text}
 							</motion.h1>
 
 							<motion.h1
@@ -53,7 +65,7 @@ export default function Home() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 1, delay: 0.7 }}
 								className="text-[clamp(4rem,12vw,8rem)] font-thin leading-[0.9] tracking-[-0.02em] text-black">
-								GEVERO
+								I&apos;m Clyde
 							</motion.h1>
 						</div>
 
@@ -109,7 +121,7 @@ export default function Home() {
 						<p className="text-white/60 uppercase tracking-[0.3em] text-sm font-medium mb-4">
 							Selected Work
 						</p>
-						<h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-light tracking-tight">
+						<h2 className="text-4xl md:text-6xl lg:text-7xl text-white font-light tracking-tight">
 							Experiences
 						</h2>
 					</motion.div>
@@ -135,7 +147,8 @@ export default function Home() {
 									<img
 										src={
 											project.image ||
-											'/placeholder.svg?height=1200&width=1920&query=abstract project background'
+											'/placeholder.svg?height=1200&width=1920&query=abstract project background' ||
+											'/placeholder.svg'
 										}
 										alt={project.title}
 										className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000"
@@ -152,7 +165,7 @@ export default function Home() {
 										initial={{ opacity: 0, y: 30 }}
 										whileInView={{ opacity: 1, y: 0 }}
 										transition={{ duration: 0.8, delay: 0.2 }}
-										className="block text-8xl md:text-9xl font-serif font-light text-white/20 leading-none mb-4">
+										className="block text-8xl md:text-9xl  font-light text-white/20 leading-none mb-4">
 										{String(index + 1).padStart(2, '0')}
 									</motion.span>
 
@@ -161,7 +174,7 @@ export default function Home() {
 										initial={{ opacity: 0, y: 30 }}
 										whileInView={{ opacity: 1, y: 0 }}
 										transition={{ duration: 0.8, delay: 0.4 }}
-										className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-light leading-tight mb-6 group-hover:scale-105 transition-transform duration-500">
+										className=" text-5xl md:text-7xl lg:text-8xl text-white font-light leading-tight mb-6 group-hover:scale-105 transition-transform duration-500">
 										{project.title}
 									</motion.h3>
 

@@ -22,10 +22,10 @@ export default function Footer() {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="font-serif text-8xl md:text-9xl lg:text-[12rem] font-bold leading-none tracking-tight mb-8">
+            <h2 className=" text-8xl md:text-9xl lg:text-[12rem] font-bold leading-none tracking-tight mb-8">
               Let&apos;s 
             </h2>
-            <h2 className="font-serif text-8xl md:text-9xl lg:text-[12rem] font-bold leading-none tracking-tight text-primary">
+            <h2 className=" text-8xl md:text-9xl lg:text-[12rem] font-bold leading-none tracking-tight text-primary">
               Connect
             </h2>
           </motion.div>
