@@ -11,7 +11,7 @@ const Profile = () => {
 			{/* Hero Section */}
 			<div className="relative h-screen bg-black">
 				<Image
-					src="/USTP CDO-0297- Gevero, Clyde H 012A3380.JPG"
+					src="/fullscreen_grad.jpeg"
 					alt="Profile Image"
 					fill
 					className="object-contain"
