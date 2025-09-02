@@ -104,7 +104,7 @@ export default function Navigation() {
 					<Link
 						href="/"
 						className="font-mono text-xs tracking-[0.3em] uppercase text-black/60 hover:text-black/90 transition-colors duration-500">
-						CG/25
+							Clyde Gevero
 					</Link>
 
 					<MenuButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
