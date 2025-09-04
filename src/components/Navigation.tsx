@@ -135,7 +135,7 @@ export default function Navigation() {
 									About
 								</NavLink>
 								<Link
-									href="/Gevero_CV.pdf"
+									href="/Gevero_CV_2025.pdf"
 									download
 									target="_blank"
 									onClick={() => setIsOpen(false)}
