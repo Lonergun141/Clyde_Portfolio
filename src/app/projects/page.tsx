@@ -7,10 +7,34 @@ import { Project } from '@/lib/types/types';
 
 const projects: Project[] = [
 	{
+		title: 'Personal Blog Website (Development)',
+		description: 'T3 stack blog website',
+		technologies: ['Nextjs', 'Tailwind', 'Prisma', 'NextAuth', 'tRPC'],
+		links: {
+			github: 'https://github.com/Lonergun141/Chika',
+			figma: 'https://www.figma.com/design/7iJIpyDJziK0DabM4OqRHt/Blog-Website?node-id=1-3&t=App18fCpzbKqgEZl-1',
+		},
+		categories: ['Web Development'],
+		image: '/Landing Page.png',
+		year: '2025',
+	},
+	{
+		title: '(Signed NDA) CHED Regional Office X Theses and Dissertations Archive Library',
+		description: 'Masters theses Digital repository for CHED regional office X archives',
+		technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
+		links: {
+			github: 'https://bitbucket.org/capstonecgnt/chedrox_theses_archive/src/main/',
+			figma: 'https://www.figma.com/design/ss0riR9VUwEgfqPae0zhzM/CHEDeTeX?node-id=0-1&t=dZ9CWZszc6D3QqDG-1',
+		},
+		categories: ['Web Development', 'UI/UX Design'],
+		image: '/CHED.png',
+		year: '2025',
+	},
+	{
 		title: 'QuickEase Web',
 		description:
 			'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification.',
-		technologies: ['React', 'Tailwind', 'Vite', 'Redux', 'RestAPI'],
+		technologies: ['React', 'Tailwind', 'Vite', 'Redux', 'RestAPI','Vercel'],
 		links: {
 			github: 'https://github.com/Lonergun141/QuickEase',
 			figma: 'https://www.figma.com/design/d1lYnIMuJg9gXzVJK9AzFk/QuickEase-WEB?node-id=0-1&t=H00IXSWGgC6DD91X-1',
@@ -112,17 +136,7 @@ const projects: Project[] = [
 		image: '/BBTV.png',
 		year: '2021-2022',
 	},
-	{
-		title: '(Signed NDA) CHED Regional Office X Theses and Dissertations Archive Library',
-		description: 'Masters theses Digital repository for CHED regional office X archives',
-		technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
-		links: {
-			figma: 'https://www.figma.com/design/ss0riR9VUwEgfqPae0zhzM/CHEDeTeX?node-id=0-1&t=dZ9CWZszc6D3QqDG-1',
-		},
-		categories: ['Web Development', 'UI/UX Design'],
-		image: '/CHED.png',
-		year: '2025',
-	},
+	
 	{
 		title: '(Signed NDA) CHED Regional Office X Maintenance Monitoring System',
 		description: 'ICT Hardware and Software maintenance tracker for CHED',
@@ -174,14 +188,14 @@ export default function Projects() {
 			if (!a.year && !b.year) return 0;
 			if (!a.year) return 1;
 			if (!b.year) return -1;
-			
+
 			const yearA = parseInt(a.year.split('-')[0]);
 			const yearB = parseInt(b.year.split('-')[0]);
-		
+
 			if (isNaN(yearA) && isNaN(yearB)) return 0;
 			if (isNaN(yearA)) return 1;
 			if (isNaN(yearB)) return -1;
-			
+
 			if (sortOrder === 'asc') {
 				return yearA - yearB;
 			} else {
