@@ -7,6 +7,18 @@ import { Project } from '@/lib/types/types';
 
 const projects: Project[] = [
 	{
+		title: 'QuickEase Reimagined Landing Page',
+		description: 'My personal latest redesign take on QuickEase',
+		technologies: ['Figma'],
+		links: {
+			figma: 'https://www.figma.com/design/Y27G8iAlPgQsRv97Cbfxta/QuickEase-Reimagined?node-id=0-1&t=DUCYHaBGkwAM9pQO-1',
+		},
+		categories: ['UI/UX Design'],
+		image: '/QuickEase Landing Page.png',
+		year: '2025',
+	},
+
+	{
 		title: 'Personal Blog Website (Development)',
 		description: 'T3 stack blog website',
 		technologies: ['Nextjs', 'Tailwind', 'Prisma', 'NextAuth', 'tRPC'],
