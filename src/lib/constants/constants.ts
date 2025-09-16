@@ -70,7 +70,7 @@ export const works = [
 		title: 'Graphics, Video and Photo',
 		description: 'Developed and edited videos for events and marketing purposes.',
 		tags: ['Lightroom', 'Premiere Pro', 'Photoshop', 'Cannon'],
-		 image: "https://images.unsplash.com/photo-1551302175-952301267d19??ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+		image: 'https://images.unsplash.com/photo-1551302175-952301267d19??ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80',
 	},
 ];
 
@@ -107,4 +107,31 @@ export const greetings = [
 	{ text: '안녕하세요', language: 'Korean' },
 	{ text: 'Olá', language: 'Portuguese' },
 	{ text: 'Привет', language: 'Russian' },
+];
+
+export const sampleList = [
+	{
+		id: 1,
+		firstName: 'Low',
+		lastName: 'Frend',
+		description: 'NAJNDJANDJNAJDNAJNDJANDJNAJDNJASNDJSNAJDNASJND',
+	},
+	{
+		id: 2,
+		firstName: 'Demi',
+		lastName: 'Ghads',
+		description: 'NAJNDJANDJNAJDNAJNDJANDJNAJDNJASNDJSNAJDNASJND',
+	},
+	{
+		id: 1,
+		firstName: 'Roxie',
+		lastName: 'Tutel',
+		description: 'NAJNDJANDJNAJDNAJNDJANDJNAJDNJASNDJSNAJDNASJND',
+	},
+	{
+		id: 1,
+		firstName: 'Anne',
+		lastName: 'frend',
+		description: 'NAJNDJANDJNAJDNAJNDJANDJNAJDNJASNDJSNAJDNASJND',
+	},
 ];

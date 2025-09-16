@@ -39,3 +39,9 @@ export interface ProjectCardProps {
     other?: string;
   };
 }
+
+export interface SampleList{
+	id:number;
+	firstName:string;
+	lastName:string
+}

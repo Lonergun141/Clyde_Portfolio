@@ -17,7 +17,17 @@ const projects: Project[] = [
 		image: '/QuickEase Landing Page.png',
 		year: '2025',
 	},
-
+	{
+		title: 'Lamdag Recipe Website Reimagined (Development)',
+		description: 'T3 stack blog website',
+		technologies: ['Nextjs', 'Tailwind', 'API', 'Figma'],
+		links: {
+			figma: 'https://www.figma.com/design/QkuanD4WBAvwyYOvVV3kGu/Recipe-Website?node-id=0-1&t=Lx4T6j2SFM9B0mAf-1',
+		},
+		categories: ['Web Development', 'UI/UX Design'],
+		image: '/Lamdag Landing Page.png',
+		year: '2025',
+	},
 	{
 		title: 'Personal Blog Website (Development)',
 		description: 'T3 stack blog website',
