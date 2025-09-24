@@ -5,6 +5,7 @@ import type React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 const NavLink = ({
 	href,
@@ -263,7 +264,7 @@ export default function Navigation() {
 													transition={{ duration: 0.3 }}
 													className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors duration-500"
 												>
-													<span className="text-white/40 group-hover:text-white/80 text-lg">↗</span>
+													<ArrowUpRight className="text-white/40 group-hover:text-white/80 text-lg"/>
 												</motion.div>
 											</div>
 										</Link>
@@ -296,7 +297,7 @@ export default function Navigation() {
 													transition={{ duration: 0.3 }}
 													className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors duration-500"
 												>
-													<span className="text-white/40 group-hover:text-white/80 text-lg">↗</span>
+													<ArrowUpRight className="text-white/40 group-hover:text-white/80 text-lg"/>
 												</motion.div>
 											</div>
 										</a>
