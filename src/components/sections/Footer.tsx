@@ -10,9 +10,9 @@ export default function Footer() {
 			whileInView={{ opacity: 1 }}
 			transition={{ duration: 0.8 }}
 			viewport={{ once: true }}
-			className="relative overflow-hidden bg-foreground text-background">
+			className="relative overflow-hidden bg-black text-background">
 			<div className="relative py-32 px-6">
-				<div className="max-w-7xl mx-auto">
+				<div className="max-w-6xl mx-auto">
 					<motion.div
 						initial={{ y: 100, opacity: 0 }}
 						whileInView={{ y: 0, opacity: 1 }}
@@ -27,7 +27,7 @@ export default function Footer() {
 						</h2>
 					</motion.div>
 
-					{/* Content Grid */}
+				
 					<div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
 						<motion.div
 							initial={{ x: -50, opacity: 0 }}
@@ -66,7 +66,7 @@ export default function Footer() {
 						</motion.div>
 
 						<div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-16">
-							{/* Social Links */}
+					
 							<motion.div
 								initial={{ y: 50, opacity: 0 }}
 								whileInView={{ y: 0, opacity: 1 }}
@@ -105,14 +105,14 @@ export default function Footer() {
 				</div>
 			</div>
 
-			{/* Bottom Bar */}
+		
 			<motion.div
 				initial={{ opacity: 0 }}
 				whileInView={{ opacity: 1 }}
 				transition={{ duration: 0.8, delay: 1.2 }}
 				viewport={{ once: true }}
 				className="border-t border-border/20 py-8">
-				<div className="max-w-7xl mx-auto px-6">
+				<div className="max-w-6xl mx-auto px-6">
 					<div className="flex flex-col md:flex-row justify-between items-center gap-4">
 						<div className="flex items-center gap-8">
 							<p className="text-sm font-mono tracking-wide">

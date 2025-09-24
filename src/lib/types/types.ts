@@ -27,17 +27,17 @@ export interface Project {
 }
 
 export interface ProjectCardProps {
-  title: string;
-  description: string;
-  tags: string[];
-  image?: string;
-  year?: string;
-  links: {
-    github?: string;
-    figma?: string;
-    live?: string;
-    other?: string;
-  };
+	title: string;
+	description: string;
+	tags: string[];
+	image?: string;
+	year?: string;
+	links: {
+		github?: string;
+		figma?: string;
+		live?: string;
+		other?: string;
+	};
 }
 
 export interface SampleList{

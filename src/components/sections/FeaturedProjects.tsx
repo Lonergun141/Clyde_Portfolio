@@ -25,7 +25,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const currentProject = projects[currentIndex]
 
   return (
-    <section className="relative min-h-screen bg-white pb-16 lg:pb-32">
+    <section className="relative min-h-screen bg-background pb-16 lg:pb-32">
       <div className="max-w-6xl mx-auto px-8 lg:px-16">
         <div className="pt-24 pb-16">
           <motion.div

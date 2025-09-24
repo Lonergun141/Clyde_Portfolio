@@ -1,14 +1,16 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import Link from 'next/link';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
+import PhilosophySection from '@/components/sections/PhilosophySection';
 import { works, featuredProjects } from '@/lib/constants/constants';
 import { greetings } from '@/lib/constants/constants';
+import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
 	const containerRef = useRef(null);
-	const projectRef = useRef(null);
 	const [selectedProject, setSelectedProject] = useState<number | null>(null);
 	const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
 
@@ -20,22 +22,29 @@ export default function Home() {
 		return () => clearInterval(interval);
 	}, []);
 
-	const { scrollYProgress: projectScrollY } = useScroll({
-		target: projectRef,
-		offset: ['start end', 'end start'],
-	});
-
-	const imageY = useTransform(projectScrollY, [0, 1], ['20%', '-20%']);
-	const imageScale = useTransform(projectScrollY, [0, 0.5, 1], [1.2, 1, 1.2]);
-	const textY = useTransform(projectScrollY, [0, 1], ['0%', '10%']);
-
 	return (
 		<main className="min-h-screen bg-background">
-			{/* Hero Section */}
 			<div
 				ref={containerRef}
-				className="relative min-h-screen bg-white flex items-center justify-center px-6">
-				<div className="max-w-4xl mx-auto w-full">
+				className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
+				<motion.div
+					className="absolute inset-0"
+					transition={{
+						duration: 8,
+						repeat: Number.POSITIVE_INFINITY,
+						ease: 'easeInOut',
+					}}
+				/>
+
+				<motion.div
+					className="absolute inset-0"
+					transition={{
+						duration: 10,
+						repeat: Number.POSITIVE_INFINITY,
+						ease: 'easeInOut',
+					}}
+				/>
+				<div className="max-w-6xl mx-auto w-full relative z-10">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -89,9 +98,32 @@ export default function Home() {
 						</motion.div>
 
 						<motion.div
+							initial={{ opacity: 0, y: 30 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 1, delay: 1.6 }}
+							className="pt-12">
+							<Link href="/projects">
+								<motion.span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+								<p className="relative z-10 flex items-center gap-3 text-black hover:underline font-medium tracking-wide cursor-pointer w-max group">
+									View All Projects
+									<motion.span
+										animate={{ x: [0, 4, 0] }}
+										transition={{
+											duration: 1.5,
+											repeat: Number.POSITIVE_INFINITY,
+											ease: 'easeInOut',
+										}}
+										className="text-xs">
+										<ArrowRight className="text-sm text-black" />
+									</motion.span>
+								</p>
+							</Link>
+						</motion.div>
+
+						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
-							transition={{ duration: 1, delay: 1.5 }}
+							transition={{ duration: 1, delay: 1.8 }}
 							className="absolute bottom-12 left-1/2 transform -translate-x-1/2">
 							<motion.div
 								animate={{ y: [0, 8, 0] }}
@@ -106,120 +138,238 @@ export default function Home() {
 				</div>
 			</div>
 
-			{/* Featured Projects */}
+			<PhilosophySection />
+
 			<FeaturedProjects projects={featuredProjects} />
 
-			{/* Projects Section */}
-			<section className="relative bg-black">
-				<div className="py-24 md:py-32 max-w-6xl mx-auto px-6">
+			<section className="bg-white py-24 md:py-32">
+				<div className="max-w-6xl mx-auto px-6">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+						<motion.div
+							initial={{ opacity: 0, x: -30 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+							className="space-y-8">
+							<div className="flex items-center gap-4">
+								<div className="w-8 h-px bg-black/20" />
+								<p className="text-black/40 text-xs font-light tracking-[0.3em] uppercase">
+									Selected Work
+								</p>
+							</div>
+
+							<h2 className="text-4xl md:text-5xl font-light text-black leading-tight">
+								Experiences
+							</h2>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, x: 30 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+							className="space-y-0">
+							{works.map((project, index) => (
+								<motion.article
+									key={index}
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.6, delay: index * 0.1 }}
+									viewport={{ once: true }}
+									className="border-b border-black/10 py-6 cursor-pointer group"
+									onClick={() =>
+										setSelectedProject(selectedProject === index ? null : index)
+									}>
+									<div className="flex items-center justify-between">
+										<div className="flex items-center gap-6">
+											<span className="text-sm font-mono text-black/30">
+												{String(index + 1).padStart(2, '0')}
+											</span>
+											<h3 className="text-xl font-light text-black group-hover:text-black/70 transition-colors">
+												{project.title}
+											</h3>
+										</div>
+										<div className="flex items-center gap-4">
+											<motion.span
+												className="text-black/30"
+												animate={{ rotate: selectedProject === index ? 180 : 0 }}
+												transition={{ duration: 0.3 }}>
+												↓
+											</motion.span>
+										</div>
+									</div>
+
+									<AnimatePresence>
+										{selectedProject === index && (
+											<motion.div
+												initial={{ opacity: 0, height: 0 }}
+												animate={{ opacity: 1, height: 'auto' }}
+												exit={{ opacity: 0, height: 0 }}
+												transition={{ duration: 0.4 }}
+												className="overflow-hidden">
+												<div className="pl-12 pt-6 space-y-4">
+													<p className="text-base text-black/60 leading-relaxed">
+														{project.description}
+													</p>
+													<div className="flex flex-wrap gap-2">
+														{project.tags.map((tag, tagIndex) => (
+															<span
+																key={tagIndex}
+																className="text-xs text-black/50 bg-black/5 px-3 py-1 rounded-full">
+																{tag}
+															</span>
+														))}
+													</div>
+												</div>
+											</motion.div>
+										)}
+									</AnimatePresence>
+								</motion.article>
+							))}
+						</motion.div>
+					</div>
+				</div>
+			</section>
+
+			<section className="bg-black text-white py-24 md:py-32 overflow-hidden">
+				<div className="max-w-6xl mx-auto px-6">
 					<motion.div
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+						transition={{ duration: 0.8 }}
 						viewport={{ once: true }}
-						className="mb-20 md:mb-32 text-center">
-						<p className="text-white/60 uppercase tracking-[0.3em] text-sm font-medium mb-4">
-							Selected Work
-						</p>
-						<h2 className="text-4xl md:text-6xl lg:text-7xl text-white font-light tracking-tight">
-							Experiences
+						className="mb-20 md:mb-32">
+						<div className="flex items-center gap-4 mb-6">
+							<div className="w-8 h-px bg-gradient-to-r from-white/20 to-transparent" />
+							<p className="text-white/40 text-xs font-light tracking-[0.3em] uppercase">
+								How I Work
+							</p>
+						</div>
+						<h2 className="text-4xl md:text-6xl font-light text-white leading-tight">
+							Process
 						</h2>
 					</motion.div>
-				</div>
 
-				{/* Full-screen project cards */}
-				<div className="space-y-0">
-					{works.map((project, index) => {
-						return (
-							<motion.article
-								key={project.title}
-								initial={{ opacity: 0 }}
-								whileInView={{ opacity: 1 }}
-								transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-								viewport={{ once: true, margin: '-20%' }}
-								className="relative h-screen flex items-center justify-center overflow-hidden cursor-pointer group"
-								onClick={() =>
-									setSelectedProject(selectedProject === index ? null : index)
-								}>
+					<div className="relative">
+						<div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-white/20 via-white/10 to-transparent hidden md:block" />
+
+						<div className="space-y-16 md:space-y-24">
+							{[
+								{
+									num: '01',
+									title: 'Research & Discovery',
+									desc: 'Understanding your needs and goals',
+									details: ['User interviews', 'Market analysis', 'Technical audit'],
+									color: 'from-blue-500/20 to-cyan-500/20',
+								},
+								{
+									num: '02',
+									title: 'Design & Prototype',
+									desc: 'Creating user-centered solutions',
+									details: ['Wireframing', 'Visual design', 'Interactive prototypes'],
+									color: 'from-purple-500/20 to-pink-500/20',
+								},
+								{
+									num: '03',
+									title: 'Develop & Test',
+									desc: 'Building with modern technologies',
+									details: [
+										'Frontend development',
+										'Quality assurance',
+										'Performance optimization',
+									],
+									color: 'from-green-500/20 to-emerald-500/20',
+								},
+								{
+									num: '04',
+									title: 'Launch & Support',
+									desc: 'Delivering results and ongoing care',
+									details: ['Deployment', 'Monitoring', 'Continuous improvement'],
+									color: 'from-orange-500/20 to-yellow-500/20',
+								},
+							].map((step, index) => (
 								<motion.div
-									style={{ y: imageY, scale: imageScale }}
-									className="absolute inset-0 w-full h-full">
-									<img
-										src={
-											project.image ||
-											'/placeholder.svg?height=1200&width=1920&query=abstract project background' ||
-											'/placeholder.svg'
-										}
-										alt={project.title}
-										className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000"
-									/>
-									<div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-700" />
-								</motion.div>
+									key={step.num}
+									initial={{ opacity: 0, x: -50 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									transition={{ duration: 0.8, delay: index * 0.2 }}
+									viewport={{ once: true }}
+									className="relative group">
+									<div className="flex items-start gap-8 md:gap-12">
+										<div className="relative flex-shrink-0">
+											<div className="w-16 h-16 rounded-full border border-white/20 bg-black flex items-center justify-center text-white/60 text-sm font-mono relative z-10">
+												{step.num}
+											</div>
+											<div
+												className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm`}
+											/>
+										</div>
 
-								{/* Project content overlay */}
-								<motion.div
-									style={{ y: textY }}
-									className="relative z-10 text-center max-w-4xl mx-auto px-6">
-									{/* Project number */}
-									<motion.span
-										initial={{ opacity: 0, y: 30 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.8, delay: 0.2 }}
-										className="block text-8xl md:text-9xl  font-light text-white/20 leading-none mb-4">
-										{String(index + 1).padStart(2, '0')}
-									</motion.span>
+										<div className="flex-1 pt-2">
+											<div className="flex flex-col lg:flex-row lg:items-start lg:gap-12">
+												<div className="flex-1">
+													<div className="flex items-center gap-3 mb-3">
+														<h3 className="text-2xl md:text-3xl font-light text-white group-hover:text-white/80 transition-colors">
+															{step.title}
+														</h3>
+													</div>
+													<p className="text-white/60 text-base md:text-lg leading-relaxed mb-6">
+														{step.desc}
+													</p>
 
-									{/* Project title */}
-									<motion.h3
-										initial={{ opacity: 0, y: 30 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.8, delay: 0.4 }}
-										className=" text-5xl md:text-7xl lg:text-8xl text-white font-light leading-tight mb-6 group-hover:scale-105 transition-transform duration-500">
-										{project.title}
-									</motion.h3>
+													<div className="flex flex-wrap gap-2">
+														{step.details.map((detail, i) => (
+															<motion.span
+																key={i}
+																initial={{ opacity: 0, scale: 0.8 }}
+																whileInView={{ opacity: 1, scale: 1 }}
+																transition={{
+																	duration: 0.4,
+																	delay: index * 0.2 + i * 0.1,
+																}}
+																viewport={{ once: true }}
+																className="px-3 py-1 text-xs text-white/50 border border-white/10 rounded-full hover:border-white/20 hover:text-white/70 transition-colors">
+																{detail}
+															</motion.span>
+														))}
+													</div>
+												</div>
 
-									{/* Project year and category */}
-									<motion.div
-										initial={{ opacity: 0, y: 30 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.8, delay: 0.6 }}
-										className="flex items-center justify-center gap-8 mb-8">
-										<span className="text-white/60 uppercase tracking-[0.2em] text-sm">
-											{project.year}
-										</span>
-										<span className="text-white/40">|</span>
-									</motion.div>
-
-									{/* Expandable project details */}
-									<motion.div
-										initial={{ opacity: 0, height: 0 }}
-										animate={{
-											opacity: selectedProject === index ? 1 : 0,
-											height: selectedProject === index ? 'auto' : 0,
-										}}
-										transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-										className="overflow-hidden">
-										<div className="space-y-6 pt-8">
-											<p className="text-lg md:text-xl text-white/80 leading-relaxed font-light max-w-2xl mx-auto">
-												{project.description}
-											</p>
-
-											{/* Tags */}
-											<div className="flex flex-wrap justify-center gap-3">
-												{project.tags.map((tag) => (
-													<span
-														key={tag}
-														className="text-sm text-white/70 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors duration-300">
-														{tag}
-													</span>
-												))}
+												<div className="hidden lg:block mt-8 lg:mt-0">
+													<div className="w-24 h-2 bg-white/5 rounded-full overflow-hidden">
+														<motion.div
+															initial={{ width: 0 }}
+															whileInView={{ width: `${((index + 1) / 4) * 100}%` }}
+															transition={{ duration: 1, delay: index * 0.2 }}
+															viewport={{ once: true }}
+															className={`h-full bg-gradient-to-r ${step.color.replace(
+																'/20',
+																'/50'
+															)} rounded-full`}
+														/>
+													</div>
+													<p className="text-xs text-white/30 mt-2 font-mono">
+														{Math.round(((index + 1) / 4) * 100)}%
+													</p>
+												</div>
 											</div>
 										</div>
-									</motion.div>
+									</div>
+
+									{index < 3 && (
+										<motion.div
+											initial={{ opacity: 0, scale: 0 }}
+											whileInView={{ opacity: 1, scale: 1 }}
+											transition={{ duration: 0.5, delay: index * 0.2 + 0.5 }}
+											viewport={{ once: true }}
+											className="absolute left-8 -bottom-8 w-px h-8 bg-gradient-to-b from-white/20 to-white/10 hidden md:block">
+											<div className="absolute -bottom-1 -left-1 w-2 h-2 border-r border-b border-white/20 rotate-45" />
+										</motion.div>
+									)}
 								</motion.div>
-							</motion.article>
-						);
-					})}
+							))}
+						</div>
+					</div>
 				</div>
 			</section>
 		</main>

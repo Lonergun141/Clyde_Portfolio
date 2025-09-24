@@ -23,9 +23,10 @@ const projects: Project[] = [
 		technologies: ['Nextjs', 'Tailwind', 'API', 'Figma'],
 		links: {
 			figma: 'https://www.figma.com/design/QkuanD4WBAvwyYOvVV3kGu/Recipe-Website?node-id=0-1&t=Lx4T6j2SFM9B0mAf-1',
+			github:'https://github.com/Lonergun141/Project-Lamdag.git'
 		},
 		categories: ['Web Development', 'UI/UX Design'],
-		image: '/Lamdag Landing Page.png',
+		image: '/lamdag_page.png',
 		year: '2025',
 	},
 	{
@@ -231,11 +232,11 @@ export default function Projects() {
 
 	const handleSortToggle = () => {
 		if (sortOrder === 'none') {
-			setSortOrder('desc'); // Start with newest first
+			setSortOrder('desc'); 
 		} else if (sortOrder === 'desc') {
-			setSortOrder('asc'); // Then oldest first
+			setSortOrder('asc'); 
 		} else {
-			setSortOrder('none'); // Then no sorting
+			setSortOrder('none'); 
 		}
 	};
 
@@ -262,7 +263,7 @@ export default function Projects() {
 	};
 
 	return (
-		<main className="min-h-screen bg-white pt-32 px-8 pb-16">
+		<main className="min-h-screen bg-background pt-32 px-8 pb-16">
 			<div className="max-w-6xl mx-auto">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -273,7 +274,7 @@ export default function Projects() {
 						Archive
 					</h1>
 
-					{/* NDA Notice */}
+				
 					<div className="mb-8 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-r-md flex items-center">
 						<p className="text-sm text-amber-800">
 							Some projects are under{' '}
@@ -282,7 +283,7 @@ export default function Projects() {
 						</p>
 					</div>
 
-					{/* Search, Filter, and Sort Section */}
+				
 					<div className="space-y-8">
 						<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
 							<input
@@ -295,7 +296,7 @@ export default function Projects() {
 								onChange={(e) => setSearchTerm(e.target.value)}
 							/>
 
-							{/* Sort Button */}
+				
 							<button
 								onClick={handleSortToggle}
 								className="flex items-center space-x-2 px-4 py-2 border border-black/10 
@@ -324,7 +325,7 @@ export default function Projects() {
 					</div>
 				</motion.div>
 
-				{/* Projects Grid */}
+			
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
 					{filteredAndSortedProjects.map((project) => (
 						<motion.div

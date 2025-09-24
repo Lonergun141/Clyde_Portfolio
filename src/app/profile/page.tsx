@@ -15,9 +15,9 @@ const Profile = () => {
 			</div>
 
 			<section className="relative min-h-screen flex items-center">
-				{/* Main Content Grid */}
+			
 				<div className="w-full max-w-7xl mx-auto px-8 grid grid-cols-12 gap-8 items-center">
-					{/* Large Typography */}
+				
 					<motion.div
 						initial={{ opacity: 0, y: 100 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ const Profile = () => {
 						</p>
 					</motion.div>
 
-					{/* Image Section */}
+			
 					<motion.div
 						initial={{ opacity: 0, scale: 0.8 }}
 						animate={{ opacity: 1, scale: 1 }}
@@ -56,19 +56,19 @@ const Profile = () => {
 							<div className="absolute inset-0 bg-black/20"></div>
 						</div>
 
-						{/* Image Caption */}
+				
 						<div className="absolute -bottom-8 -right-8 bg-white text-black px-6 py-3 text-xs tracking-[0.3em] uppercase font-medium">
 							DEVELOPER & CREATOR
 						</div>
 					</motion.div>
 				</div>
 
-				{/* Vertical Text */}
+			
 				<div className="absolute right-8 top-1/2 transform -translate-y-1/2 rotate-90 origin-center">
 					<p className="text-xs tracking-[0.6em] uppercase font-light opacity-60">PORTFOLIO</p>
 				</div>
 
-				{/* Bottom Quote */}
+			
 				<motion.div
 					initial={{ opacity: 0, x: -50 }}
 					animate={{ opacity: 1, x: 0 }}
@@ -83,13 +83,13 @@ const Profile = () => {
 
 			<section className="py-32 px-8 relative">
 				<div className="max-w-7xl mx-auto">
-					{/* Section Number */}
+				
 					<div className="absolute top-8 right-8 text-xs tracking-[0.4em] uppercase opacity-40">
 						01 / SKILLS
 					</div>
 
 					<div className="grid grid-cols-12 gap-16 items-start">
-						{/* Development Skills */}
+				
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ const Profile = () => {
 							</div>
 						</motion.div>
 
-						{/* Creative Tools */}
+				
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -156,7 +156,7 @@ const Profile = () => {
 
 			<section className="py-32 px-8 relative border-t border-white/10">
 				<div className="max-w-7xl mx-auto">
-					{/* Bottom Info */}
+					
 					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
