@@ -36,11 +36,12 @@ const PhilosophySection: React.FC = () => {
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.5 }}
 							className="text-lg md:text-xl text-black/70 leading-relaxed font-light">
-							As a results-driven IT professional with a B.S. in Information Technology (Cum
-							Laude), I specialize in creating user-focused web and mobile applications. I
-							believe in the power of purposeful design—where every interaction streamlines
-							processes, enhances user experience, and solves real-world problems through
-							innovative digital solutions.
+							A detail-oriented and analytical Information Technology graduate (Cum Laude)
+							from the University of Science and Technology of Southern Philippines.
+							Possesses a strong foundation in front-end development, UI/UX principles, and
+							database management. Eager to apply technical skills in a research or academic
+							environment to solve complex problems in data accessibility, process
+							automation, and human-computer interaction.
 						</motion.p>
 
 						<motion.div
@@ -70,7 +71,6 @@ const PhilosophySection: React.FC = () => {
 						</motion.div>
 					</motion.div>
 
-			
 					<motion.div
 						initial={{ opacity: 0, x: 30 }}
 						whileInView={{ opacity: 1, x: 0 }}

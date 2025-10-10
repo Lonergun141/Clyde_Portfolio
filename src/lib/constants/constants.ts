@@ -80,7 +80,7 @@ export const featuredProjects = [
 		title: 'QuickEase Web App',
 		category: 'Web and Mobile App',
 		url: 'https://quick-ease-alpha.vercel.app/',
-		year: '2024',
+		year: '2024-2025',
 		description:
 			'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
 		link: 'https://quick-ease-alpha.vercel.app/',
@@ -89,10 +89,19 @@ export const featuredProjects = [
 		title: 'QuickEase Android App',
 		category: 'Web and Mobile App',
 		url: 'https://drive.google.com/file/d/1kFRlyijqySLolmyW1NhOfsvf0GiJEOzr/view?usp=sharing',
-		year: '2024',
+		year: '2024-2025',
 		description:
 			'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
 		link: 'https://quick-ease-alpha.vercel.app/',
+	},
+	{
+		title: 'Commission on Higher Education Regional Office X: Theses Dissertations Repository System',
+		category: 'Web App',
+		url: 'https://script.google.com/macros/s/AKfycbxi4v30LdGtGmq0vlj_HAb27w1Y5qpG9PUEWpkjn4A6I1AcpHvdBjzzoRAdfJXzEBc4ag/exec',
+		year: '2025',
+		description:
+			'A transition in storing theses dissertations for CHED10 to digital.',
+		link: 'https://script.google.com/macros/s/AKfycbxi4v30LdGtGmq0vlj_HAb27w1Y5qpG9PUEWpkjn4A6I1AcpHvdBjzzoRAdfJXzEBc4ag/exec',
 	},
 ];
 
@@ -135,4 +144,39 @@ export const sampleList = [
 		lastName: 'frend',
 		description: 'NAJNDJANDJNAJDNAJNDJANDJNAJDNJASNDJSNAJDNASJND',
 	},
+];
+
+export const certificates = [
+	{
+		title: 'BS in Information Technology Track II: Software Development',
+		issuer: 'USTP Cagayan de Oro',
+		platform: 'University Degree',
+		date: '2025',
+		logo: 'https://upload.wikimedia.org/wikipedia/en/0/01/University_of_Science_and_Technology_of_Southern_Philippines.png',
+		link: '#',
+	},
+	{
+		title: 'Foundations of User Experience (UX) Design (Ongoing)',
+		issuer: 'Google',
+		platform: 'Coursera',
+		date: '2025',
+		logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg',
+		link: 'https://drive.google.com/file/d/1n08Vx_WZ7e89ZTYJmsEmG27yM0eQlN6l/view?usp=sharing',
+	},
+	{
+		title: 'HCIA-AI Machine Learning Fundamentals',
+		issuer: 'Huawei',
+		platform: 'Huawei',
+		date: '2024',
+		logo: 'https://upload.wikimedia.org/wikipedia/en/0/04/Huawei_Standard_logo.svg',
+		link: 'https://drive.google.com/file/d/1goAZVxJDEbyUnnnuz7Bsr6EIXvpdgY9x/view?usp=sharing',
+	},
+	{
+		title:'CITC Digital Solutions Showcase',
+		issuer:'USTP-CITC',
+		platform: 'USTP-DRER Gymnassium',
+		date:'2024',
+		logo: 'https://upload.wikimedia.org/wikipedia/en/0/01/University_of_Science_and_Technology_of_Southern_Philippines.png',
+		link:'https://docs.google.com/document/d/1iIZEH0euyNqLN1hhyjh5Vbb5eIjvPCGuW7vmy1EcnzQ/edit?usp=sharing'
+	}
 ];

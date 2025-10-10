@@ -8,6 +8,7 @@ import PhilosophySection from '@/components/sections/PhilosophySection';
 import { works, featuredProjects } from '@/lib/constants/constants';
 import { greetings } from '@/lib/constants/constants';
 import { ArrowRight } from 'lucide-react';
+import CertificatesSection from '@/components/sections/CertificatesSection';
 
 export default function Home() {
 	const containerRef = useRef(null);
@@ -26,118 +27,75 @@ export default function Home() {
 		<main className="min-h-screen bg-background">
 			<div
 				ref={containerRef}
-				className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
-				<motion.div
-					className="absolute inset-0"
-					transition={{
-						duration: 8,
-						repeat: Number.POSITIVE_INFINITY,
-						ease: 'easeInOut',
-					}}
-				/>
-
-				<motion.div
-					className="absolute inset-0"
-					transition={{
-						duration: 10,
-						repeat: Number.POSITIVE_INFINITY,
-						ease: 'easeInOut',
-					}}
-				/>
-				<div className="max-w-6xl mx-auto w-full relative z-10">
+				className="relative min-h-screen  flex items-center justify-center overflow-hidden bg-white">
+				<div className="relative z-10 w-full md:px-16 lg:px-24 py-20 max-w-6xl mx-auto px-6">
 					<motion.div
-						initial={{ opacity: 0, y: 20 }}
+						initial={{ opacity: 0, y: -20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
-						className="space-y-12">
-						<motion.p
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ duration: 1, delay: 0.3 }}
-							className="text-black/40 text-xs font-light tracking-[0.3em] uppercase">
-							Portfolio {new Date().getFullYear()}
-						</motion.p>
-
-						<div className="space-y-4">
-							<motion.h1
-								key={currentGreetingIndex}
-								initial={{ opacity: 0, y: 30 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -30 }}
-								transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-								className="text-[clamp(4rem,12vw,8rem)] font-extralight leading-[0.9] tracking-[-0.02em] text-black">
-								{greetings[currentGreetingIndex].text}
-							</motion.h1>
-
-							<motion.h1
-								initial={{ opacity: 0, y: 30 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 1, delay: 0.7 }}
-								className="text-[clamp(4rem,12vw,8rem)] font-thin leading-[0.9] tracking-[-0.02em] text-black">
-								I&apos;m Clyde
-							</motion.h1>
-						</div>
-
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 1, delay: 0.9 }}
-							className="space-y-3 pt-8">
-							{['(01) Mobile Developer', '(02) Web Developer', '(03) UI/UX Designer'].map(
-								(text, index) => (
-									<motion.div
-										key={text}
-										initial={{ opacity: 0, x: -20 }}
-										animate={{ opacity: 1, x: 0 }}
-										transition={{ duration: 0.8, delay: 1.1 + index * 0.1 }}
-										className="text-sm font-light text-black/60 tracking-wide hover:text-black transition-colors duration-300 cursor-default">
-										{text}
-									</motion.div>
-								)
-							)}
-						</motion.div>
-
-						<motion.div
-							initial={{ opacity: 0, y: 30 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 1, delay: 1.6 }}
-							className="pt-12">
-							<Link href="/projects">
-								<motion.span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-								<p className="relative z-10 flex items-center gap-3 text-black hover:underline font-medium tracking-wide cursor-pointer w-max group">
-									View All Projects
-									<motion.span
-										animate={{ x: [0, 4, 0] }}
-										transition={{
-											duration: 1.5,
-											repeat: Number.POSITIVE_INFINITY,
-											ease: 'easeInOut',
-										}}
-										className="text-xs">
-										<ArrowRight className="text-sm text-black" />
-									</motion.span>
-								</p>
-							</Link>
-						</motion.div>
-
-						<motion.div
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ duration: 1, delay: 1.8 }}
-							className="absolute bottom-12 left-1/2 transform -translate-x-1/2">
-							<motion.div
-								animate={{ y: [0, 8, 0] }}
-								transition={{
-									duration: 2,
-									repeat: Number.POSITIVE_INFINITY,
-									ease: 'easeInOut',
-								}}
-								className="w-px h-12 bg-black/20"></motion.div>
-						</motion.div>
+						transition={{ duration: 1, delay: 0.3 }}
+						className="absolute top-24 right-8 md:right-16 lg:right-24 text-right max-w-xs">
+						<p className="text-neutral-600 text-xs md:text-sm font-light leading-relaxed tracking-wide">
+							Mobile Developer, Web Developer & UI/UX 
+						</p>
+						<div className="w-full h-px bg-neutral-300 mt-4"></div>
 					</motion.div>
+
+			
+					<div className="max-w-7xl mx-auto flex flex-col justify-center min-h-screen">
+						<div className="pl-0 md:pl-4">
+							<AnimatePresence mode="wait">
+								<motion.h1
+									key={currentGreetingIndex}
+									initial={{ opacity: 0, x: -50 }}
+									animate={{ opacity: 1, x: 0 }}
+									exit={{ opacity: 0, x: 50 }}
+									transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
+									className="text-[clamp(3.5rem,12vw,9rem)] font-extralight leading-[0.9] tracking-[-0.04em] text-neutral-900 mb-8">
+									{greetings[currentGreetingIndex].text}
+								</motion.h1>
+							</AnimatePresence>
+
+							<motion.div
+								initial={{ opacity: 0, y: 30 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 1, delay: 0.6 }}
+								className="space-y-2">
+								<p className="text-neutral-500 text-sm md:text-base font-light tracking-widest">
+									I&apos;m Clyde
+								</p>
+								<p className="text-neutral-400 text-xs md:text-sm font-light max-w-md leading-relaxed">
+									Crafting digital experiences through thoughtful design and clean code
+								</p>
+							</motion.div>
+
+				
+							<motion.div
+								initial={{ opacity: 0, y: 30 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 1, delay: 0.9 }}
+								className="mt-12">
+								<Link href="/projects">
+									<button className="group relative px-8 py-4 border border-neutral-300 text-neutral-900 text-xs tracking-[0.2em] font-light overflow-hidden transition-all duration-500 hover:border-neutral-900 hover:bg-neutral-900 hover:text-white">
+										<span className="relative z-10 flex items-center gap-3">
+											VIEW MY PROJECTS
+											<motion.span
+												animate={{ x: [0, 5, 0] }}
+												transition={{
+													duration: 1.5,
+													repeat: Number.POSITIVE_INFINITY,
+													ease: 'easeInOut',
+												}}>
+												<ArrowRight className="w-4 h-4" />
+											</motion.span>
+										</span>
+									</button>
+								</Link>
+							</motion.div>
+						</div>
+					</div>
 				</div>
 			</div>
-
+			<CertificatesSection />
 			<PhilosophySection />
 
 			<FeaturedProjects projects={featuredProjects} />
