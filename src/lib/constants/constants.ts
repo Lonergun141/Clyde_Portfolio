@@ -156,14 +156,6 @@ export const certificates = [
 		link: '#',
 	},
 	{
-		title: 'Foundations of User Experience (UX) Design (Ongoing)',
-		issuer: 'Google',
-		platform: 'Coursera',
-		date: '2025',
-		logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg',
-		link: 'https://drive.google.com/file/d/1n08Vx_WZ7e89ZTYJmsEmG27yM0eQlN6l/view?usp=sharing',
-	},
-	{
 		title: 'HCIA-AI Machine Learning Fundamentals',
 		issuer: 'Huawei',
 		platform: 'Huawei',
