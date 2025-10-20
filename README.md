@@ -122,6 +122,4 @@ To deploy on Netlify:
 
 ## License
 
-This project is licensed under the >[Specify the License Type (e.g., MIT License)]<. See the `LICENSE` file for more information.
 
-> If you don't have a LICENSE file, create one and add the appropriate license text.
