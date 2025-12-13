@@ -5,14 +5,14 @@ import { ProjectCardProps } from '@/lib/types/types';
 
 
 const PlaceholderSVG = () => (
-	<svg className="w-full h-full bg-black/5" viewBox="0 0 16 9" preserveAspectRatio="none">
+	<svg className="w-full h-full bg-muted" viewBox="0 0 16 9" preserveAspectRatio="none">
 		<rect width="100%" height="100%" fill="currentColor" />
 		<text
 			x="50%"
 			y="50%"
 			dominantBaseline="middle"
 			textAnchor="middle"
-			className="fill-black/20 text-[0.8px] uppercase tracking-wider">
+			className="fill-muted-foreground/30 text-[0.8px] uppercase tracking-wider">
 			No Image Available
 		</text>
 	</svg>
@@ -22,7 +22,7 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 	const getLinkIcon = (linkType: string) => {
 		const iconProps = {
 			size: 12,
-			className: 'transition-colors duration-500 group-hover:text-black/60',
+			className: 'transition-colors duration-500 group-hover:text-foreground',
 		};
 		switch (linkType) {
 			case 'github':
@@ -58,7 +58,7 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 
 	return (
 		<div className="relative w-full group">
-			<div className="aspect-[16/9] overflow-hidden mb-6 relative bg-black/5 cursor-pointer">
+			<div className="aspect-[16/9] overflow-hidden mb-6 relative bg-muted cursor-pointer">
 				{image ? (
 					<>
 						<Image
@@ -71,11 +71,11 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
 						/>
 						<div
-							className="absolute inset-0 bg-black/20 transition-opacity duration-700 ease-in-out
+							className="absolute inset-0 bg-background/20 transition-opacity duration-700 ease-in-out
                           group-hover:opacity-0"
 						/>
 						<div
-							className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent
+							className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent
                           opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out"
 						/>
 					</>
@@ -85,7 +85,7 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 
 				{hasLinks && (
 					<div className="absolute top-3 right-3 opacity-30 group-hover:opacity-0 transition-opacity duration-500">
-						<MousePointer2 size={14} className="text-white drop-shadow-md" />
+						<MousePointer2 size={14} className="text-foreground drop-shadow-md" />
 					</div>
 				)}
 
@@ -95,13 +95,13 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
                         opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out
                         transform translate-y-2 group-hover:translate-y-0">
 						<div
-							className="flex flex-col gap-3 p-6 rounded-lg bg-white/95 backdrop-blur-sm 
-                          shadow-lg border border-white/20 min-w-[200px]">
+							className="flex flex-col gap-3 p-6 rounded-lg bg-card/95 backdrop-blur-sm 
+                          shadow-lg border border-border min-w-[200px]">
 							<div className="text-center mb-2">
-								<h4 className="text-xs font-medium text-black/80 tracking-wide uppercase">
+								<h4 className="text-xs font-medium text-foreground/80 tracking-wide uppercase">
 									Quick Access
 								</h4>
-								<div className="w-8 h-px bg-black/20 mx-auto mt-1"></div>
+								<div className="w-8 h-px bg-border mx-auto mt-1"></div>
 							</div>
 
 							{availableLinks.map(([linkType, url]) => (
@@ -111,21 +111,21 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 									target="_blank"
 									rel="noopener noreferrer"
 									className="flex items-center gap-3 p-3 rounded-md
-                           bg-black/5 hover:bg-black/10 transition-all duration-300
+                           bg-muted hover:bg-muted/80 transition-all duration-300
                            group/overlay-link transform hover:scale-105 hover:shadow-md
-                           border border-transparent hover:border-black/10"
+                           border border-transparent hover:border-border"
 									onClick={(e) => e.stopPropagation()}>
-									<span className="text-black/60 group-hover/overlay-link:text-black/80 transition-colors duration-300">
+									<span className="text-muted-foreground group-hover/overlay-link:text-foreground transition-colors duration-300">
 										{getLinkIcon(linkType)}
 									</span>
 									<span
-										className="text-xs font-medium text-black/70 group-hover/overlay-link:text-black/90
+										className="text-xs font-medium text-muted-foreground group-hover/overlay-link:text-foreground
                                  tracking-wide transition-colors duration-300">
 										{getLinkLabel(linkType)}
 									</span>
 									<ExternalLink
 										size={10}
-										className="text-black/40 group-hover/overlay-link:text-black/60 
+										className="text-muted-foreground/50 group-hover/overlay-link:text-muted-foreground 
                                                    transition-colors duration-300 ml-auto"
 									/>
 								</Link>
@@ -137,8 +137,8 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 
 			<div className="mb-4 flex items-center gap-4">
 				<span
-					className="font-mono text-[10px] tracking-[0.2em] text-black/30
-                      transition-colors duration-500 group-hover:text-black/50">
+					className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50
+                      transition-colors duration-500 group-hover:text-muted-foreground">
 					SC.
 					{Math.floor(Math.random() * 100)
 						.toString()
@@ -146,8 +146,8 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 				</span>
 				{year && (
 					<span
-						className="text-[10px] font-light tracking-[0.2em] text-black/40
-                        transition-colors duration-500 group-hover:text-black/60">
+						className="text-[10px] font-light tracking-[0.2em] text-muted-foreground/60
+                        transition-colors duration-500 group-hover:text-muted-foreground">
 						{year}
 					</span>
 				)}
@@ -155,26 +155,26 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 
 			<div className="space-y-4 max-w-[90%]">
 				<h3
-					className="text-xs font-light tracking-[0.15em] uppercase text-black/80 break-words
-                     transition-colors duration-500 group-hover:text-black">
+					className="text-xs font-light tracking-[0.15em] uppercase text-foreground/80 break-words
+                     transition-colors duration-500 group-hover:text-foreground">
 					{title}
 				</h3>
 
 				<p
-					className="text-[11px] font-extralight leading-relaxed text-black/50 tracking-wide break-words
-                    transition-colors duration-500 group-hover:text-black/70">
+					className="text-[11px] font-extralight leading-relaxed text-muted-foreground tracking-wide break-words
+                    transition-colors duration-500 group-hover:text-foreground/80">
 					{description}
 				</p>
 			</div>
 
 			{hasLinks && (
-				<div className="mt-6 border-t border-black/5 pt-4 transition-colors duration-500 group-hover:border-black/10">
+				<div className="mt-6 border-t border-border/30 pt-4 transition-colors duration-500 group-hover:border-border">
 					<div className="flex items-center gap-2 mb-3">
-						<span className="text-[9px] tracking-[0.15em] uppercase font-extralight text-black/40">
+						<span className="text-[9px] tracking-[0.15em] uppercase font-extralight text-muted-foreground">
 							Links
 						</span>
-						<div className="flex-1 h-px bg-black/5"></div>
-						<div className="flex items-center gap-1 text-black/30">
+						<div className="flex-1 h-px bg-border/30"></div>
+						<div className="flex items-center gap-1 text-muted-foreground/50">
 							<MousePointer2 size={10} />
 							<span className="text-[8px] tracking-wider uppercase">Clickable</span>
 						</div>
@@ -188,17 +188,17 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 								target="_blank"
 								rel="noopener noreferrer"
 								className="inline-flex items-center gap-2 text-[9px] tracking-[0.15em] uppercase font-extralight
-                         text-black/40 hover:text-black/70 transition-all duration-300
-                         border border-transparent hover:border-black/20 rounded-sm
-                         px-2 py-1 hover:bg-black/5 group/link
+                         text-muted-foreground hover:text-foreground transition-all duration-300
+                         border border-transparent hover:border-border rounded-sm
+                         px-2 py-1 hover:bg-muted group/link
                          transform hover:scale-105 hover:shadow-sm">
-								<span className="text-black/30 group-hover/link:text-black/50 transition-colors duration-300">
+								<span className="text-muted-foreground/60 group-hover/link:text-muted-foreground transition-colors duration-300">
 									{getLinkIcon(linkType)}
 								</span>
 								<span className="break-words">{getLinkLabel(linkType)}</span>
 								<ExternalLink
 									size={8}
-									className="text-black/20 group-hover/link:text-black/40 
+									className="text-muted-foreground/40 group-hover/link:text-muted-foreground/60 
                                                 transition-colors duration-300 ml-1"
 								/>
 							</Link>
@@ -208,14 +208,13 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 			)}
 
 			<div
-				className={`${
-					hasLinks ? 'mt-6' : 'mt-6'
-				} border-t border-black/5 pt-4 transition-colors duration-500 group-hover:border-black/10`}>
+				className={`${hasLinks ? 'mt-6' : 'mt-6'
+					} border-t border-border/30 pt-4 transition-colors duration-500 group-hover:border-border`}>
 				<div className="flex items-center gap-2 mb-3">
-					<span className="text-[9px] tracking-[0.15em] uppercase font-extralight text-black/40">
+					<span className="text-[9px] tracking-[0.15em] uppercase font-extralight text-muted-foreground">
 						Technologies
 					</span>
-					<div className="flex-1 h-px bg-black/5"></div>
+					<div className="flex-1 h-px bg-border/30"></div>
 				</div>
 
 				<div className="flex flex-wrap gap-x-6 gap-y-3">
@@ -223,9 +222,9 @@ const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCa
 						<span
 							key={tag}
 							className="text-[9px] tracking-[0.15em] uppercase font-extralight
-                       text-black/40 break-words transition-colors duration-500
-                       group-hover:text-black/60 px-2 py-1 rounded-sm
-                       bg-black/5 opacity-80 group-hover:opacity-100">
+                       text-muted-foreground break-words transition-colors duration-500
+                       group-hover:text-foreground px-2 py-1 rounded-sm
+                       bg-muted opacity-80 group-hover:opacity-100">
 							{tag}
 						</span>
 					))}

@@ -1,66 +1,81 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
-export default {
+const config = {
+  darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
+  prefix: "",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
-        // Main Brand Colors
-        brand: {
-          primary: "#1a1a1a",    // Main text and important elements
-          secondary: "#666666",   // Secondary text and less important elements
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
-        
-        // Background Colors
-        background: {
-          DEFAULT: "#fafafa",     // Main background
-          light: "#ffffff",       // Light sections
-          dark: "#f5f5f5",        // Dark sections
-          accent: "#1a1a1a05",    // Subtle accent backgrounds
+        secondary: {
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
         },
-        
-        // Accent Colors
+        destructive: {
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
+        },
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
+        },
         accent: {
-          purple: {
-            DEFAULT: "#8B5CF6",
-            light: "#8B5CF620",   // For gradients and subtle effects
-          },
-          blue: {
-            DEFAULT: "#3B82F6",
-            light: "#3B82F620",   // For gradients and subtle effects
-          },
-          pink: {
-            DEFAULT: "#EC4899",
-            light: "#EC489920",   // For gradients and subtle effects
-          },
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
         },
-        
-        // Status Colors
-        status: {
-          success: "#10B981",     // Success states and available status
-          error: "#EF4444",       // Error states
-          warning: "#F59E0B",     // Warning states
+        popover: {
+          DEFAULT: "var(--popover)",
+          foreground: "var(--popover-foreground)",
         },
-        
-        // Border Colors
-        border: {
-          DEFAULT: "#1a1a1a10",   // Default borders
-          dark: "#1a1a1a20",      // Darker borders
-          light: "#1a1a1a05",     // Lighter borders
+        card: {
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
         },
       },
-      
-      // Add opacity variations for all colors
-      opacity: {
-        '15': '.15',
-        '35': '.35',
-        '85': '.85',
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "spin-slow": "spin 8s linear infinite",
       },
     },
   },
-  plugins: [],
-} satisfies Config;
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config
+
+export default config
