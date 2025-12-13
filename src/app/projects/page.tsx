@@ -255,11 +255,11 @@ export default function Projects() {
 	const getSortIcon = () => {
 		switch (sortOrder) {
 			case 'asc':
-				return <ArrowUp size={16} className="text-black" />;
+				return <ArrowUp size={16} className="text-foreground" />;
 			case 'desc':
-				return <ArrowDown size={16} className="text-black" />;
+				return <ArrowDown size={16} className="text-foreground" />;
 			default:
-				return <ArrowUpDown size={16} className="text-black/40" />;
+				return <ArrowUpDown size={16} className="text-muted-foreground" />;
 		}
 	};
 
@@ -282,12 +282,12 @@ export default function Projects() {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
 					className="mb-24">
-					<h1 className="text-sm tracking-[0.3em] uppercase text-black/40 font-light mb-16">
+					<h1 className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-light mb-16">
 						Archive
 					</h1>
 
-					<div className="mb-8 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-r-md flex items-center">
-						<p className="text-sm text-amber-800">
+					<div className="mb-8 p-4 bg-muted/30 border-l-4 border-primary/50 rounded-r-md flex items-center">
+						<p className="text-sm text-foreground/80">
 							Some projects are under{' '}
 							<span className="font-semibold">Non-Disclosure Agreements (NDAs)</span>.
 							Limited details are shared to respect confidentiality.
@@ -300,17 +300,17 @@ export default function Projects() {
 								type="text"
 								placeholder="Search projects..."
 								className="w-full md:w-96 px-4 py-3 
-						   border-b border-black/10 focus:border-black/20
-						   bg-transparent text-black/70 text-sm
-						   focus:outline-none font-light"
+					   border-b border-border focus:border-foreground/40
+					   bg-transparent text-foreground text-sm
+					   focus:outline-none font-light"
 								onChange={(e) => setSearchTerm(e.target.value)}
 							/>
 
 							<button
 								onClick={handleSortToggle}
-								className="flex items-center space-x-2 px-4 py-2 border border-black/10 
-								   hover:border-black/20 rounded-md transition-all duration-300
-								   text-sm font-light text-black/70 hover:text-black">
+								className="flex items-center space-x-2 px-4 py-2 border border-border 
+							   hover:border-foreground/40 rounded-md transition-all duration-300
+							   text-sm font-light text-muted-foreground hover:text-foreground">
 								{getSortIcon()}
 								<span>{getSortLabel()}</span>
 							</button>
@@ -322,11 +322,10 @@ export default function Projects() {
 									key={category}
 									onClick={() => setSelectedCategory(category)}
 									className={`text-xs tracking-wider uppercase transition-all duration-300
-						  ${
-								selectedCategory === category
-									? 'text-black font-light'
-									: 'text-black/40 hover:text-black/60 font-extralight'
-							}`}>
+					  ${selectedCategory === category
+											? 'text-foreground font-light'
+											: 'text-muted-foreground hover:text-foreground/80 font-extralight'
+										}`}>
 									{category}
 								</button>
 							))}
@@ -343,8 +342,8 @@ export default function Projects() {
 							transition={{ duration: 0.4 }}>
 							{hasNDA(project.title) && (
 								<div className="mb-2 flex items-center space-x-2">
-									<Lock className="text-amber-600" size={16} />
-									<span className="text-xs uppercase tracking-wide text-amber-700 font-medium">
+									<Lock className="text-primary" size={16} />
+									<span className="text-xs uppercase tracking-wide text-primary/80 font-medium">
 										Confidential Project
 									</span>
 								</div>
@@ -362,7 +361,7 @@ export default function Projects() {
 				</div>
 
 				{filteredAndSortedProjects.length === 0 && (
-					<p className="text-center text-black/40 font-light mt-16">
+					<p className="text-center text-muted-foreground font-light mt-16">
 						No projects found matching your criteria.
 					</p>
 				)}

@@ -1,171 +1,124 @@
 'use client';
+
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { mainTechnologies, creativeTools } from '@/lib/constants/constants';
 
 const Profile = () => {
 	return (
-		<main className="min-h-screen bg-black text-white overflow-hidden relative">
-			<div className="absolute inset-0 opacity-5">
-				<div className="absolute top-0 left-0 w-full h-px bg-white transform rotate-12 origin-left"></div>
-				<div className="absolute top-20 left-0 w-full h-px bg-white transform -rotate-6 origin-left"></div>
-				<div className="absolute top-40 left-0 w-full h-px bg-white transform rotate-3 origin-left"></div>
-				<div className="absolute bottom-40 left-0 w-full h-px bg-white transform -rotate-12 origin-left"></div>
-				<div className="absolute bottom-20 left-0 w-full h-px bg-white transform rotate-6 origin-left"></div>
-			</div>
+		<main className="min-h-screen bg-background text-foreground overflow-hidden relative pt-32 pb-24">
 
-			<section className="relative min-h-screen flex items-center">
-			
-				<div className="w-full max-w-7xl mx-auto px-8 grid grid-cols-12 gap-8 items-center">
-				
+			{/* Header / Intro */}
+			<section className="relative px-6 md:px-12 mb-32">
+				<div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+
 					<motion.div
 						initial={{ opacity: 0, y: 100 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 1.2, ease: 'easeOut' }}
-						className="col-span-12 lg:col-span-6 lg:col-start-1">
-						<h1 className="text-[clamp(4rem,12vw,12rem)] font-black tracking-[-0.08em] leading-[0.75] mb-8">
+						transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+						className="col-span-12 lg:col-span-7">
+						<h1 className="text-[12vw] font-bold tracking-tighter leading-[0.8] mb-12 mix-blend-difference">
 							CLYDE
 							<br />
-							<span className="font-thin opacity-60">GEVERO</span>
+							<span className="text-muted-foreground/30 ml-[10vw]">GEVERO</span>
 						</h1>
 
-						<div className="w-32 h-px bg-white mb-8"></div>
-
-						<p className="text-sm font-light tracking-[0.4em] uppercase leading-loose opacity-80 max-w-xs">
-							INFORMATION TECHNOLOGY
-							<br />
-							<span className="opacity-60">CUM LAUDE</span>
-						</p>
+						<div className="flex flex-col gap-8 max-w-xl ml-auto mr-[5vw]">
+							<p className="text-xl md:text-2xl font-light leading-relaxed text-muted-foreground">
+								&quot;Versatile creator specializing in frontend development and digital media.&quot;
+							</p>
+							<div className="w-full h-px bg-border" />
+							<div className="flex justify-between text-xs tracking-[0.3em] uppercase text-muted-foreground/60">
+								<span>Information Technology</span>
+								<span>Cum Laude</span>
+							</div>
+						</div>
 					</motion.div>
 
-			
+
 					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
+						initial={{ opacity: 0, scale: 0.9 }}
 						animate={{ opacity: 1, scale: 1 }}
-						transition={{ duration: 1.5, delay: 0.3 }}
-						className="col-span-12 lg:col-span-5 lg:col-start-8 relative">
-						<div className="aspect-[3/4] relative overflow-hidden">
+						transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+						className="col-span-12 lg:col-span-5 relative">
+						<div className="aspect-[3/4] relative overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-700">
 							<Image
 								src="/fullscreen_grad.jpeg"
 								alt="Profile Image"
 								fill
-								className="object-cover transition-all duration-700"
+								className="object-cover"
 								priority
 								sizes="(max-width: 768px) 100vw, 50vw"
 							/>
-							<div className="absolute inset-0 bg-black/20"></div>
-						</div>
-
-				
-						<div className="absolute -bottom-8 -right-8 bg-white text-black px-6 py-3 text-xs tracking-[0.3em] uppercase font-medium">
-							DEVELOPER & CREATOR
 						</div>
 					</motion.div>
 				</div>
-
-			
-				<div className="absolute right-8 top-1/2 transform -translate-y-1/2 rotate-90 origin-center">
-					<p className="text-xs tracking-[0.6em] uppercase font-light opacity-60">PORTFOLIO</p>
-				</div>
-
-			
-				<motion.div
-					initial={{ opacity: 0, x: -50 }}
-					animate={{ opacity: 1, x: 0 }}
-					transition={{ duration: 1, delay: 0.8 }}
-					className="absolute bottom-16 left-8 max-w-md">
-					<p className="text-lg font-light leading-relaxed opacity-80">
-						&quot;Versatile creator specializing in frontend development and digital
-						media&quot;
-					</p>
-				</motion.div>
 			</section>
 
-			<section className="py-32 px-8 relative">
-				<div className="max-w-7xl mx-auto">
-				
-					<div className="absolute top-8 right-8 text-xs tracking-[0.4em] uppercase opacity-40">
-						01 / SKILLS
-					</div>
+			{/* Skills Section */}
+			<section className="px-6 md:px-12 py-24 border-t border-border/30">
+				<div className="max-w-[1920px] mx-auto">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-32">
 
-					<div className="grid grid-cols-12 gap-16 items-start">
-				
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8 }}
-							viewport={{ once: true }}
-							className="col-span-12 lg:col-span-5">
-							<h3 className="text-2xl font-light tracking-[0.1em] uppercase mb-16 opacity-60">
-								Development Stack
+							viewport={{ once: true }}>
+							<h3 className="text-5xl md:text-7xl font-light tracking-tight mb-16 text-foreground/20">
+								Development
 							</h3>
 
-							<div className="space-y-8">
+							<div className="space-y-6">
 								{mainTechnologies.map((tech, index) => (
 									<motion.div
 										key={tech}
-										initial={{ opacity: 0, x: -30 }}
+										initial={{ opacity: 0, x: -20 }}
 										whileInView={{ opacity: 1, x: 0 }}
-										transition={{ duration: 0.6, delay: index * 0.1 }}
+										transition={{ duration: 0.6, delay: index * 0.05 }}
 										viewport={{ once: true }}
-										className="group cursor-pointer">
-										<div className="flex items-center justify-between py-4 border-b border-white/10 group-hover:border-white/30 transition-all duration-500">
-											<span className="text-xl font-light tracking-wide group-hover:tracking-wider transition-all duration-300">
+										className="group cursor-default">
+										<div className="flex items-center justify-between py-6 border-b border-border group-hover:border-foreground/40 transition-all duration-500">
+											<span className="text-2xl md:text-3xl font-light tracking-tight group-hover:translate-x-4 transition-transform duration-300">
 												{tech}
 											</span>
-											<div className="w-2 h-2 border border-white/40 group-hover:bg-white transition-all duration-300"></div>
+											<div className="w-2 h-2 rounded-full bg-border group-hover:bg-primary transition-colors duration-300 opacity-0 group-hover:opacity-100" />
 										</div>
 									</motion.div>
 								))}
 							</div>
 						</motion.div>
 
-				
+
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.3 }}
-							viewport={{ once: true }}
-							className="col-span-12 lg:col-span-5 lg:col-start-8">
-							<h3 className="text-2xl font-light tracking-[0.1em] uppercase mb-16 opacity-60">
-								Creative Tools
+							transition={{ duration: 0.8, delay: 0.2 }}
+							viewport={{ once: true }}>
+							<h3 className="text-5xl md:text-7xl font-light tracking-tight mb-16 text-foreground/20">
+								Creative
 							</h3>
 
-							<div className="space-y-8">
+							<div className="space-y-6">
 								{creativeTools.map((tool, index) => (
 									<motion.div
 										key={tool}
-										initial={{ opacity: 0, x: 30 }}
+										initial={{ opacity: 0, x: 20 }}
 										whileInView={{ opacity: 1, x: 0 }}
-										transition={{ duration: 0.6, delay: index * 0.1 }}
+										transition={{ duration: 0.6, delay: index * 0.05 }}
 										viewport={{ once: true }}
-										className="group cursor-pointer">
-										<div className="flex items-center justify-between py-4 border-b border-white/10 group-hover:border-white/30 transition-all duration-500">
-											<span className="text-xl font-light tracking-wide group-hover:tracking-wider transition-all duration-300">
+										className="group cursor-default">
+										<div className="flex items-center justify-between py-6 border-b border-border group-hover:border-foreground/40 transition-all duration-500">
+											<span className="text-2xl md:text-3xl font-light tracking-tight group-hover:translate-x-4 transition-transform duration-300">
 												{tool}
 											</span>
-											<div className="w-2 h-2 border border-white/40 group-hover:bg-white transition-all duration-300"></div>
+											<div className="w-2 h-2 rounded-full bg-border group-hover:bg-primary transition-colors duration-300 opacity-0 group-hover:opacity-100" />
 										</div>
 									</motion.div>
 								))}
 							</div>
 						</motion.div>
 					</div>
-				</div>
-			</section>
-
-			<section className="py-32 px-8 relative border-t border-white/10">
-				<div className="max-w-7xl mx-auto">
-					
-					<motion.div
-						initial={{ opacity: 0 }}
-						whileInView={{ opacity: 1 }}
-						transition={{ duration: 1, delay: 0.6 }}
-						viewport={{ once: true }}
-						className="mt-32 flex justify-between items-end text-xs tracking-[0.3em] uppercase opacity-40">
-						<div>AVAILABLE FOR PROJECTS</div>
-						<div>2025</div>
-					</motion.div>
 				</div>
 			</section>
 		</main>
