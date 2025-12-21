@@ -275,76 +275,86 @@ export default function Projects() {
 	};
 
 	return (
-		<main className="min-h-screen bg-background pt-32 px-8 pb-16">
-			<div className="max-w-6xl mx-auto">
+		<main className="min-h-screen bg-background pt-32 px-4 md:px-8 pb-16">
+			<div className="max-w-7xl mx-auto">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
-					className="mb-24">
-					<h1 className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-light mb-16">
-						Archive
-					</h1>
+					className="mb-16">
 
-					<div className="mb-8 p-4 bg-muted/30 border-l-4 border-primary/50 rounded-r-md flex items-center">
-						<p className="text-sm text-foreground/80">
-							Some projects are under{' '}
-							<span className="font-semibold">Non-Disclosure Agreements (NDAs)</span>.
-							Limited details are shared to respect confidentiality.
+					<div className="flex flex-col gap-2 mb-12">
+						<h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+							Selected Works
+						</h1>
+						<p className="text-muted-foreground text-lg max-w-2xl">
+							A curated collection of projects exploring web development, design, and user experience.
 						</p>
 					</div>
 
-					<div className="space-y-8">
-						<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-							<input
-								type="text"
-								placeholder="Search projects..."
-								className="w-full md:w-96 px-4 py-3 
-					   border-b border-border focus:border-foreground/40
-					   bg-transparent text-foreground text-sm
-					   focus:outline-none font-light"
-								onChange={(e) => setSearchTerm(e.target.value)}
-							/>
+					<div className="flex items-center gap-3 p-3 bg-secondary/30 border border-border/50 rounded-lg max-w-fit mb-12 text-sm text-muted-foreground">
+						<Lock size={14} className="text-primary" />
+						<p>
+							Some projects are protected by{' '}
+							<span className="font-medium text-foreground">NDA</span>.
+						</p>
+					</div>
 
-							<button
-								onClick={handleSortToggle}
-								className="flex items-center space-x-2 px-4 py-2 border border-border 
-							   hover:border-foreground/40 rounded-md transition-all duration-300
-							   text-sm font-light text-muted-foreground hover:text-foreground">
-								{getSortIcon()}
-								<span>{getSortLabel()}</span>
-							</button>
-						</div>
+					<div className="flex flex-col space-y-8">
+						{/* Controls Section */}
+						<div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+							{/* Categories as Tabs/Pills */}
+							<div className="flex flex-wrap gap-2">
+								{categories.map((category) => (
+									<button
+										key={category}
+										onClick={() => setSelectedCategory(category)}
+										className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+										${selectedCategory === category
+												? 'bg-primary text-primary-foreground shadow-sm'
+												: 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground'
+											}`}>
+										{category}
+									</button>
+								))}
+							</div>
 
-						<div className="flex flex-wrap gap-6">
-							{categories.map((category) => (
+							<div className="flex items-center gap-4 w-full md:w-auto">
+								<input
+									type="text"
+									placeholder="Search projects..."
+									className="flex-1 md:w-64 px-4 py-2 rounded-md
+									border border-border bg-background focus:ring-1 focus:ring-ring
+									text-sm transition-colors focus:outline-none"
+									onChange={(e) => setSearchTerm(e.target.value)}
+								/>
+
 								<button
-									key={category}
-									onClick={() => setSelectedCategory(category)}
-									className={`text-xs tracking-wider uppercase transition-all duration-300
-					  ${selectedCategory === category
-											? 'text-foreground font-light'
-											: 'text-muted-foreground hover:text-foreground/80 font-extralight'
-										}`}>
-									{category}
+									onClick={handleSortToggle}
+									className="flex items-center space-x-2 px-3 py-2 border border-border 
+								   hover:bg-muted rounded-md transition-all duration-300
+								   text-sm font-medium text-muted-foreground hover:text-foreground shrink-0">
+									{getSortIcon()}
+									<span className="hidden sm:inline">{getSortLabel()}</span>
 								</button>
-							))}
+							</div>
 						</div>
 					</div>
 				</motion.div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
 					{filteredAndSortedProjects.map((project) => (
 						<motion.div
 							key={project.title}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ duration: 0.4 }}>
+							layout
+							initial={{ opacity: 0, scale: 0.95 }}
+							animate={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.3 }}>
 							{hasNDA(project.title) && (
-								<div className="mb-2 flex items-center space-x-2">
-									<Lock className="text-primary" size={16} />
-									<span className="text-xs uppercase tracking-wide text-primary/80 font-medium">
-										Confidential Project
+								<div className="mb-3 flex items-center space-x-2">
+									<div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+									<span className="text-[10px] uppercase tracking-wider text-primary font-semibold">
+										Confidential
 									</span>
 								</div>
 							)}
@@ -361,9 +371,10 @@ export default function Projects() {
 				</div>
 
 				{filteredAndSortedProjects.length === 0 && (
-					<p className="text-center text-muted-foreground font-light mt-16">
-						No projects found matching your criteria.
-					</p>
+					<div className="flex flex-col items-center justify-center py-24 text-center">
+						<p className="text-lg font-medium text-foreground mb-2">No projects found</p>
+						<p className="text-muted-foreground">Try adjusting your search or filters.</p>
+					</div>
 				)}
 			</div>
 		</main>

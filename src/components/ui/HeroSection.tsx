@@ -31,7 +31,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.8 }}
                     className="absolute top-24 md:top-28 right-6 md:right-12 flex items-center gap-4">
 
-                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-widest uppercase text-muted-foreground">
+                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-widest uppercase text-muted-foreground/80">
                         {greetings[currentGreetingIndex].text}
                     </span>
                 </motion.div>
@@ -62,7 +62,7 @@ export default function HeroSection() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className="absolute top-1/2 left-[45%] -translate-y-[40%] w-[30vw] md:w-[25vw] aspect-[3/4] z-10 hidden md:block">
-                        <div className="relative w-full h-full overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-700">
+                        <div className="relative w-full h-full overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
                             <Image
                                 src="/fullscreen_grad.jpeg"
                                 alt="Clyde Gevero Spotlight"
@@ -71,7 +71,7 @@ export default function HeroSection() {
                                 priority
                                 sizes="(max-width: 768px) 100vw, 33vw"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-50" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent opacity-30" />
                         </div>
                     </motion.div>
                 </div>
@@ -86,7 +86,7 @@ export default function HeroSection() {
                         <p className="text-xl md:text-2xl font-light leading-relaxed text-muted-foreground">
                             Crafting digital experiences through thoughtful design and clean code.
                             <br />
-                            <span className="text-foreground">Mobile</span>, <span className="text-foreground">Web</span>, & <span className="text-foreground">UI/UX</span>.
+                            <span className="text-foreground font-medium">Mobile</span>, <span className="text-foreground font-medium">Web</span>, & <span className="text-foreground font-medium">UI/UX</span>.
                         </p>
                         <div className="flex items-center gap-4">
                             <Link href="/projects">
@@ -113,25 +113,6 @@ export default function HeroSection() {
                 </div>
 
             </div>
-
-            {/* Grid Background */}
-            <div className="absolute inset-0 -z-20 pointer-events-none opacity-30">
-                <div
-                    className="absolute inset-0 border-border/20"
-                    style={{
-                        backgroundImage: `
-                            linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
-                            linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px)
-                        `,
-                        backgroundSize: '60px 60px'
-                    }}
-                />
-                {/* Radial fade overlay */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(var(--background))_70%)]" />
-            </div>
-
-            {/* Background Gradient/Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-primary/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
         </div>
     );
 }
