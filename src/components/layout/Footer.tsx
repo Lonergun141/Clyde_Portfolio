@@ -2,98 +2,110 @@
 
 import { motion } from 'framer-motion';
 import { socialLinks, contactDetails } from '@/lib/constants/constants';
+import Link from 'next/link';
+import { ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Footer() {
 	return (
-		<motion.footer
-			initial={{ opacity: 0 }}
-			whileInView={{ opacity: 1 }}
-			transition={{ duration: 0.8 }}
-			viewport={{ once: true }}
-			className="relative overflow-hidden bg-background text-foreground border-t border-border/10 pb-12 pt-32">
-			<div className="relative px-6 md:px-12">
-				<div className="max-w-[1920px] mx-auto">
-					<motion.div
-						initial={{ y: 50, opacity: 0 }}
-						whileInView={{ y: 0, opacity: 1 }}
-						transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-						viewport={{ once: true }}
-						className="mb-32">
-						<h2 className="text-[14vw] font-bold leading-[0.8] tracking-tighter mix-blend-difference">
-							LET&apos;S
-						</h2>
-						<h2 className="text-[14vw] font-bold leading-[0.8] tracking-tighter text-muted-foreground/30 pl-[10vw]">
-							CONNECT
-						</h2>
-					</motion.div>
+		<footer className="relative bg-background text-foreground pt-24 pb-0 overflow-hidden">
+			<div className="px-6 md:px-12 max-w-[1920px] mx-auto mb-32">
+				<div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
 
-					<div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-end">
-						<motion.div
-							initial={{ x: -20, opacity: 0 }}
-							whileInView={{ x: 0, opacity: 1 }}
-							transition={{ duration: 0.8, delay: 0.2 }}
-							viewport={{ once: true }}
-							className="lg:col-span-5 space-y-12">
-							<div>
-								<p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
-									Email Me
-								</p>
-								<motion.a
-									href={`mailto:${contactDetails[0].value}`}
-									className="text-2xl md:text-3xl font-light hover:text-primary transition-colors duration-300 block border-b border-transparent hover:border-foreground inline-block pb-1"
-									whileHover={{ x: 10 }}>
-									{contactDetails[0].value}
-								</motion.a>
+					{/* Column 1: Brand / Info */}
+					<div className="md:col-span-4 space-y-8">
+						<div>
+							<div className="w-10 h-10 rounded-full bg-foreground flex items-center justify-center text-background font-bold text-xl mb-6">
+								C
 							</div>
+							<h3 className="text-sm font-medium uppercase tracking-widest mb-1 text-muted-foreground">
+								Unique Digital Experiences
+							</h3>
+							<h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+                                // Immersive Web Design
+							</h3>
+						</div>
 
-							<div>
-								<p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
-									Based In
-								</p>
-								<p className="text-xl font-light">{contactDetails[1].value}</p>
-							</div>
-						</motion.div>
-
-						<div className="lg:col-span-7">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-								<motion.div
-									initial={{ y: 20, opacity: 0 }}
-									whileInView={{ y: 0, opacity: 1 }}
-									transition={{ duration: 0.8, delay: 0.4 }}
-									viewport={{ once: true }}
-									className="space-y-8">
-									<p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-										Socials
-									</p>
-
-									<div className="space-y-4">
-										{socialLinks.map((link, index) => (
-											<motion.a
-												key={link.name}
-												href={link.url}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="group flex items-center gap-4 text-xl font-light hover:text-primary transition-colors duration-300"
-												initial={{ opacity: 0, x: 20 }}
-												whileInView={{ opacity: 1, x: 0 }}
-												transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-												viewport={{ once: true }}>
-												<span className="w-2 h-2 rounded-full bg-border group-hover:bg-primary transition-colors duration-300" />
-												<span>{link.name}</span>
-											</motion.a>
-										))}
-									</div>
-								</motion.div>
+						<div className="space-y-4 pt-8">
+							<p className="text-muted-foreground">
+								{contactDetails[1].value}
+							</p>
+							<a href={`mailto:${contactDetails[0].value}`} className="block text-xl hover:text-muted-foreground transition-colors">
+								{contactDetails[0].value}
+							</a>
+							<div className="flex gap-4 pt-2">
+								{socialLinks.map((link) => (
+									<a
+										key={link.name}
+										href={link.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-2xl hover:text-muted-foreground transition-colors"
+									>
+										{link.name === 'GitHub' && <Github className="w-5 h-5" />}
+										{link.name === 'LinkedIn' && <Linkedin className="w-5 h-5" />}
+										{link.name !== 'GitHub' && link.name !== 'LinkedIn' && <ArrowUpRight className="w-5 h-5" />}
+									</a>
+								))}
 							</div>
 						</div>
 					</div>
 
-					<div className="mt-32 pt-8 border-t border-border/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-muted-foreground/50 uppercase tracking-widest">
-						<p>© {new Date().getFullYear()} Clyde Gevero</p>
-						<p>Code by Clyde</p>
+					{/* Column 2: Navigation */}
+					<div className="md:col-span-4 flex flex-col gap-4 border-l border-border/20 md:pl-12">
+						{[
+							{ name: 'HOME', href: '/' },
+							{ name: 'PROJECTS', href: '/projects' },
+							{ name: 'ABOUT', href: '#' }, // Assuming these exist or placeholders
+							{ name: 'CONTACT', href: '#' }
+						].map((item) => (
+							<Link
+								key={item.name}
+								href={item.href}
+								className="group flex items-center justify-between border-b border-border/10 py-4 text-sm font-medium tracking-widest hover:pl-4 transition-all duration-300"
+							>
+								{item.name}
+								<ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+							</Link>
+						))}
+					</div>
+
+					{/* Column 3: CTA */}
+					<div className="md:col-span-4 md:pl-12 border-l border-border/20">
+						<h2 className="text-3xl md:text-4xl font-light leading-tight mb-8">
+							Ready to start a project?
+						</h2>
+						<p className="text-muted-foreground mb-8 text-sm leading-relaxed">
+							Share your ideas with me, and let's begin turning your vision into reality today.
+						</p>
+						<a
+							href={`mailto:${contactDetails[0].value}`}
+							className="inline-flex items-center gap-2 text-sm uppercase tracking-widest border border-foreground/20 px-6 py-3 rounded-full hover:bg-foreground hover:text-background transition-all duration-300"
+						>
+							Get In Touch <ArrowUpRight className="w-4 h-4" />
+						</a>
 					</div>
 				</div>
 			</div>
-		</motion.footer>
+
+			{/* Massive Bottom Text */}
+			<div className="w-full overflow-hidden leading-none select-none">
+				<motion.h1
+					initial={{ y: 100 }}
+					whileInView={{ y: 0 }}
+					transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+					viewport={{ once: true }}
+					className="text-[18vw] font-bold tracking-tighter text-center whitespace-nowrap text-foreground mix-blend-difference"
+				>
+					CLYDE GEVERO
+				</motion.h1>
+			</div>
+
+			<div className="border-t border-border/10">
+				<div className="px-6 md:px-12 py-4 flex justify-between text-[10px] uppercase tracking-widest text-muted-foreground/40">
+					<p>© 2025 Clyde Gevero</p>
+					<p>Portfolio v2.0</p>
+				</div>
+			</div>
+		</footer>
 	);
 }

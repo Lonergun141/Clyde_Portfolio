@@ -58,8 +58,8 @@ const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void 
 		<div className="relative w-6 h-6">
 			<span
 				className={`absolute block w-6 h-px bg-foreground transition-all duration-500 ease-out ${isOpen
-						? 'rotate-45 top-1/2 -translate-y-1/2 bg-white'
-						: 'top-2 rotate-0'
+					? 'rotate-45 top-1/2 -translate-y-1/2 bg-white'
+					: 'top-2 rotate-0'
 					}`}
 			/>
 			<span
@@ -68,28 +68,19 @@ const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void 
 			/>
 			<span
 				className={`absolute block w-6 h-px bg-foreground transition-all duration-500 ease-out ${isOpen
-						? '-rotate-45 top-1/2 -translate-y-1/2 bg-white'
-						: 'bottom-2 rotate-0'
+					? '-rotate-45 top-1/2 -translate-y-1/2 bg-white'
+					: 'bottom-2 rotate-0'
 					}`}
 			/>
 		</div>
 	</button>
 );
 
-const BackButton = () => (
-	<Link
-		href="/"
-		className="fixed top-6 left-6 z-50 text-sm font-light text-white hover:text-white/70 transition-colors"
-		aria-label="Go back">
-		← Back
-	</Link>
-);
 
 export default function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isVisible, setIsVisible] = useState(true);
 	const [lastScrollY, setLastScrollY] = useState(0);
-	const pathname = usePathname();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -116,10 +107,6 @@ export default function Navigation() {
 			document.body.style.overflow = 'unset';
 		};
 	}, [isOpen]);
-
-	if (pathname === '/profile') {
-		return <BackButton />;
-	}
 
 	return (
 		<>
