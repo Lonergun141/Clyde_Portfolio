@@ -20,28 +20,6 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             <br />
             <span className="text-muted-foreground/30 ml-12">Works</span>
           </motion.h2>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="hidden md:block">
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground text-right mb-2">
-              Filter by
-            </p>
-            <div className="flex gap-4 text-sm font-light text-foreground">
-              <span>All</span>
-              <span className="text-muted-foreground/50">/</span>
-              <span className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors">
-                Web
-              </span>
-              <span className="text-muted-foreground/50">/</span>
-              <span className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors">
-                Mobile
-              </span>
-            </div>
-          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-y-24 gap-x-8 md:gap-x-16">
@@ -69,12 +47,6 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                       className="w-full h-full relative">
-                      {/* Use Image component or iframe if it's a video url/embed */}
-                      {/* For now assuming these might be images or iframes based on previous code.
-                                                Previous code used iframe for 'url'. Let's check project structure. 
-                                                The data structure has 'url' (which seemed to be a video/embed) and 'link'.
-                                                I'll use a placeholder div with an iframe if url exists, or fallback.
-                                            */}
                       <div className="absolute inset-0 bg-secondary/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
                       {project.url ? (
                         <iframe
