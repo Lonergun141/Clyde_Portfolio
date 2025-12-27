@@ -1,17 +1,13 @@
-'use client';
-
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowDown } from 'lucide-react';
 import { greetings } from '@/lib/constants/constants';
+import ParticleField from './interactive/ParticleField';
 
 export default function HeroSection() {
     const containerRef = useRef(null);
     const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
-    const { scrollY } = useScroll();
-    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -22,93 +18,74 @@ export default function HeroSection() {
 
     return (
         <div ref={containerRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background px-6 md:px-12">
-            <div className="max-w-[1920px] mx-auto w-full relative z-10 pt-20">
+            {/* Mesh Gradient Background */}
+            <div className="absolute inset-0 z-0 opacity-40">
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/20 blur-[120px]" />
+                <div className="absolute top-[20%] right-[-10%] w-[40%] h-[60%] rounded-full bg-secondary/20 blur-[100px]" />
+                <div className="absolute bottom-[-10%] left-[20%] w-[60%] h-[40%] rounded-full bg-primary/10 blur-[130px]" />
+            </div>
 
-                {/* Greeting - Top Right */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="absolute top-24 md:top-28 right-6 md:right-12 flex items-center gap-4">
+            {/* Interactive Particle Animation (Replaces massive text) */}
+            <ParticleField />
 
-                    <span className="text-2xl md:text-3xl lg:text-4xl font-light tracking-widest uppercase text-muted-foreground/80">
-                        {greetings[currentGreetingIndex].text}
-                    </span>
-                </motion.div>
+            <div className="max-w-[1920px] mx-auto w-full relative z-20 h-screen flex flex-col justify-between py-12 md:py-16 pointer-events-none">
 
-                {/* Massive Typography & Spotlight Image */}
-                <div className="relative">
-                    <div className="flex flex-col relative z-20 mix-blend-difference">
-                        <motion.h1
-                            initial={{ y: 100, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-[15vw] leading-[0.8] font-bold tracking-tighter text-foreground">
-                            CLYDE
-                        </motion.h1>
-                        <motion.h1
-                            initial={{ y: 100, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-[15vw] leading-[0.8] font-bold tracking-tighter text-foreground ml-[5vw]">
-                            GEVERO
-                        </motion.h1>
-                    </div>
-
-                    {/* Spotlight Image - Positioned absolutely to interact with text */}
-                    <motion.div
-                        style={{ y: y1 }}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute top-1/2 left-[45%] -translate-y-[40%] w-[30vw] md:w-[25vw] aspect-[3/4] z-10 hidden md:block">
-                        <div className="relative w-full h-full overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
-                            <Image
-                                src="/fullscreen_grad.jpeg"
-                                alt="Clyde Gevero Spotlight"
-                                fill
-                                className="object-cover object-center"
-                                priority
-                                sizes="(max-width: 768px) 100vw, 33vw"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent opacity-30" />
-                        </div>
-                    </motion.div>
-                </div>
-
-                {/* Bottom Info */}
-                <div className="flex flex-col md:flex-row justify-between items-end mt-24 md:mt-32 gap-8">
+                {/* Top Section: Intro & Location */}
+                <div className="flex justify-between items-start pointer-events-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="max-w-md space-y-6">
-                        <p className="text-xl md:text-2xl font-light leading-relaxed text-muted-foreground">
-                            Crafting digital experiences through thoughtful design and clean code.
-                            <br />
-                            <span className="text-foreground font-medium">Mobile</span>, <span className="text-foreground font-medium">Web</span>, & <span className="text-foreground font-medium">UI/UX</span>.
-                        </p>
-                        <div className="flex items-center gap-4">
-                            <Link href="/projects">
-                                <button className="group relative px-6 py-3 bg-transparent border border-border rounded-full text-sm uppercase tracking-widest hover:bg-foreground hover:text-background transition-all duration-300">
-                                    View Projects
-                                </button>
-                            </Link>
-                        </div>
+                        transition={{ duration: 0.8 }}
+                        className="max-w-xs text-sm md:text-base font-light text-muted-foreground/80 leading-relaxed"
+                    >
+                        <p className="font-bold text-foreground text-xl md:text-2xl">Clyde Gevero</p>
+                        <p>Frontend Developer & UI/UX Designer.</p>
+                        <p>Based in Bukidnon, Philippines.</p>
+                    </motion.div>
 
+                    {/* Greeting - Top Right */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="text-right"
+                    >
+                        <span className="text-xl md:text-2xl font-light tracking-widest uppercase text-muted-foreground/80">
+                            {greetings[currentGreetingIndex].text}
+                        </span>
+                    </motion.div>
+                </div>
+
+                {/* puhon na*/}
+                <div className="flex-grow" />
+
+                {/* Bottom Section: Pseudo-Nav & Scroll Indicator */}
+                <div className="flex justify-between items-end pointer-events-auto">
+                    {/* Pseudo Bottom Nav */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.8 }}
+                        className="hidden md:flex gap-12 text-sm font-medium tracking-widest uppercase text-muted-foreground"
+                    >
+                        <Link href="/" className="text-foreground hover:text-primary transition-colors cursor-pointer">Home</Link>
+                        <Link href="/projects" className="hover:text-primary transition-colors cursor-pointer">Projects</Link>
+                        <Link href="/profile" className="hover:text-primary transition-colors cursor-pointer">About</Link>
                     </motion.div>
 
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.6 }}
-                        className="flex items-center gap-4 text-xs font-mono text-muted-foreground/50 uppercase tracking-widest">
-                        <span>Scroll</span>
+                        transition={{ duration: 0.8, delay: 1 }}
+                        className="flex flex-col items-center gap-2 text-xs font-mono text-muted-foreground/50 uppercase tracking-widest"
+                    >
                         <motion.div
                             animate={{ y: [0, 5, 0] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        >
                             <ArrowDown size={14} />
                         </motion.div>
+                        <span>Scroll</span>
                     </motion.div>
                 </div>
 

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Github, Figma, ExternalLink, Globe } from 'lucide-react';
+import { Github, Figma, ExternalLink, Globe, Lock } from 'lucide-react';
 import { ProjectCardProps } from '@/lib/types/types';
 import { Button } from '@/components/ui/button';
 
@@ -18,8 +18,97 @@ const PlaceholderSVG = () => (
 	</svg>
 );
 
-const ProjectCard = ({ title, description, tags, image, year, links }: ProjectCardProps) => {
-	const availableLinks = Object.entries(links).filter(([, url]) => url && url !== '#');
+const ProjectCard = ({ title, description, tags, image, year, links, variant = 'default', isNDA = false }: ProjectCardProps) => {
+
+	if (variant === 'minimal') {
+		const primaryLink = links.live || links.github || links.figma || links.other || '#';
+
+		return (
+			<Link href={primaryLink} target="_blank" className="block h-full group outline-none">
+				<div className="flex flex-col h-full space-y-4">
+					{/* Image Section - Minimal */}
+					<div className={`relative aspect-[16/10] overflow-hidden bg-muted/20 ${isNDA ? 'border border-primary/50 rounded-xl' : ''}`}>
+						{image ? (
+							<>
+								<div className={`absolute inset-0 z-10 transition-colors duration-500
+									${isNDA ? 'bg-background/20 backdrop-blur-[2px]' : 'bg-black/0 group-hover:bg-black/20'}`} />
+
+								{/* NDA Overlay */}
+								{isNDA && (
+									<div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-4 text-center">
+										<div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-md flex items-center justify-center mb-3 shadow-lg border border-primary/20">
+											<Lock size={20} className="text-primary" />
+										</div>
+										<span className="bg-background/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary border border-primary/20 shadow-sm">
+											Confidential
+										</span>
+									</div>
+								)}
+
+								<Image
+									src={image}
+									alt={title}
+									fill
+									className={`object-cover transition-all duration-700 ease-[0.22,1,0.36,1]
+                         				${isNDA ? 'scale-105 blur-[3px] grayscale opacity-60' : 'group-hover:scale-105 group-hover:opacity-90 grayscale group-hover:grayscale-0'}`}
+									sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+								/>
+							</>
+						) : (
+							<PlaceholderSVG />
+						)}
+					</div>
+
+					{/* Minimal Info */}
+					<div className="flex flex-col gap-3 mt-3">
+						<div className="flex items-start justify-between">
+							<div className="flex flex-col gap-1">
+								<h3 className="text-lg font-light tracking-tight text-foreground leading-tight group-hover:text-primary transition-colors duration-300">
+									{title}
+								</h3>
+								<div className="flex flex-wrap gap-2 text-xs text-muted-foreground uppercase tracking-wider">
+									{tags.slice(0, 3).map((tag, i) => (
+										<span key={i}>
+											{tag}{i < Math.min(tags.length, 3) - 1 ? ' • ' : ''}
+										</span>
+									))}
+								</div>
+							</div>
+							<span className="text-xs font-mono text-muted-foreground pt-1">{year}</span>
+						</div>
+
+						{/* Links - Minimal */}
+						<div className="flex items-center gap-3 pt-1 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+							{links.live && (
+								<div className="flex items-center gap-1 text-xs font-medium text-foreground hover:text-primary transition-colors">
+									<Globe size={12} />
+									<span>Live</span>
+								</div>
+							)}
+							{links.github && (
+								<div className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
+									<Github size={12} />
+									<span>Code</span>
+								</div>
+							)}
+							{links.figma && (
+								<div className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
+									<Figma size={12} />
+									<span>Design</span>
+								</div>
+							)}
+							{links.other && !links.live && (
+								<div className="flex items-center gap-1 text-xs font-medium text-foreground hover:text-primary transition-colors">
+									<ExternalLink size={12} />
+									<span>View</span>
+								</div>
+							)}
+						</div>
+					</div>
+				</div>
+			</Link>
+		);
+	}
 
 	return (
 		<div className="flex flex-col h-full group bg-card/40 border border-border/50 rounded-xl overflow-hidden hover:border-border transition-colors duration-300">
