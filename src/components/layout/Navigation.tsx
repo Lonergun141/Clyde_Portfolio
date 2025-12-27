@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import type React from 'react';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { ModeToggle } from '@/components/ui/mode-toggle';
@@ -79,22 +78,21 @@ const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void 
 
 export default function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [isVisible, setIsVisible] = useState(true);
-	const [lastScrollY, setLastScrollY] = useState(0);
+	const [isVisible, setIsVisible] = useState(false);
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (window.scrollY > lastScrollY && window.scrollY > 100) {
-				setIsVisible(false);
-			} else {
+			// Show navbar only after scrolling past the Hero section (approx 1 viewport height)
+			if (window.scrollY > window.innerHeight - 100) {
 				setIsVisible(true);
+			} else {
+				setIsVisible(false);
 			}
-			setLastScrollY(window.scrollY);
 		};
 
 		window.addEventListener('scroll', handleScroll, { passive: true });
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, [lastScrollY]);
+	}, []);
 
 	useEffect(() => {
 		if (isOpen) {
@@ -132,11 +130,11 @@ export default function Navigation() {
 							<span>Menu</span>
 							<div className="w-px h-4 bg-border mx-2" />
 							<span>
-								{new Date().toLocaleTimeString('en-US', {
+								{isVisible ? new Date().toLocaleTimeString('en-US', {
 									hour: '2-digit',
 									minute: '2-digit',
 									hour12: false,
-								})}
+								}) : ''}
 							</span>
 						</div>
 						<ModeToggle />
@@ -230,7 +228,7 @@ export default function Navigation() {
 										className="w-full"
 									>
 										<Link
-											href="/Gevero_CV_2025.pdf"
+											href="/Gevero_RESUME.pdf"
 											download
 											target="_blank"
 											onClick={() => setIsOpen(false)}

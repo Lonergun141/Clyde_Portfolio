@@ -38,10 +38,12 @@ export interface ProjectCardProps {
 		live?: string;
 		other?: string;
 	};
+	variant?: 'default' | 'minimal';
+	isNDA?: boolean;
 }
 
-export interface SampleList{
-	id:number;
-	firstName:string;
-	lastName:string
+export interface SampleList {
+	id: number;
+	firstName: string;
+	lastName: string
 }

@@ -2,81 +2,105 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 import type { FeaturedProjectsProps } from '@/lib/types/types';
 
 export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   return (
-    <section className="bg-background py-32 relative z-10">
+    <section className="bg-background py-32 relative z-10 overflow-hidden">
       <div className="max-w-[1800px] mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+        {/* Header Section */}
+        <div className="mb-32">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
-            className="text-6xl md:text-8xl lg:text-9xl font-light tracking-tight text-foreground leading-[0.9]">
+            className="text-7xl md:text-9xl font-light tracking-tighter text-foreground leading-[0.9]">
             Selected
             <br />
-            <span className="text-muted-foreground/30 ml-12">Works</span>
+            <span className="text-muted-foreground ml-16 md:ml-32">Works</span>
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-24 gap-x-8 md:gap-x-16">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-32 md:gap-x-12">
           {projects.map((project, index) => {
-            // Create an asymmetric grid pattern
-            const isLarge = index % 3 === 0;
-            const isMedium = index % 3 === 1;
-            const widthClass = isLarge
-              ? 'md:col-span-8'
-              : isMedium
-                ? 'md:col-span-5 md:translate-y-24'
-                : 'md:col-span-6 md:col-start-7';
+            // Asymmetric Grid Logic
+            // Pattern: 4-step cycle
+            // 0: Large Left (col-span-7)
+            // 1: Small Right (col-span-5, pushed down)
+            // 2: Small Left (col-span-5)
+            // 3: Large Right (col-span-7, pushed down)
+            const patternIndex = index % 4;
+
+            let gridClass = '';
+            if (patternIndex === 0) gridClass = 'md:col-span-7';
+            else if (patternIndex === 1) gridClass = 'md:col-span-5 md:mt-32';
+            else if (patternIndex === 2) gridClass = 'md:col-span-5'; // Vertical image often fits well here
+            else if (patternIndex === 3) gridClass = 'md:col-span-7 md:mt-32 md:col-start-6';
+
+            // Aspect Ratio logic based on size
+            // Large cards get landscape, smaller cards get portrait/square-ish
+            const aspectRatio = (patternIndex === 0 || patternIndex === 3) ? 'aspect-[16/10]' : 'aspect-[4/5]';
 
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 viewport={{ once: true, margin: '-10%' }}
-                className={`${widthClass} group relative`}>
-                <Link href={project.link || '#'} target="_blank" className="block cursor-none">
-                  <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden bg-muted mb-6 rounded-sm">
+                className={`${gridClass} group relative flex flex-col`}
+              >
+                <Link href={project.link || '#'} target="_blank" className="block w-full">
+                  {/* Image Container */}
+                  <div className={`relative ${aspectRatio} w-full overflow-hidden rounded-md bg-muted mb-8`}>
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                      className="w-full h-full relative">
-                      <div className="absolute inset-0 bg-secondary/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
-                      {project.url ? (
-                        <iframe
-                          src={project.url}
-                          className="w-[150%] h-[150%] border-0 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-75 pointer-events-none grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100"
-                          tabIndex={-1}
+                      transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
+                      className="w-full h-full relative"
+                    >
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+
+                      {/* Placeholder Image */}
+                      <div className="w-full h-full relative">
+                        {/* Using a consistent high-quality placeholder that fits the theme */}
+                        <Image
+                          src={`https://images.unsplash.com/photo-${index % 2 === 0 ? '1618005182384-a83a8bd57fbe' : '1620641788421-7a1c31034215'}?q=80&w=1200&auto=format&fit=crop`}
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-90 group-hover:opacity-100"
                         />
-                      ) : (
-                        <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground">No Preview</div>
-                      )}
+                      </div>
                     </motion.div>
 
-                    <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0 z-20">
-                      <ArrowUpRight className="w-5 h-5 text-foreground" />
+                    {/* Floating View Button */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2 rounded-full uppercase text-xs tracking-[0.2em]">
+                        View Project
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 border-t border-border pt-6">
+                  {/* Project Info */}
+                  <div className="flex justify-between items-start border-t border-border/40 pt-6">
                     <div>
-                      <h3 className="text-2xl md:text-4xl font-light text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground font-light max-w-sm line-clamp-2">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-xs font-mono text-muted-foreground">0{index + 1}</span>
+                        <h3 className="text-3xl font-light text-foreground group-hover:text-muted-foreground transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm text-muted-foreground max-w-sm line-clamp-2 pl-7">
                         {project.description}
                       </p>
                     </div>
-                    <div className="flex items-center gap-4 text-xs uppercase tracking-[0.1em] text-muted-foreground/60">
-                      <span>{project.category}</span>
-                      <span className="w-1 h-1 rounded-full bg-border" />
+
+                    <div className="hidden md:flex flex-col items-end gap-2 text-xs uppercase tracking-widest text-muted-foreground/60">
                       <span>{project.year}</span>
+                      <span>{project.category}</span>
                     </div>
                   </div>
                 </Link>
@@ -85,10 +109,14 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           })}
         </div>
 
-        <div className="mt-32 text-center">
+        {/* View All Button */}
+        <div className="mt-48 flex justify-center">
           <Link href="/projects">
-            <button className="text-sm uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors border-b border-transparent hover:border-foreground pb-1">
-              View All Projects
+            <button className="group relative px-8 py-4 overflow-hidden rounded-full border border-foreground/20 hover:border-foreground transition-colors duration-300">
+              <span className="relative z-10 text-sm uppercase tracking-[0.2em] group-hover:text-background transition-colors duration-300">
+                All Projects
+              </span>
+              <div className="absolute inset-0 bg-foreground transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ease-[0.22,1,0.36,1]" />
             </button>
           </Link>
         </div>
