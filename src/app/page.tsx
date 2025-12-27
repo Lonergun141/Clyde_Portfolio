@@ -1,7 +1,6 @@
 'use client';
 
 import FeaturedProjects from '@/components/ui/FeaturedProjects';
-import PhilosophySection from '@/components/ui/PhilosophySection';
 import { featuredProjects } from '@/lib/constants/constants';
 import CertificatesSection from '@/components/ui/CertificatesSection';
 import HeroSection from '@/components/ui/HeroSection';
@@ -15,7 +14,7 @@ export default function Home() {
 	return (
 		<SmoothScroll>
 			<main className="min-h-screen bg-background">
-				<HeroSection /> {/* Hero usually handles its own initial animation, but can be wrapped if desired */}
+				<HeroSection />
 
 				<Reveal delay={0.2}>
 					<TechMarquee />

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { socialLinks, contactDetails } from '@/lib/constants/constants';
 import Link from 'next/link';
-import { ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUpRight, Github, Linkedin } from 'lucide-react';
 
 export default function Footer() {
 	return (
@@ -11,7 +11,7 @@ export default function Footer() {
 			<div className="px-6 md:px-12 max-w-[1920px] mx-auto mb-32">
 				<div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
 
-					{/* Column 1: Brand / Info */}
+
 					<div className="md:col-span-4 space-y-8">
 						<div>
 							<div className="w-10 h-10 rounded-full bg-foreground flex items-center justify-center text-background font-bold text-xl mb-6">
@@ -21,7 +21,7 @@ export default function Footer() {
 								Unique Digital Experiences
 							</h3>
 							<h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-                                // Immersive Web Design
+								Immersive Web Design
 							</h3>
 						</div>
 
@@ -50,12 +50,12 @@ export default function Footer() {
 						</div>
 					</div>
 
-					{/* Column 2: Navigation */}
+
 					<div className="md:col-span-4 flex flex-col gap-4 border-l border-border/20 md:pl-12">
 						{[
 							{ name: 'HOME', href: '/' },
 							{ name: 'PROJECTS', href: '/projects' },
-							{ name: 'ABOUT', href: '#' }, // Assuming these exist or placeholders
+							{ name: 'ABOUT', href: '#' },
 							{ name: 'CONTACT', href: '#' }
 						].map((item) => (
 							<Link
@@ -69,13 +69,13 @@ export default function Footer() {
 						))}
 					</div>
 
-					{/* Column 3: CTA */}
+
 					<div className="md:col-span-4 md:pl-12 border-l border-border/20">
 						<h2 className="text-3xl md:text-4xl font-light leading-tight mb-8">
 							Ready to start a project?
 						</h2>
 						<p className="text-muted-foreground mb-8 text-sm leading-relaxed">
-							Share your ideas with me, and let's begin turning your vision into reality today.
+							Share your ideas with me, and let&apos;s begin turning your vision into reality today.
 						</p>
 						<a
 							href={`mailto:${contactDetails[0].value}`}
@@ -87,7 +87,7 @@ export default function Footer() {
 				</div>
 			</div>
 
-			{/* Massive Bottom Text */}
+
 			<div className="w-full overflow-hidden leading-none select-none">
 				<motion.h1
 					initial={{ y: 100 }}
