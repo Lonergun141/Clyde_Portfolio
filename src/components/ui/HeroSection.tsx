@@ -8,8 +8,10 @@ import ParticleField from './interactive/ParticleField';
 export default function HeroSection() {
     const containerRef = useRef(null);
     const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const interval = setInterval(() => {
             setCurrentGreetingIndex((prev) => (prev + 1) % greetings.length);
         }, 3000);
@@ -51,7 +53,7 @@ export default function HeroSection() {
                         className="text-right"
                     >
                         <span className="text-xl md:text-2xl font-light tracking-widest uppercase text-muted-foreground/80">
-                            {greetings[currentGreetingIndex].text}
+                            {mounted ? greetings[currentGreetingIndex].text : greetings[0].text}
                         </span>
                     </motion.div>
                 </div>

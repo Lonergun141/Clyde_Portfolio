@@ -76,11 +76,21 @@ const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void 
 );
 
 
+import { usePathname } from 'next/navigation';
+
 export default function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
+	const [mounted, setMounted] = useState(false);
+	const pathname = usePathname();
 
 	useEffect(() => {
+		setMounted(true);
+		if (pathname !== '/') {
+			setIsVisible(true);
+			return;
+		}
+
 		const handleScroll = () => {
 			// Show navbar only after scrolling past the Hero section (approx 1 viewport height)
 			if (window.scrollY > window.innerHeight - 100) {
@@ -90,9 +100,12 @@ export default function Navigation() {
 			}
 		};
 
+		// Initial check
+		handleScroll();
+
 		window.addEventListener('scroll', handleScroll, { passive: true });
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, []);
+	}, [pathname]);
 
 	useEffect(() => {
 		if (isOpen) {
@@ -130,7 +143,7 @@ export default function Navigation() {
 							<span>Menu</span>
 							<div className="w-px h-4 bg-border mx-2" />
 							<span>
-								{isVisible ? new Date().toLocaleTimeString('en-US', {
+								{mounted && isVisible ? new Date().toLocaleTimeString('en-US', {
 									hour: '2-digit',
 									minute: '2-digit',
 									hour12: false,
