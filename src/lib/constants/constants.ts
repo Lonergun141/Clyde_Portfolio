@@ -76,6 +76,26 @@ export const works = [
 ];
 
 export const featuredProjects = [
+	// {
+	// 	title: 'Aquila by Cytech',
+	// 	category: 'Web App',
+	// 	url: '',
+	// 	year: '2025',
+	// 	description:
+	// 		'Cybersecutiry made easy',
+	// 	link: '#',
+	// 	isConfidential: true,
+	// },
+	{
+		title: 'SMB Expense Tracker',
+		category: 'Web App',
+		url: '',
+		year: '2025',
+		description:
+			'A web application designed to track expenses for a medium business in Cagayan de Oro City',
+		link: '#',
+		isConfidential: true,
+	},
 	{
 		title: 'QuickEase Web App',
 		category: 'Web and Mobile App',
@@ -94,14 +114,7 @@ export const featuredProjects = [
 			'A revolutionary web and mobile application designed to quickly generate summary notes, flashcards, and quizzes from text, files, and images.',
 		link: 'https://quick-ease-alpha.vercel.app/',
 	},
-	{
-		title: 'Commission on Higher Education Regional Office X: Theses Dissertations Repository System',
-		category: 'Web App',
-		url: '',
-		year: '2025',
-		description:
-			'A transition in storing theses dissertations for CHED10 to digital.',
-	},
+
 ];
 
 export const greetings = [

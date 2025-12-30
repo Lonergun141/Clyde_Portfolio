@@ -5,6 +5,8 @@ export interface FeaturedProject {
 	year: string;
 	description?: string;
 	link?: string;
+	image?: string;
+	isConfidential?: boolean;
 }
 
 export interface FeaturedProjectsProps {
