@@ -5,20 +5,25 @@
  * 
  * This component renders an interactive 3D particle system using Three.js and React Three Fiber.
  * It features mouse interaction (repulsion/imprint) and a wave-like ambient animation.
+ * In dark mode, particles transform into a twinkling starfield.
  * 
  * TWEAKABLE AREAS are marked with [TWEAK] comments.
  */
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useTheme } from 'next-themes';
 
 const ParticleSystem = () => {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === 'dark';
+
     // [TWEAK] Number of particles. 
     // Higher = denser field but more performance cost. 
     // Lower = sparser field, faster performance.
     // Try: 5000 for mobile, 15000 for high-end desktop.
-    const count = 8000;
+    const count = isDark ? 10000 : 8000; // More particles for starfield
 
     const mesh = useRef<THREE.Points>(null);
     const { viewport } = useThree();
@@ -26,29 +31,41 @@ const ParticleSystem = () => {
     const particles = useMemo(() => {
         const positions = new Float32Array(count * 3);
         const sizes = new Float32Array(count);
+        const twinkle = new Float32Array(count); // Random offset for twinkling
 
         for (let i = 0; i < count; i++) {
             // [TWEAK] Particle Spread / Distribution
-            // (Math.random() - 0.5) * START -> Centers around 0
-            // * 20 means spread from -10 to +10
             positions[i * 3] = (Math.random() - 0.5) * 20; // x spread
             positions[i * 3 + 1] = (Math.random() - 0.5) * 20; // y spread
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 10; // z depth (thickness of the cloud)
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 10; // z depth
 
             // [TWEAK] Base Size randomization
-            sizes[i] = Math.random();
+            // In dark mode, more varied sizes for realistic stars
+            sizes[i] = isDark ? Math.random() * Math.random() : Math.random();
+
+            // Random phase for twinkling (dark mode only)
+            twinkle[i] = Math.random() * Math.PI * 2;
         }
 
-        return { positions, sizes };
-    }, []);
+        return { positions, sizes, twinkle };
+    }, [count, isDark]);
 
     const uniforms = useMemo(() => ({
         uTime: { value: 0 },
         uMouse: { value: new THREE.Vector2(0, 0) },
-        // [TWEAK] Base Particle Color
-        // You can change this hex code to match your brand color.
-        uColor: { value: new THREE.Color('#60A5FA') },
-    }), []);
+        // [TWEAK] Particle Color - changes based on theme
+        uColor: { value: isDark ? new THREE.Color('#FFFFFF') : new THREE.Color('#60A5FA') },
+        uIsDark: { value: isDark ? 1.0 : 0.0 },
+    }), [isDark]);
+
+    // Update uniforms when theme changes
+    useEffect(() => {
+        if (mesh.current) {
+            (mesh.current.material as THREE.ShaderMaterial).uniforms.uColor.value =
+                isDark ? new THREE.Color('#FFFFFF') : new THREE.Color('#60A5FA');
+            (mesh.current.material as THREE.ShaderMaterial).uniforms.uIsDark.value = isDark ? 1.0 : 0.0;
+        }
+    }, [isDark]);
 
     useFrame((state) => {
         const { clock, pointer } = state;
@@ -59,90 +76,100 @@ const ParticleSystem = () => {
             // Update mouse position (lerp for smoothness)
             const targetMouse = new THREE.Vector2(pointer.x * viewport.width / 2, pointer.y * viewport.height / 2);
             // [TWEAK] Mouse Follow Smoothness/Lag
-            // 0.1 = slow/smooth, 0.9 = fast/instant
             (mesh.current.material as THREE.ShaderMaterial).uniforms.uMouse.value.lerp(targetMouse, 0.1);
         }
     });
 
     // Custom Vertex Shader
-    // This handles the POSITION and SIZE of each particle
     const vertexShader = `
-        uniform float uTime;
-        uniform vec2 uMouse;
-        attribute float aScale;
-        varying float vAlpha;
+    uniform float uTime;
+    uniform vec2 uMouse;
+    uniform float uIsDark;
+    attribute float aScale;
+    attribute float aTwinkle;
+    varying float vAlpha;
+    varying float vBrightness;
 
-        void main() {
-            vec3 pos = position;
+    void main() {
+      vec3 pos = position;
 
-            // Distance from mouse to vertex
-            float dist = distance(pos.xy, uMouse);
-            
-            // [TWEAK] Interaction Radius
-            // How far away the mouse affects particles. 
-            // 4.0 is a wide area, 1.0 would be very tight.
-            float radius = 4.0; 
-            
-            // Calculate force based on distance (closer = stronger)
-            float force = smoothstep(radius, 0.0, dist);
-            
-            // [TWEAK] Ambient Wave Movement
-            // sin(pos.x * FREQUENCY + uTime * SPEED) * AMPLITUDE
-            // Change '2.0' to make waves tighter/looser
-            // Change '0.2' to make waves higher/lower
-            pos.z += sin(pos.x * 2.0 + uTime) * 0.2;
-            pos.z += cos(pos.y * 2.0 + uTime) * 0.2;
+      // Distance from mouse to vertex
+      float dist = distance(pos.xy, uMouse);
+      float radius = 4.0; 
+      float force = smoothstep(radius, 0.0, dist);
+      
+      if (uIsDark > 0.5) {
+        // DARK MODE: Starfield behavior
+        // Very subtle wave, stars are mostly static
+        pos.z += sin(pos.x * 0.5 + uTime * 0.1) * 0.1;
+        
+        // Twinkling effect - each star has its own phase
+        vBrightness = 0.3 + 0.7 * (0.5 + 0.5 * sin(uTime * 2.0 + aTwinkle));
+        
+        // Minimal mouse interaction for stars
+        vec2 dir = normalize(pos.xy - uMouse);
+        pos.xy += dir * force * 0.5;
+      } else {
+        // LIGHT MODE: Original particle behavior
+        pos.z += sin(pos.x * 2.0 + uTime) * 0.2;
+        pos.z += cos(pos.y * 2.0 + uTime) * 0.2;
+        
+        // Stronger mouse repulsion in light mode
+        vec2 dir = normalize(pos.xy - uMouse);
+        pos.xy += dir * force * 2.0;
+        
+        vBrightness = 1.0;
+      }
 
-            // [TWEAK] Mouse Interaction Effect
-            // Currently: Makes particles ripple in Z-space (depth) when hovered
-            // force * STRENGTH * sin(SPEED)
-            // pos.z += force * 2.0 * sin(uTime * 5.0); // REMOVED bounce effect
-            
-            // Optional: Push particles away in X/Y plane (Repulsion)
-            // Uncomment the lines below to enable "parting the sea" effect
-            vec2 dir = normalize(pos.xy - uMouse);
-            pos.xy += dir * force * 2.0; // Increased strength for visible avoidance
-
-            vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-            gl_Position = projectionMatrix * mvPosition;
-            
-            // [TWEAK] Particle Size
-            // 40.0 = base size multiplier
-            // force * 30.0 = how much larger they get when hovered
-            gl_PointSize = (40.0 * aScale + force * 30.0) * (1.0 / -mvPosition.z);
-            
-            // [TWEAK] Alpha/Opacity Logic
-            // 0.6 = base opacity
-            // force * 0.4 = extra opacity when hovered (up to 1.0 total)
-            vAlpha = 0.6 + force * 0.4;
-        }
-    `;
+      vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+      gl_Position = projectionMatrix * mvPosition;
+      
+      // [TWEAK] Particle Size
+      if (uIsDark > 0.5) {
+        // Stars: varied sizes, subtle interaction
+        gl_PointSize = (25.0 + aScale * 60.0 + force * 10.0) * (1.0 / -mvPosition.z);
+      } else {
+        // Original particle size
+        gl_PointSize = (40.0 * aScale + force * 30.0) * (1.0 / -mvPosition.z);
+      }
+      
+      // Alpha logic
+      vAlpha = 0.6 + force * 0.4;
+    }
+  `;
 
     // Custom Fragment Shader
-    // This handles the COLOR and SHAPE of each particle
     const fragmentShader = `
-        uniform vec3 uColor;
-        varying float vAlpha;
+    uniform vec3 uColor;
+    uniform float uIsDark;
+    varying float vAlpha;
+    varying float vBrightness;
 
-        void main() {
-            // [TWEAK] Particle Shape
-            // This logic creates a soft circle.
-            // distance(gl_PointCoord, vec2(0.5)) calculates dist from center of particle square
-            float dist = distance(gl_PointCoord, vec2(0.5));
-            
-            // Discard pixels outside circle radius (0.5) to make it round
-            if (dist > 0.5) discard;
-            
-            // [TWEAK] Glow/Hardness
-            // 1.0 - (dist * 2.0) creates a gradient from center to edge
-            // pow(..., 2.0) makes the falloff non-linear (softer)
-            // Higher power = sharper, smaller core. Lower = glowier.
-            float strength = 1.0 - (dist * 2.0);
-            strength = pow(strength, 2.0);
-
-            gl_FragColor = vec4(uColor, vAlpha * strength);
+    void main() {
+      float dist = distance(gl_PointCoord, vec2(0.5));
+      if (dist > 0.5) discard;
+      
+      float strength = 1.0 - (dist * 2.0);
+      
+      if (uIsDark > 0.5) {
+        // DARK MODE: Star rendering with glow
+        strength = pow(strength, 1.5); // Sharper core, softer glow
+        
+        // Add slight color variation for stars
+        vec3 starColor = uColor;
+        // Some stars slightly warmer (yellowish)
+        if (vBrightness > 0.7) {
+          starColor = mix(uColor, vec3(1.0, 0.95, 0.8), 0.3);
         }
-    `;
+        
+        gl_FragColor = vec4(starColor, vAlpha * strength * vBrightness);
+      } else {
+        // LIGHT MODE: Original particle rendering
+        strength = pow(strength, 2.0);
+        gl_FragColor = vec4(uColor, vAlpha * strength);
+      }
+    }
+  `;
 
     return (
         <points ref={mesh}>
@@ -157,6 +184,12 @@ const ParticleSystem = () => {
                     attach="attributes-aScale"
                     count={particles.sizes.length}
                     array={particles.sizes}
+                    itemSize={1}
+                />
+                <bufferAttribute
+                    attach="attributes-aTwinkle"
+                    count={particles.twinkle.length}
+                    array={particles.twinkle}
                     itemSize={1}
                 />
             </bufferGeometry>
@@ -185,3 +218,4 @@ export default function ParticleField() {
         </div>
     );
 }
+
