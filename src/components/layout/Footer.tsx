@@ -14,9 +14,7 @@ export default function Footer() {
 
 					<div className="md:col-span-4 space-y-8">
 						<div>
-							<div className="w-10 h-10 rounded-full bg-foreground flex items-center justify-center text-background font-bold text-xl mb-6">
-								C
-							</div>
+
 							<h3 className="text-sm font-medium uppercase tracking-widest mb-1 text-muted-foreground">
 								Unique Digital Experiences
 							</h3>
