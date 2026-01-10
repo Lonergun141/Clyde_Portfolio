@@ -2,6 +2,26 @@ import { Project } from '@/lib/types/types';
 
 export const projects: Project[] = [
     {
+        title: 'QuickEase Version III',
+        description: 'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification.',
+        technologies: ['NextJS', 'Django'],
+        links: {
+            live: 'https://quickeasev3.vercel.app/'
+        },
+        categories: ['Web Development', 'UI/UX Design'],
+        image: '/QuickEase Landing Page.png',
+        year: '2026',
+    },
+    {
+        title: '(Signed NDA) SMB Expense Tracker',
+        description: 'A web application designed to track expenses for a medium business in Cagayan de Oro City',
+        technologies: ['NextJS', 'Django', 'Tailwind', 'Zustand', 'Recharts', 'Docker', 'PostgreSQL'],
+        links: {},
+        categories: ['Web Development'],
+        image: '',
+        year: '2025',
+    },
+    {
         title: 'QuickEase Reimagined Landing Page',
         description: 'My personal latest redesign take on QuickEase',
         technologies: ['Figma'],
@@ -20,6 +40,7 @@ export const projects: Project[] = [
         links: {
             github: 'https://github.com/Lonergun141/QuickEase',
             figma: 'https://www.figma.com/design/d1lYnIMuJg9gXzVJK9AzFk/QuickEase-WEB?node-id=0-1&t=H00IXSWGgC6DD91X-1',
+            live: 'https://quick-ease-alpha.vercel.app/'
         },
         categories: ['Web Development', 'UI/UX Design'],
         image: '/web.png',
@@ -71,6 +92,25 @@ export const projects: Project[] = [
             figma: 'https://www.figma.com/design/ss0riR9VUwEgfqPae0zhzM/CHEDeTeX?node-id=0-1&t=dZ9CWZszc6D3QqDG-1',
         },
         categories: ['Web Development', 'UI/UX Design'],
+        image: '/CHED.png',
+        year: '2025',
+    },
+
+    {
+        title: '(Signed NDA) CHED Regional Office X Maintenance Monitoring System',
+        description: 'ICT Hardware and Software maintenance tracker for CHED',
+        technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
+        links: {},
+        categories: ['Web Development'],
+        image: '/CHED.png',
+        year: '2025',
+    },
+    {
+        title: '(Signed NDA) CHED Regional Office X Form Controller System',
+        description: 'Form Controller/Manager for CHED',
+        technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
+        links: {},
+        categories: ['Web Development'],
         image: '/CHED.png',
         year: '2025',
     },
@@ -167,24 +207,6 @@ export const projects: Project[] = [
         year: '2021-2022',
     },
 
-    {
-        title: '(Signed NDA) CHED Regional Office X Maintenance Monitoring System',
-        description: 'ICT Hardware and Software maintenance tracker for CHED',
-        technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
-        links: {},
-        categories: ['Web Development'],
-        image: '/CHED.png',
-        year: '2025',
-    },
-    {
-        title: '(Signed NDA) CHED Regional Office X Form Controller System',
-        description: 'Form Controller/Manager for CHED',
-        technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'JQuery'],
-        links: {},
-        categories: ['Web Development'],
-        image: '/CHED.png',
-        year: '2025',
-    },
 ];
 
 export const projectCategories: string[] = [

@@ -22,6 +22,7 @@ export interface Project {
 		figma?: string;
 		live?: string;
 		other?: string;
+		website?: string;
 	};
 	categories: string[];
 	image?: string;
@@ -32,6 +33,7 @@ export interface ProjectCardProps {
 	title: string;
 	description: string;
 	tags: string[];
+	categories?: string[];
 	image?: string;
 	year?: string;
 	links: {
