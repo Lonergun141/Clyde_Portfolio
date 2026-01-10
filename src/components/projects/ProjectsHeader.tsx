@@ -16,7 +16,7 @@ const ProjectsHeader = ({ totalProjects, publicProjects }: ProjectsHeaderProps) 
             <div className="flex flex-col md:flex-row justify-between items-end gap-6">
                 <div>
                     <h2 className="text-xs font-mono text-primary uppercase tracking-[0.3em] mb-2 pl-1">
-                        //Selected Works
+                        {'//'}Selected Works
                     </h2>
                     <h1 className="text-4xl md:text-7xl font-bold tracking-tighter uppercase text-foreground max-w-4xl leading-[0.9]">
                         The <span className="text-muted-foreground">Archive</span>

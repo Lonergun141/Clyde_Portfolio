@@ -1,7 +1,6 @@
 'use client';
 
 import WorkspacePanel from '@/components/spatial/WorkspacePanel';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { mainTechnologies, creativeTools } from '@/lib/constants/constants';
 import { Mail, MapPin, Briefcase, GraduationCap, FileDown } from 'lucide-react';

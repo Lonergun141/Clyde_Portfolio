@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Github, Figma, Globe, Lock, ArrowUpRight } from 'lucide-react';
+import { Github, Globe, Lock, ArrowUpRight } from 'lucide-react';
 import { ProjectCardProps } from '@/lib/types/types';
-import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
 const ProjectCard = ({ title, description, tags, categories = [], image, year, links, isNDA = false }: ProjectCardProps) => {
