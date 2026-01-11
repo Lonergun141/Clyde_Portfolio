@@ -10,7 +10,7 @@ export async function GET(request: Request) {
         const email = searchParams.get('email');
         const secret = searchParams.get('secret');
 
-        const expectedSecret = process.env.RESEND_API_KEY?.substring(0, 8);
+        const expectedSecret = (process.env.EMAIL_PASS || 'fallback-secret').substring(0, 8);
         if (secret !== expectedSecret) {
             return new NextResponse('Unauthorized', { status: 401 });
         }
