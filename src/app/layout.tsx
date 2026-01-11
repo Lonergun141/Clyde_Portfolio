@@ -13,6 +13,7 @@ import CertificatesPanel from '@/components/panels/CertificatesPanel';
 import GitHubPanel from '@/components/panels/GitHubPanel';
 import ContactPanel from '@/components/panels/ContactPanel';
 import KeyboardHelpWrapper from '@/components/ui/KeyboardHelpWrapper';
+import ChatPanel from '@/components/panels/ChatPanel';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -81,6 +82,7 @@ export default function RootLayout({
 								<CertificatesPanel />
 								<GitHubPanel />
 								<ContactPanel />
+								<ChatPanel />
 
 								<Analytics />
 							</NavigationProvider>

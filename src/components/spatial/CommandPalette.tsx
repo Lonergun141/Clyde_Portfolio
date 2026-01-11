@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Search, FolderKanban, User, Award, Terminal, ArrowRight, Github } from 'lucide-react';
+import { X, Search, FolderKanban, User, Award, Terminal, ArrowRight, Github, MessageSquare } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigation, PanelType } from '@/context/NavigationContext';
 
@@ -41,6 +41,13 @@ const commands: CommandItem[] = [
         description: 'Contribution activity and repositories',
         icon: <Github size={18} />,
         shortcut: '4',
+    },
+    {
+        id: 'chat',
+        label: 'AI Chat',
+        description: 'Ask questions about my background',
+        icon: <MessageSquare size={18} />,
+        shortcut: '6',
     },
 ];
 

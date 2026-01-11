@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
-export type PanelType = 'projects' | 'profile' | 'certificates' | 'github' | 'contact' | null;
+export type PanelType = 'projects' | 'profile' | 'certificates' | 'github' | 'contact' | 'chat' | null;
 
 interface NavigationContextType {
     activePanel: PanelType;
@@ -104,6 +104,10 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
                     case '5':
                         e.preventDefault();
                         openPanel('contact');
+                        break;
+                    case '6':
+                        e.preventDefault();
+                        openPanel('chat');
                         break;
                 }
             }
