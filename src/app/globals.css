@@ -4,117 +4,88 @@
 
 @layer base {
 	:root {
-		--background: 0 0% 100%;
-		--foreground: 240 10% 3.9%;
+		/* Light Mode: "Technical Manual" - Stark, high contrast, no warmth */
+		--background: 0 0% 92%;
+		/* #EBEBEB - Light Grey Concrete */
+		--foreground: 0 0% 10%;
+		/* #1A1A1A - Nearly Black Ink */
 
-		--card: 0 0% 100%;
-		--card-foreground: 240 10% 3.9%;
+		--card: 0 0% 92%;
+		--card-foreground: 0 0% 10%;
 
-		--popover: 0 0% 100%;
-		--popover-foreground: 240 10% 3.9%;
+		--popover: 0 0% 92%;
+		--popover-foreground: 0 0% 10%;
 
-		--primary: 240 5.9% 10%;
-		--primary-foreground: 0 0% 98%;
+		--primary: 0 0% 10%;
+		--primary-foreground: 0 0% 92%;
 
-		--secondary: 240 4.8% 95.9%;
-		--secondary-foreground: 240 5.9% 10%;
+		--secondary: 0 0% 85%;
+		/* #D9D9D9 - Structural Steel */
+		--secondary-foreground: 0 0% 10%;
 
-		--muted: 240 4.8% 95.9%;
-		--muted-foreground: 240 3.8% 46.1%;
+		--muted: 0 0% 60%;
+		--muted-foreground: 0 0% 40%;
+		/* Technical Annotations */
 
-		--accent: 240 4.8% 95.9%;
-		--accent-foreground: 240 5.9% 10%;
+		--accent: 12 85% 55%;
+		/* #D9381E - International Safety Orange (Restrained) */
+		--accent-foreground: 0 0% 98%;
 
 		--destructive: 0 84.2% 60.2%;
 		--destructive-foreground: 0 0% 98%;
 
-		--border: 240 5.9% 90%;
-		--input: 240 5.9% 90%;
-		--ring: 240 10% 3.9%;
+		--border: 0 0% 80%;
+		/* Sharp, defined borders */
+		--input: 0 0% 80%;
+		--ring: 0 0% 10%;
 
-		--radius: 0.5rem;
+		--radius: 0rem;
+		/* No rounded corners. Precision. */
 	}
 
 	.dark {
-		--background: 240 10% 3.9%;
-		--foreground: 0 0% 98%;
+		/* Dark Mode: "Anodized" - Matte, light-absorbing, dense */
+		--background: 0 0% 8%;
+		/* #141414 - Matte Carbon */
+		--foreground: 0 0% 90%;
+		/* #E6E6E6 - Brushed Aluminum */
 
-		--card: 240 10% 3.9%;
-		--card-foreground: 0 0% 98%;
+		--card: 0 0% 8%;
+		--card-foreground: 0 0% 90%;
 
-		--popover: 240 10% 3.9%;
-		--popover-foreground: 0 0% 98%;
+		--popover: 0 0% 8%;
+		--popover-foreground: 0 0% 90%;
 
-		--primary: 0 0% 98%;
-		--primary-foreground: 240 5.9% 10%;
+		--primary: 0 0% 90%;
+		--primary-foreground: 0 0% 8%;
 
-		--secondary: 240 3.7% 15.9%;
-		--secondary-foreground: 0 0% 98%;
+		--secondary: 0 0% 15%;
+		/* #262626 - Darker Steel */
+		--secondary-foreground: 0 0% 90%;
 
-		--muted: 240 3.7% 15.9%;
-		--muted-foreground: 240 5% 64.9%;
+		--muted: 0 0% 25%;
+		--muted-foreground: 0 0% 50%;
 
-		--accent: 240 3.7% 15.9%;
-		--accent-foreground: 0 0% 98%;
+		--accent: 12 85% 55%;
+		/* International Safety Orange */
+		--accent-foreground: 0 0% 90%;
 
 		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 0 0% 98%;
+		--destructive-foreground: 0 0% 90%;
 
-		--border: 240 3.7% 15.9%;
-		--input: 240 3.7% 15.9%;
-		--ring: 240 4.9% 83.9%;
+		--border: 0 0% 20%;
+		--input: 0 0% 20%;
+		--ring: 0 0% 80%;
 	}
-}
-
-@layer utilities {
-	.animation-delay-2000 {
-		animation-delay: 2s;
-	}
-
-	.animation-delay-4000 {
-		animation-delay: 4s;
-	}
-}
-
-@keyframes blob {
-	0% {
-		transform: translate(0px, 0px) scale(1);
-	}
-
-	33% {
-		transform: translate(30px, -50px) scale(1.1);
-	}
-
-	66% {
-		transform: translate(-20px, 20px) scale(0.9);
-	}
-
-	100% {
-		transform: translate(0px, 0px) scale(1);
-	}
-}
-
-.animate-blob {
-	animation: blob 7s infinite;
 }
 
 @layer base {
 	* {
 		@apply border-border;
+		transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
 	}
 
 	body {
 		@apply bg-background text-foreground;
-	}
-
-	html {
-		-ms-overflow-style: none;
-		/* IE and Edge */
-		scrollbar-width: none;
-		/* Firefox */
-	}
-
-	html::-webkit-scrollbar {
-		display: none;
 	}
 }
