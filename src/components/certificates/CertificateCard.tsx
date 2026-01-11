@@ -14,7 +14,7 @@ interface CertificateCardProps {
 
 const variantStyles = {
     mobile: {
-        container: 'group flex items-center gap-3 p-3 border border-border hover:border-accent bg-background/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 active:scale-[0.98]',
+        container: 'group flex w-full items-center gap-3 p-3 border border-border hover:border-accent bg-background/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 active:scale-[0.98]',
         logo: 'w-8 h-8',
         title: 'text-xs font-bold text-foreground group-hover:text-accent-foreground leading-tight line-clamp-1 transition-colors',
         subtitle: 'text-[9px] text-muted-foreground group-hover:text-accent-foreground/70 font-mono truncate transition-colors',
@@ -39,16 +39,14 @@ const variantStyles = {
     },
 };
 
-export default function CertificateCard({ certificate, index, variant = 'desktop' }: CertificateCardProps) {
+export default function CertificateCard({ certificate, index, variant = 'desktop', onClick }: CertificateCardProps & { onClick?: () => void }) {
     const styles = variantStyles[variant];
     const { initial, delay } = styles.animation;
 
     return (
-        <motion.a
+        <motion.button
             key={certificate.title}
-            href={certificate.link}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={onClick}
             initial={initial}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.3, delay: index * delay }}
@@ -66,7 +64,7 @@ export default function CertificateCard({ certificate, index, variant = 'desktop
             </div>
 
             {/* Content */}
-            <div className={`flex-1 min-w-0 ${variant === 'desktop' ? 'flex flex-col justify-between h-full' : ''}`}>
+            <div className={`flex-1 min-w-0 ${variant === 'desktop' ? 'flex flex-col justify-between h-full text-left' : 'text-left'}`}>
                 <div>
                     <h3 className={styles.title}>
                         {certificate.title}
@@ -87,6 +85,6 @@ export default function CertificateCard({ certificate, index, variant = 'desktop
                 size={styles.iconSize}
                 className={`flex-shrink-0 text-muted-foreground/50 group-hover:text-accent-foreground/70 transition-colors ${variant === 'desktop' ? 'mt-1' : variant === 'tablet' ? 'mt-0.5' : ''}`}
             />
-        </motion.a>
+        </motion.button>
     );
 }
