@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Search, FolderKanban, User, Award, Terminal, ArrowRight } from 'lucide-react';
+import { X, Search, FolderKanban, User, Award, Terminal, ArrowRight, Github } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigation, PanelType } from '@/context/NavigationContext';
 
@@ -34,6 +34,13 @@ const commands: CommandItem[] = [
         description: 'Credentials and achievements',
         icon: <Award size={18} />,
         shortcut: '3',
+    },
+    {
+        id: 'github',
+        label: 'GitHub',
+        description: 'Contribution activity and repositories',
+        icon: <Github size={18} />,
+        shortcut: '4',
     },
 ];
 
@@ -75,7 +82,7 @@ export default function CommandPalette() {
                 if (selected) {
                     openPanel(selected.id);
                 }
-            } else if (['1', '2', '3'].includes(e.key) && !searchTerm) {
+            } else if (['1', '2', '3', '4'].includes(e.key) && !searchTerm) {
                 const idx = parseInt(e.key) - 1;
                 if (commands[idx]) {
                     openPanel(commands[idx].id);
@@ -152,8 +159,8 @@ export default function CommandPalette() {
                                             onClick={() => openPanel(cmd.id)}
                                             onMouseEnter={() => setSelectedIndex(index)}
                                             className={`w-full flex items-center gap-4 px-4 py-3 text-left transition-colors ${selectedIndex === index
-                                                    ? 'bg-accent text-accent-foreground'
-                                                    : 'hover:bg-secondary/30'
+                                                ? 'bg-accent text-accent-foreground'
+                                                : 'hover:bg-secondary/30'
                                                 }`}
                                         >
                                             <div className="text-muted-foreground">{cmd.icon}</div>

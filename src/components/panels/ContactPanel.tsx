@@ -63,7 +63,7 @@ export default function ContactPanel() {
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-4 p-4 sm:p-6 md:p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-border flex flex-col"
                     >
-                        {/* Header */}
+
                         <div className="mb-8">
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="w-6 h-[1px] bg-accent" />
@@ -81,15 +81,7 @@ export default function ContactPanel() {
 
                         {/* Contact Info */}
                         <div className="space-y-4 mb-auto">
-                            <a
-                                href="mailto:clydegevero14@gmail.com"
-                                className="flex items-center gap-3 text-sm group py-2"
-                            >
-                                <Mail size={14} className="text-muted-foreground group-hover:text-accent transition-colors" />
-                                <span className="font-mono text-accent group-hover:text-primary transition-colors">
-                                    clydegevero14@gmail.com
-                                </span>
-                            </a>
+
                             <a
                                 href="https://github.com/Lonergun141"
                                 target="_blank"
@@ -103,7 +95,7 @@ export default function ContactPanel() {
                                 <ExternalLink size={10} className="opacity-50" />
                             </a>
                             <a
-                                href="https://linkedin.com/in/clyde-gevero"
+                                href="https://www.linkedin.com/in/me/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-3 text-sm group py-2"

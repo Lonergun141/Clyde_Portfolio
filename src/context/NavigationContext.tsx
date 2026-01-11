@@ -12,6 +12,9 @@ interface NavigationContextType {
     toggleCommandPalette: () => void;
     openCommandPalette: () => void;
     closeCommandPalette: () => void;
+    isKeyboardHelpOpen: boolean;
+    openKeyboardHelp: () => void;
+    closeKeyboardHelp: () => void;
 }
 
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
@@ -19,10 +22,12 @@ const NavigationContext = createContext<NavigationContextType | undefined>(undef
 export function NavigationProvider({ children }: { children: React.ReactNode }) {
     const [activePanel, setActivePanel] = useState<PanelType>(null);
     const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+    const [isKeyboardHelpOpen, setIsKeyboardHelpOpen] = useState(false);
 
     const openPanel = useCallback((panel: PanelType) => {
         setActivePanel(panel);
         setIsCommandPaletteOpen(false);
+        setIsKeyboardHelpOpen(false);
     }, []);
 
     const closePanel = useCallback(() => {
@@ -41,23 +46,36 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
         setIsCommandPaletteOpen(false);
     }, []);
 
-    // Global keyboard shortcuts
+    const openKeyboardHelp = useCallback(() => {
+        setIsKeyboardHelpOpen(true);
+        setIsCommandPaletteOpen(false);
+    }, []);
+
+    const closeKeyboardHelp = useCallback(() => {
+        setIsKeyboardHelpOpen(false);
+    }, []);
+
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            // Don't trigger if typing in an input
             const target = e.target as HTMLElement;
             if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return;
 
-            // Cmd+K / Ctrl+K for command palette
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 e.preventDefault();
                 toggleCommandPalette();
                 return;
             }
 
-            // Escape to close
+            if (e.key === '?' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+                e.preventDefault();
+                setIsKeyboardHelpOpen(prev => !prev);
+                return;
+            }
+
             if (e.key === 'Escape') {
-                if (isCommandPaletteOpen) {
+                if (isKeyboardHelpOpen) {
+                    closeKeyboardHelp();
+                } else if (isCommandPaletteOpen) {
                     closeCommandPalette();
                 } else if (activePanel) {
                     closePanel();
@@ -65,8 +83,7 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
                 return;
             }
 
-            // Number keys 1-5 to open panels (when no modifiers)
-            if (!e.metaKey && !e.ctrlKey && !e.altKey && !e.shiftKey) {
+            if (!e.metaKey && !e.ctrlKey && !e.altKey && !e.shiftKey && !isCommandPaletteOpen && !isKeyboardHelpOpen) {
                 switch (e.key) {
                     case '1':
                         e.preventDefault();
@@ -94,11 +111,10 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [toggleCommandPalette, closeCommandPalette, closePanel, openPanel, isCommandPaletteOpen, activePanel]);
+    }, [toggleCommandPalette, closeCommandPalette, closePanel, openPanel, closeKeyboardHelp, isCommandPaletteOpen, isKeyboardHelpOpen, activePanel]);
 
-    // Lock body scroll when panel or palette is open
     useEffect(() => {
-        if (activePanel || isCommandPaletteOpen) {
+        if (activePanel || isCommandPaletteOpen || isKeyboardHelpOpen) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = '';
@@ -106,7 +122,7 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
         return () => {
             document.body.style.overflow = '';
         };
-    }, [activePanel, isCommandPaletteOpen]);
+    }, [activePanel, isCommandPaletteOpen, isKeyboardHelpOpen]);
 
     return (
         <NavigationContext.Provider
@@ -118,6 +134,9 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
                 toggleCommandPalette,
                 openCommandPalette,
                 closeCommandPalette,
+                isKeyboardHelpOpen,
+                openKeyboardHelp,
+                closeKeyboardHelp,
             }}
         >
             {children}

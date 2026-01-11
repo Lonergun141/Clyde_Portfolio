@@ -40,7 +40,6 @@ export function ThemeTransitionProvider({ children }: { children: React.ReactNod
     const handleAnimationComplete = useCallback(() => {
         if (nextTheme) {
             setTheme(nextTheme);
-            // Small delay before hiding overlay
             setTimeout(() => {
                 setIsTransitioning(false);
                 setNextTheme(null);
@@ -52,7 +51,8 @@ export function ThemeTransitionProvider({ children }: { children: React.ReactNod
         <ThemeTransitionContext.Provider value={{ toggleTheme, isTransitioning }}>
             {children}
 
-            {/* Wipe Overlay */}
+
+
             <AnimatePresence>
                 {isTransitioning && nextTheme && (
                     <motion.div
