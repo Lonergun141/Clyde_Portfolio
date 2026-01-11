@@ -1,21 +1,89 @@
 export const mainTechnologies = [
-	'React',
-	'Next.js',
-	'Django',
-	'React Native',
-	'Micro Frontend',
-	'Scrum',
-	'Python',
-	'AppScript',
-	'MongoDB',
-	'PostgreSQL',
-	'Firebase',
-	'Git',
-	'GitHub',
-	'GitLab',
-	'Bitbucket',
-	'Trello',
-	'Open Project',
+	{
+		name: 'React',
+		description: 'A JavaScript library for building user interfaces.',
+		logo: 'react'
+	},
+	{
+		name: 'Next.js',
+		description: 'The React Framework for Production.',
+		logo: 'nextdotjs'
+	},
+	{
+		name: 'Django',
+		description: 'High-level Python Web framework.',
+		logo: 'django'
+	},
+	{
+		name: 'React Native',
+		description: 'Create native apps for Android and iOS using React.',
+		logo: 'react'
+	},
+	{
+		name: 'Micro Frontend',
+		description: 'Architectural style composing apps from independently deliverable frontend applications.',
+		logo: 'webpack'
+	},
+	{
+		name: 'Scrum',
+		description: 'Agile framework for managing knowledge work.',
+		logo: 'jira'
+	},
+	{
+		name: 'Python',
+		description: 'Programming language that lets you work quickly and integrate systems.',
+		logo: 'python'
+	},
+	{
+		name: 'AppScript',
+		description: 'Rapid application development platform by Google.',
+		logo: 'googleappsscript'
+	},
+	{
+		name: 'MongoDB',
+		description: 'The most popular database for modern apps.',
+		logo: 'mongodb'
+	},
+	{
+		name: 'PostgreSQL',
+		description: 'The World\'s Most Advanced Open Source Relational Database.',
+		logo: 'postgresql'
+	},
+	{
+		name: 'Firebase',
+		description: 'Google\'s mobile platform that helps you quickly develop high-quality apps.',
+		logo: 'firebase'
+	},
+	{
+		name: 'Git',
+		description: 'Free and open source distributed version control system.',
+		logo: 'git'
+	},
+	{
+		name: 'GitHub',
+		description: 'Platform for version control and collaboration.',
+		logo: 'github'
+	},
+	{
+		name: 'GitLab',
+		description: 'The One DevOps Platform.',
+		logo: 'gitlab'
+	},
+	{
+		name: 'Bitbucket',
+		description: 'Git solution for professional teams.',
+		logo: 'bitbucket'
+	},
+	{
+		name: 'Trello',
+		description: 'Visual tool that empowers your team to manage any type of project.',
+		logo: 'trello'
+	},
+	{
+		name: 'Open Project',
+		description: 'Open source project management software.',
+		logo: 'openproject'
+	},
 ];
 
 export const creativeTools = [
@@ -86,16 +154,6 @@ export const works = [
 ];
 
 export const featuredProjects = [
-	// {
-	// 	title: 'Aquila by Cytech',
-	// 	category: 'Web App',
-	// 	url: '',
-	// 	year: '2025',
-	// 	description:
-	// 		'Cybersecutiry made easy',
-	// 	link: '#',
-	// 	isConfidential: true,
-	// },
 	{
 		title: 'QuickEase Version III',
 		category: 'Web and Mobile App',
@@ -153,12 +211,37 @@ export const greetings = [
 
 export const certificates = [
 	{
+		title: 'Presidential Decree No. 907: HONOR GRADUATE ELIGIBILITY',
+		issuer: 'Civil Service Commission (CSC) Regional Office X',
+		platform: 'Civil Service Eligibility',
+		date: '2025',
+		logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Civil_Service_Commission.svg/500px-Civil_Service_Commission.svg.png',
+		link: 'https://drive.google.com/file/d/10hl3ucErr9lTdX1neL_yGO53dcleFQYV/view?usp=sharing',
+	},
+	{
 		title: 'BS in Information Technology Track II: Software Development',
 		issuer: 'USTP Cagayan de Oro',
 		platform: 'University Degree',
 		date: '2025',
 		logo: 'https://upload.wikimedia.org/wikipedia/en/0/01/University_of_Science_and_Technology_of_Southern_Philippines.png',
 		link: 'https://drive.google.com/file/d/1xzl_IaV7LbhmEVuVC6X-OZeBn_EroVvK/view?usp=sharing',
+	},
+	{
+		title: 'Problem Solving & Innovation (US English)',
+		issuer: 'Wadhwani Foundation ',
+		platform: 'Wadhwani Foundation ',
+		date: '2025',
+		logo: 'https://wadhwanifoundation.org/wp-content/uploads/2023/10/Wadhwani-Foundation-Logo.png',
+		link: 'https://drive.google.com/file/d/18YBhOn9ScpTdh6_7QNvbE5zDadDjjX1C/view?usp=sharing'
+	},
+	{
+		title: 'Impactful Writing Skills (US English)',
+		issuer: 'Wadhwani Foundation ',
+		platform: 'Wadhwani Foundation ',
+		date: '2025',
+		logo: 'https://wadhwanifoundation.org/wp-content/uploads/2023/10/Wadhwani-Foundation-Logo.png',
+		link: 'https://drive.google.com/file/d/1I1Tj9QvSI8B1uxoxKo9b2Otfv2VdJGou/view?usp=sharing'
+
 	},
 	{
 		title: 'HCIA-AI Machine Learning Fundamentals',
@@ -168,6 +251,7 @@ export const certificates = [
 		logo: 'https://upload.wikimedia.org/wikipedia/en/0/04/Huawei_Standard_logo.svg',
 		link: 'https://drive.google.com/file/d/1goAZVxJDEbyUnnnuz7Bsr6EIXvpdgY9x/view?usp=sharing',
 	},
+
 	{
 		title: 'CITC Digital Solutions Showcase',
 		issuer: 'USTP-CITC',
@@ -175,5 +259,6 @@ export const certificates = [
 		date: '2024',
 		logo: 'https://upload.wikimedia.org/wikipedia/en/0/01/University_of_Science_and_Technology_of_Southern_Philippines.png',
 		link: 'https://docs.google.com/document/d/1iIZEH0euyNqLN1hhyjh5Vbb5eIjvPCGuW7vmy1EcnzQ/edit?usp=sharing'
-	}
+	},
+
 ];

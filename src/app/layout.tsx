@@ -5,12 +5,14 @@ import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { NavigationProvider } from '@/context/NavigationContext';
 import { ThemeTransitionProvider } from '@/context/ThemeTransitionContext';
+import { AccentProvider } from '@/context/AccentContext';
 import CommandPalette from '@/components/spatial/CommandPalette';
 import ProjectsPanel from '@/components/panels/ProjectsPanel';
 import ProfilePanel from '@/components/panels/ProfilePanel';
 import CertificatesPanel from '@/components/panels/CertificatesPanel';
 import GitHubPanel from '@/components/panels/GitHubPanel';
 import ContactPanel from '@/components/panels/ContactPanel';
+import KeyboardHelpWrapper from '@/components/ui/KeyboardHelpWrapper';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: 'website',
 		locale: 'en_US',
-		url: 'https://clydegevero.dev',
+		url: 'https://clyde-portfolio-beige.vercel.app/',
 		title: 'Clyde Gevero | Fullstack Developer & UI/UX Designer',
 		description: 'Fullstack developer and UI/UX designer specializing in React, TypeScript, and thoughtful interfaces.',
 		siteName: 'Clyde Gevero Portfolio',
@@ -66,20 +68,23 @@ export default function RootLayout({
 					enableSystem
 				>
 					<ThemeTransitionProvider>
-						<NavigationProvider>
-							<div className="bg-noise" />
-							{children}
+						<AccentProvider>
+							<NavigationProvider>
+								<div className="bg-noise" />
+								{children}
 
-							{/* Global Spatial Components */}
-							<CommandPalette />
-							<ProjectsPanel />
-							<ProfilePanel />
-							<CertificatesPanel />
-							<GitHubPanel />
-							<ContactPanel />
+								{/* Global Spatial Components */}
+								<CommandPalette />
+								<KeyboardHelpWrapper />
+								<ProjectsPanel />
+								<ProfilePanel />
+								<CertificatesPanel />
+								<GitHubPanel />
+								<ContactPanel />
 
-							<Analytics />
-						</NavigationProvider>
+								<Analytics />
+							</NavigationProvider>
+						</AccentProvider>
 					</ThemeTransitionProvider>
 				</ThemeProvider>
 			</body>

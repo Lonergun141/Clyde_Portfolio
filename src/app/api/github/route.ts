@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 
 const GITHUB_USERNAME = 'Lonergun141';
 
+// Revalidate every 5 minutes to get fresh data
+export const revalidate = 300;
+
 export async function GET() {
     const token = process.env.GITHUB_TOKEN;
 
@@ -101,11 +104,12 @@ export async function GET() {
             throw new Error('User not found');
         }
 
-        // Process contribution data
+        // Process contribution data - preserve week structure from GitHub
         const calendar = user.contributionsCollection.contributionCalendar;
-        const contributions: { date: string; count: number; level: number }[] = [];
+        const weeks: { date: string; count: number; level: number }[][] = [];
 
         for (const week of calendar.weeks) {
+            const weekDays: { date: string; count: number; level: number }[] = [];
             for (const day of week.contributionDays) {
                 const levelMap: Record<string, number> = {
                     'NONE': 0,
@@ -114,13 +118,17 @@ export async function GET() {
                     'THIRD_QUARTILE': 3,
                     'FOURTH_QUARTILE': 4,
                 };
-                contributions.push({
+                weekDays.push({
                     date: day.date,
                     count: day.contributionCount,
                     level: levelMap[day.contributionLevel] || 0,
                 });
             }
+            weeks.push(weekDays);
         }
+
+        // Flatten for backward compatibility with contributions array
+        const contributions = weeks.flat();
 
         // Process language data
         const langCounts: Record<string, { size: number; color: string }> = {};
@@ -165,6 +173,7 @@ export async function GET() {
 
         return NextResponse.json({
             contributions,
+            weeks,
             totalContributions: calendar.totalContributions,
             languages,
             commits: commits.slice(0, 8),
