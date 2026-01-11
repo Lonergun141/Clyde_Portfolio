@@ -1,11 +1,21 @@
 export const mainTechnologies = [
 	'React',
 	'Next.js',
-	'TypeScript',
-	'TailwindCSS',
+	'Django',
 	'React Native',
+	'Micro Frontend',
+	'Scrum',
 	'Python',
 	'AppScript',
+	'MongoDB',
+	'PostgreSQL',
+	'Firebase',
+	'Git',
+	'GitHub',
+	'GitLab',
+	'Bitbucket',
+	'Trello',
+	'Open Project',
 ];
 
 export const creativeTools = [
@@ -87,6 +97,15 @@ export const featuredProjects = [
 	// 	isConfidential: true,
 	// },
 	{
+		title: 'QuickEase Version III',
+		category: 'Web and Mobile App',
+		url: 'https://quickeasev3.vercel.app/',
+		year: '2026',
+		description:
+			'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification.',
+		link: 'https://quickeasev3.vercel.app/',
+	},
+	{
 		title: 'SMB Expense Tracker',
 		category: 'Web App',
 		url: '',
@@ -139,12 +158,12 @@ export const certificates = [
 		platform: 'University Degree',
 		date: '2025',
 		logo: 'https://upload.wikimedia.org/wikipedia/en/0/01/University_of_Science_and_Technology_of_Southern_Philippines.png',
-		link: '#',
+		link: 'https://drive.google.com/file/d/1xzl_IaV7LbhmEVuVC6X-OZeBn_EroVvK/view?usp=sharing',
 	},
 	{
 		title: 'HCIA-AI Machine Learning Fundamentals',
 		issuer: 'Huawei',
-		platform: 'Huawei',
+		platform: 'https://e.huawei.com/',
 		date: '2024',
 		logo: 'https://upload.wikimedia.org/wikipedia/en/0/04/Huawei_Standard_logo.svg',
 		link: 'https://drive.google.com/file/d/1goAZVxJDEbyUnnnuz7Bsr6EIXvpdgY9x/view?usp=sharing',
@@ -152,7 +171,7 @@ export const certificates = [
 	{
 		title: 'CITC Digital Solutions Showcase',
 		issuer: 'USTP-CITC',
-		platform: 'USTP-DRER Gymnassium',
+		platform: 'College of Information Technology and Computing',
 		date: '2024',
 		logo: 'https://upload.wikimedia.org/wikipedia/en/0/01/University_of_Science_and_Technology_of_Southern_Philippines.png',
 		link: 'https://docs.google.com/document/d/1iIZEH0euyNqLN1hhyjh5Vbb5eIjvPCGuW7vmy1EcnzQ/edit?usp=sharing'
