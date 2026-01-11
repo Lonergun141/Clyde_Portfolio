@@ -3,45 +3,30 @@
 import WorkspacePanel from '@/components/spatial/WorkspacePanel';
 import { motion } from 'framer-motion';
 import { mainTechnologies, creativeTools } from '@/lib/constants/constants';
-import { Mail, MapPin, Briefcase, GraduationCap, FileDown } from 'lucide-react';
-import { track } from '@vercel/analytics';
+import { MapPin, Briefcase, GraduationCap, FileKey } from 'lucide-react';
+import { useState } from 'react';
+import ResumeRequestModal from './ResumeRequestModal';
+import { TechHoverCard } from '@/components/ui/TechHoverCard';
 
 export default function ProfilePanel() {
-    const handleDownloadResume = () => {
-        // Track download with Vercel Analytics
-        track('resume_download', {
-            location: '/GEVERO_RESUME.pdf',
-            timestamp: new Date().toISOString(),
-        });
+    const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
-        // Trigger download
-        const link = document.createElement('a');
-        link.href = '/GEVERO_RESUME.pdf';
-        link.download = 'GEVERO_RESUME.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const handleRequestResume = () => {
+        setIsResumeModalOpen(true);
     };
 
     return (
         <WorkspacePanel panelId="profile" title="System Operator">
             <div className="h-full">
-
-                {/* Asymmetric Split Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 h-full">
 
-                    {/* Left Column: Identity Data with Background Image */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-5 relative border-b lg:border-b-0 lg:border-r border-border flex flex-col overflow-hidden"
                     >
-
-
-                        {/* Content */}
                         <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col h-full">
-                            {/* Name & Role */}
                             <div className="mb-8">
                                 <div className="flex items-center gap-3 mb-3">
                                     <div className="w-6 h-[1px] bg-accent" />
@@ -57,7 +42,6 @@ export default function ProfilePanel() {
                                 </p>
                             </div>
 
-                            {/* Metadata Grid */}
                             <div className="space-y-3 sm:space-y-4 mb-auto">
                                 <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
                                     <MapPin size={14} className="text-muted-foreground" />
@@ -71,38 +55,34 @@ export default function ProfilePanel() {
                                     <GraduationCap size={14} className="text-muted-foreground" />
                                     <span className="font-mono text-muted-foreground">BS Information Technology • Cum Laude</span>
                                 </div>
-                                <a href="mailto:clydegevero14@gmail.com" className="flex items-center gap-3 text-sm group">
-                                    <Mail size={14} className="text-muted-foreground group-hover:text-accent transition-colors" />
-                                    <span className="font-mono text-accent group-hover:text-primary transition-colors">clydegevero14@gmail.com</span>
-                                </a>
                             </div>
 
-                            {/* Resume Download Button */}
                             <div className="pt-6 border-t border-border/50 mt-6">
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    onClick={handleDownloadResume}
+                                    onClick={handleRequestResume}
                                     className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-border hover:border-accent hover:bg-accent hover:text-accent-foreground font-mono uppercase tracking-widest text-xs transition-all duration-300"
                                 >
-                                    <FileDown size={14} />
-                                    Download Resume
+                                    <FileKey size={14} />
+                                    Request Resume Access
                                 </motion.button>
                             </div>
 
-                            {/* Statement */}
+                            <ResumeRequestModal
+                                isOpen={isResumeModalOpen}
+                                onClose={() => setIsResumeModalOpen(false)}
+                            />
+
                             <div className="pt-6 mt-6">
                                 <p className="text-xs text-muted-foreground leading-relaxed font-mono">
-                                    What I do is build build build
+                                    What I do is build build build no matter what
                                 </p>
                             </div>
                         </div>
                     </motion.div>
 
-                    {/* Right Column: Technical Stacks */}
                     <div className="lg:col-span-7 p-4 sm:p-6 md:p-8 lg:p-12 overflow-y-auto">
-
-                        {/* Development Stack */}
                         <motion.section
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -123,20 +103,25 @@ export default function ProfilePanel() {
 
                             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                                 {mainTechnologies.map((tech, index) => (
-                                    <motion.div
-                                        key={tech}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 0.3, delay: 0.3 + index * 0.03 }}
-                                        className="group px-2 sm:px-3 md:px-4 py-2 sm:py-3 border border-border hover:border-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+                                    <TechHoverCard
+                                        key={tech.name}
+                                        name={tech.name}
+                                        description={tech.description}
+                                        logo={tech.logo}
                                     >
-                                        <span className="text-xs sm:text-sm font-mono">{tech}</span>
-                                    </motion.div>
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 0.3, delay: 0.3 + index * 0.03 }}
+                                            className="group px-2 sm:px-3 md:px-4 py-2 sm:py-3 border border-border hover:border-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300 w-full text-center"
+                                        >
+                                            <span className="text-xs sm:text-sm font-mono">{tech.name}</span>
+                                        </motion.div>
+                                    </TechHoverCard>
                                 ))}
                             </div>
                         </motion.section>
 
-                        {/* Creative Tools */}
                         <motion.section
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -168,11 +153,8 @@ export default function ProfilePanel() {
                                 ))}
                             </div>
                         </motion.section>
-
                     </div>
-
                 </div>
-
             </div>
         </WorkspacePanel>
     );

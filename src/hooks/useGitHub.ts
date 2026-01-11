@@ -22,6 +22,7 @@ interface GitHubLanguage {
 
 interface GitHubData {
     contributions: GitHubContribution[];
+    weeks: GitHubContribution[][];
     commits: GitHubCommit[];
     languages: GitHubLanguage[];
     totalContributions: number;
@@ -31,6 +32,7 @@ interface GitHubData {
 
 export function useGitHub(): GitHubData {
     const [contributions, setContributions] = useState<GitHubContribution[]>([]);
+    const [weeks, setWeeks] = useState<GitHubContribution[][]>([]);
     const [commits, setCommits] = useState<GitHubCommit[]>([]);
     const [languages, setLanguages] = useState<GitHubLanguage[]>([]);
     const [totalContributions, setTotalContributions] = useState(0);
@@ -53,6 +55,7 @@ export function useGitHub(): GitHubData {
             const data = await response.json();
 
             setContributions(data.contributions || []);
+            setWeeks(data.weeks || []);
             setTotalContributions(data.totalContributions || 0);
             setLanguages(data.languages || []);
             setCommits(data.commits || []);
@@ -71,6 +74,7 @@ export function useGitHub(): GitHubData {
 
     return {
         contributions,
+        weeks,
         commits,
         languages,
         totalContributions,
