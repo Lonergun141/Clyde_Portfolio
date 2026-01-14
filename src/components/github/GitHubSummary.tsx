@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, GitCommit, Code2, Calendar, ExternalLink } from 'lucide-react';
+import { Github, GitCommit, Code2, Calendar } from 'lucide-react';
 
 interface GitHubSummaryProps {
     totalContributions: number;
@@ -70,18 +70,12 @@ export default function GitHubSummary({
                 </div>
             </div>
 
-            {/* GitHub Link */}
+            {/* GitHub Username Display (not clickable) */}
             <div className="pt-8 border-t border-border mt-8">
-                <a
-                    href="https://github.com/Lonergun141"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-accent hover:text-primary transition-colors font-mono"
-                >
+                <div className="inline-flex items-center gap-2 text-sm text-accent font-mono">
                     <Github size={14} />
                     @Lonergun141
-                    <ExternalLink size={10} className="opacity-50" />
-                </a>
+                </div>
             </div>
         </motion.div>
     );
