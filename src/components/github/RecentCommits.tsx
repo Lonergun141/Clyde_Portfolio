@@ -35,11 +35,8 @@ export default function RecentCommits({ commits }: RecentCommitsProps) {
 
             <div className="space-y-2">
                 {commits.map((commit, index) => (
-                    <a
+                    <div
                         key={`${commit.sha}-${index}`}
-                        href={commit.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className="group flex items-start gap-3 p-3 border border-border hover:border-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                     >
                         <code className="text-[10px] font-mono text-accent group-hover:text-accent-foreground/80 bg-accent/10 group-hover:bg-accent-foreground/10 px-1.5 py-0.5">
@@ -53,7 +50,7 @@ export default function RecentCommits({ commits }: RecentCommitsProps) {
                                 {commit.repo} • {commit.date}
                             </p>
                         </div>
-                    </a>
+                    </div>
                 ))}
             </div>
         </motion.section>
