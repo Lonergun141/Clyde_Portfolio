@@ -27,6 +27,8 @@ export interface Project {
 	categories: string[];
 	image?: string;
 	year?: string;
+	period?: 'current' | 'university' | 'creative' | 'personal';
+	id?: number;
 }
 
 export interface ProjectCardProps {

@@ -2,6 +2,16 @@ import { Project } from '@/lib/types/types';
 
 export const projects: Project[] = [
     {
+        title: '(Signed NDA) Aquila',
+        description: 'AQUILA is a web app that operationalizes cybersecurity across 10 domains — from governance to infrastructure, from identity to intelligence.',
+        technologies: ['Redacted', 'Redacted', 'Redacted', 'Redacted', 'Redacted', 'Redacted', 'Redacted', 'Redacted', 'Redacted', 'Redacted'],
+        links: {},
+        categories: ['Web Development'],
+        image: '/aquila.jpg',
+        year: '2025 - Present',
+        period: 'current',
+    },
+    {
         title: 'QuickEase Version III',
         description: 'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification.',
         technologies: ['NextJS', 'Django'],
@@ -11,6 +21,7 @@ export const projects: Project[] = [
         categories: ['Web Development', 'UI/UX Design'],
         image: '/QuickEase Landing Page.png',
         year: '2026',
+        period: 'personal',
     },
     {
         title: '(Signed NDA) SMB Expense Tracker',
@@ -20,6 +31,7 @@ export const projects: Project[] = [
         categories: ['Web Development'],
         image: '',
         year: '2025',
+        period: 'current',
     },
     {
         title: 'QuickEase Reimagined Landing Page',
@@ -31,6 +43,7 @@ export const projects: Project[] = [
         categories: ['UI/UX Design'],
         image: '/QuickEase Landing Page.png',
         year: '2025',
+        period: 'personal',
     },
     {
         title: 'QuickEase Web',
@@ -45,6 +58,7 @@ export const projects: Project[] = [
         categories: ['Web Development', 'UI/UX Design'],
         image: '/web.png',
         year: '2024',
+        period: 'university',
     },
     {
         title: 'QuickEase Mobile',
@@ -52,12 +66,13 @@ export const projects: Project[] = [
             'QuickEase simplifies study sessions using AI to create summaries, flashcards, and quizzes from various inputs. It boosts productivity with tools like a Pomodoro Timer and gamification. Designed for efficiency, it saves time and complements traditional study methods.',
         technologies: ['ReactNative', 'Expo', 'NativeWind', 'Redux', 'RestAPI'],
         links: {
-            github: 'https://bitbucket.org/capstonecgnt/quickease/src/main/',
+            github: 'https://github.com/Lonergun141/QuickEase-Mobile',
             figma: 'https://www.figma.com/design/mU4TyGyGioaRDqPypFM6TZ/QuickEase-App-Mobile?node-id=0-1&t=xDSyyhWJi5RXAJ3U-1',
         },
         categories: ['Mobile', 'UI/UX Design'],
         image: '/mobile.png',
         year: '2024',
+        period: 'university',
     },
     {
         title: 'Lamdag Recipe Website Reimagined (Development)',
@@ -70,6 +85,7 @@ export const projects: Project[] = [
         categories: ['Web Development', 'UI/UX Design'],
         image: '/lamdag_page.png',
         year: '2025',
+        period: 'university',
     },
     {
         title: 'Personal Blog Website (Development)',
@@ -82,6 +98,7 @@ export const projects: Project[] = [
         categories: ['Web Development', 'UI/UX Design'],
         image: '/Landing Page.png',
         year: '2025',
+        period: 'university',
     },
     {
         title: '(Signed NDA) CHED Regional Office X Theses and Dissertations Archive Library',
@@ -94,6 +111,7 @@ export const projects: Project[] = [
         categories: ['Web Development', 'UI/UX Design'],
         image: '/CHED.png',
         year: '2025',
+        period: 'current',
     },
 
     {
@@ -104,6 +122,7 @@ export const projects: Project[] = [
         categories: ['Web Development'],
         image: '/CHED.png',
         year: '2025',
+        period: 'current',
     },
     {
         title: '(Signed NDA) CHED Regional Office X Form Controller System',
@@ -113,6 +132,7 @@ export const projects: Project[] = [
         categories: ['Web Development'],
         image: '/CHED.png',
         year: '2025',
+        period: 'current',
     },
     {
         title: 'Redesign Test',
@@ -124,6 +144,7 @@ export const projects: Project[] = [
         categories: ['UI/UX Design'],
         image: '/Dashboard.png',
         year: '2025',
+        period: 'personal',
     },
 
     {
@@ -136,6 +157,7 @@ export const projects: Project[] = [
         },
         categories: ['Mobile', 'UI/UX Design'],
         year: '2023',
+        period: 'university',
     },
     {
         title: 'VortexNews Web',
@@ -148,6 +170,7 @@ export const projects: Project[] = [
         categories: ['Web Development', 'UI/UX Design'],
         image: '/vortexm.png',
         year: '2023',
+        period: 'university',
     },
     {
         title: 'FurEverMatch',
@@ -160,6 +183,7 @@ export const projects: Project[] = [
         categories: ['Mobile', 'UI/UX Design'],
         image: '/frever.png',
         year: '2022',
+        period: 'university',
     },
     {
         title: 'LAMDAG - Recipe Website',
@@ -171,6 +195,7 @@ export const projects: Project[] = [
         },
         categories: ['Web Development'],
         year: '2022',
+        period: 'university',
     },
     {
         title: 'Dahilayan Wedding Shoot',
@@ -182,6 +207,7 @@ export const projects: Project[] = [
         categories: ['Video Editing'],
         image: '/wed.png',
         year: '2019',
+        period: 'creative',
     },
     {
         title: 'Dahilayan Pre-Wedding Shoot',
@@ -193,6 +219,7 @@ export const projects: Project[] = [
         categories: ['Video Editing'],
         image: '/weddings.png',
         year: '2019',
+        period: 'creative',
     },
     {
         title: 'BANOG BANOG TV VOLUME 2 (2022)',
@@ -205,6 +232,7 @@ export const projects: Project[] = [
         categories: ['Video Editing', 'Photography'],
         image: '/BBTV.png',
         year: '2021-2022',
+        period: 'creative',
     },
 
 ];
