@@ -1,12 +1,12 @@
 'use client';
 
+import { useState, useMemo } from 'react';
 import WorkspacePanel from '@/components/spatial/WorkspacePanel';
 import { useProjects } from '@/hooks/useProjects';
 import ProjectsControls from '@/components/projects/ProjectsControls';
-import ProjectsGrid from '@/components/projects/ProjectsGrid';
-import ProjectsList from '@/components/projects/ProjectsList';
-import { Code, Aperture, Film } from 'lucide-react';
-import { motion } from 'framer-motion';
+import ProjectPeriodTabs from '@/components/projects/ProjectPeriodTabs';
+import ProjectSection from '@/components/projects/ProjectSection';
+import { Briefcase, Rocket, Code, Aperture } from 'lucide-react';
 
 export default function ProjectsPanel() {
     const {
@@ -20,25 +20,58 @@ export default function ProjectsPanel() {
         setSelectedCategory,
         handleSortToggle,
         setViewMode,
-        hasNDA
+        hasNDA,
+        loading
     } = useProjects();
 
-    // Split projects into two groups
-    const creativeCategories = ['Video Editing', 'Photography'];
+    // Period tab state
+    const [activePeriod, setActivePeriod] = useState('professional');
 
-    const systemProjects = filteredAndSortedProjects.filter(p =>
-        !p.categories.some(cat => creativeCategories.includes(cat))
-    );
+    // Split projects by period
+    const projectsByPeriod = useMemo(() => ({
+        professional: filteredAndSortedProjects.filter(p => p.period === 'current'),
+        personal: filteredAndSortedProjects.filter(p => p.period === 'personal'),
+        academic: filteredAndSortedProjects.filter(p => p.period === 'university'),
+        creative: filteredAndSortedProjects.filter(p => p.period === 'creative'),
+    }), [filteredAndSortedProjects]);
 
-    const creativeProjects = filteredAndSortedProjects.filter(p =>
-        p.categories.some(cat => creativeCategories.includes(cat))
-    );
+    // Tab configuration
+    const periodTabs = [
+        {
+            id: 'professional',
+            label: 'Professional Work',
+            icon: Briefcase,
+            count: projectsByPeriod.professional.length,
+            isPrimary: true,
+        },
+        {
+            id: 'personal',
+            label: 'Personal Projects',
+            icon: Rocket,
+            count: projectsByPeriod.personal.length,
+        },
+        {
+            id: 'academic',
+            label: 'Academic Projects',
+            icon: Code,
+            count: projectsByPeriod.academic.length,
+        },
+        {
+            id: 'creative',
+            label: 'Media & Creative',
+            icon: Aperture,
+            count: projectsByPeriod.creative.length,
+        },
+    ];
+
+    // Get current projects based on active tab
+    const currentProjects = projectsByPeriod[activePeriod as keyof typeof projectsByPeriod];
 
     return (
         <WorkspacePanel panelId="projects" title="Deployed Systems">
             <div className="p-8 max-w-[1920px] mx-auto">
 
-                {/* Controls */}
+                {/* Search and Filter Controls */}
                 <ProjectsControls
                     selectedCategory={selectedCategory}
                     categories={categories}
@@ -51,64 +84,23 @@ export default function ProjectsPanel() {
                     onViewModeChange={setViewMode}
                 />
 
-                <div className="space-y-24 mt-8">
+                {/* Period Tabs */}
+                <div className="mt-8">
+                    <ProjectPeriodTabs
+                        tabs={periodTabs}
+                        activeTab={activePeriod}
+                        onTabChange={setActivePeriod}
+                    />
 
-                    {/* SECTION 1: ENGINEERING & DESIGN */}
-                    {systemProjects.length > 0 && (
-                        <section>
-                            <div className="flex items-center gap-3 mb-8 border-b border-border pb-4">
-                                <Code size={18} className="text-muted-foreground" />
-                                <h2 className="text-sm font-bold uppercase tracking-widest text-foreground">
-                                    Engineering & Systems
-                                </h2>
-                                <span className="text-xs font-mono text-muted-foreground ml-auto">
-                                    [{String(systemProjects.length).padStart(2, '0')}]
-                                </span>
-                            </div>
-
-                            {viewMode === 'grid' ? (
-                                <ProjectsGrid projects={systemProjects} hasNDA={hasNDA} />
-                            ) : (
-                                <ProjectsList projects={systemProjects} hasNDA={hasNDA} />
-                            )}
-                        </section>
-                    )}
-
-                    {/* SECTION 2: CREATIVE WORKS */}
-                    {creativeProjects.length > 0 && (
-                        <section>
-                            <div className="flex items-center gap-3 mb-8 border-b border-border pb-4">
-                                <Aperture size={18} className="text-muted-foreground" />
-                                <h2 className="text-sm font-bold uppercase tracking-widest text-foreground">
-                                    Creative Works & Media
-                                </h2>
-                                <span className="text-xs font-mono text-muted-foreground ml-auto">
-                                    [{String(creativeProjects.length).padStart(2, '0')}]
-                                </span>
-                            </div>
-
-                            {viewMode === 'grid' ? (
-                                <ProjectsGrid projects={creativeProjects} hasNDA={hasNDA} />
-                            ) : (
-                                <ProjectsList projects={creativeProjects} hasNDA={hasNDA} />
-                            )}
-                        </section>
-                    )}
-
-                    {/* Empty State */}
-                    {systemProjects.length === 0 && creativeProjects.length === 0 && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="h-[40vh] flex flex-col items-center justify-center text-center opacity-50"
-                        >
-                            <Film size={48} className="mb-6 text-muted-foreground" />
-                            <h3 className="text-2xl font-bold uppercase tracking-widest text-foreground">No Footage Found</h3>
-                            <p className="text-muted-foreground font-mono mt-2">The archives are incomplete.</p>
-                        </motion.div>
-                    )}
-
+                    {/* Project Section */}
+                    <ProjectSection
+                        projects={currentProjects}
+                        viewMode={viewMode}
+                        hasNDA={hasNDA}
+                        loading={loading}
+                    />
                 </div>
+
             </div>
         </WorkspacePanel>
     );
