@@ -45,6 +45,7 @@ const ProjectCard = ({ title, description, tags, categories = [], image, year, l
 						src={image}
 						alt={title}
 						fill
+						unoptimized={image.includes('placehold.co')}
 						className="object-cover object-center grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
 						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 					/>
@@ -59,7 +60,7 @@ const ProjectCard = ({ title, description, tags, categories = [], image, year, l
 					<div className="absolute inset-0 bg-background/80 backdrop-blur-[1px] flex items-center justify-center z-10 border-l border-r border-background">
 						<div className="flex items-center gap-2 px-3 py-1 border border-primary/20 bg-background">
 							<Lock size={12} className="text-primary" />
-							<span className="text-[10px] font-mono uppercase tracking-widest text-primary">Classified</span>
+							<span className="text-[10px] font-mono uppercase tracking-widest text-primary">Under NDA</span>
 						</div>
 					</div>
 				)}

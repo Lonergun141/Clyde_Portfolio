@@ -8,6 +8,9 @@ interface ProjectsGridProps {
 }
 
 const ProjectsGrid = ({ projects, hasNDA }: ProjectsGridProps) => {
+    // Reverse the projects as requested by user
+    const sortedProjects = [...projects].reverse();
+
     return (
         <motion.div
             key="grid"
@@ -16,7 +19,7 @@ const ProjectsGrid = ({ projects, hasNDA }: ProjectsGridProps) => {
             exit={{ opacity: 0 }}
             className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8"
         >
-            {projects.map((project, index) => (
+            {sortedProjects.map((project, index) => (
                 <motion.div
                     key={project.title}
                     layout
