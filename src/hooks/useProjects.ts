@@ -41,6 +41,13 @@ export const useProjects = () => {
         fetchProjects();
     }, []);
 
+    const getCreatedAtTime = (p: Project): number => {
+        const v = p.created_at;
+        if (v == null) return 0;
+        const t = typeof v === 'string' ? new Date(v).getTime() : (v as number);
+        return Number.isFinite(t) ? t : 0;
+    };
+
     const filteredAndSortedProjects = useMemo(() => {
         return projects
             .filter((project) => {
@@ -52,12 +59,22 @@ export const useProjects = () => {
                 return matchesSearch && matchesCategory;
             })
             .sort((a, b) => {
-                if (sortOrder === 'none') return 0;
+                // Default: newest first by date added (created_at), then by id
+                if (sortOrder === 'none') {
+                    const timeA = getCreatedAtTime(a);
+                    const timeB = getCreatedAtTime(b);
+                    if (timeA !== timeB) return timeB - timeA;
+                    return (b.id ?? 0) - (a.id ?? 0);
+                }
                 if (!a.year && !b.year) return 0;
                 if (!a.year) return 1;
                 if (!b.year) return -1;
 
-                const getYear = (y: string) => parseInt(y.split('-')[0]) || 0;
+                const getYear = (y: string) => {
+                    if (!y) return 0;
+                    if (/present/i.test(y)) return new Date().getFullYear();
+                    return parseInt(y.split(/[-–—]/)[0].trim(), 10) || 0;
+                };
                 const yearA = getYear(a.year);
                 const yearB = getYear(b.year);
 
@@ -65,7 +82,7 @@ export const useProjects = () => {
             });
     }, [projects, searchTerm, selectedCategory, sortOrder]);
 
-    const hasNDA = (title: string) => title.includes('(Signed NDA)');
+    const hasNDA = (title: string) => (title || '').trim().includes('(Signed NDA)');
 
     const handleSortToggle = () => {
         setSortOrder(prev => prev === 'none' ? 'desc' : prev === 'desc' ? 'asc' : 'none');

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { Plus, Lock } from 'lucide-react';
 
 interface ProjectFormProps {
     showForm: boolean;
@@ -127,8 +127,50 @@ export default function ProjectForm({ showForm, formData, setFormData, handleSub
                             <FormInput label="Categories (comma-separated)" value={formData.categories || ''}
                                 onChange={v => setFormData({ ...formData, categories: v })} required placeholder="Web Dev, AI, CyberSec" />
 
-                            <FormInput label="Year / Timeline" value={formData.year || ''}
-                                onChange={v => setFormData({ ...formData, year: v })} placeholder="2025 - Present" />
+                            <div className="md:col-span-2">
+                                <label className="block text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                                    Year / Timeline (date range)
+                                </label>
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <input
+                                        type="text"
+                                        value={formData.year || ''}
+                                        onChange={(e) => setFormData({ ...formData, year: e.target.value })}
+                                        placeholder="e.g. 2024 - 2025 or 2025 - Present"
+                                        className="flex-1 min-w-[180px] bg-black/20 border border-white/10 px-4 py-3 text-sm focus:border-[#FF6B35] focus:ring-1 focus:ring-[#FF6B35]/50 outline-none transition-all rounded-sm placeholder:text-muted-foreground/30"
+                                    />
+                                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest">or presets:</span>
+                                    {[
+                                        { label: '2025 - Present', value: '2025 - Present' },
+                                        { label: '2024 - 2025', value: '2024 - 2025' },
+                                        { label: 'Present', value: 'Present' },
+                                        { label: '2024', value: '2024' },
+                                    ].map((preset) => (
+                                        <button
+                                            key={preset.value}
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, year: preset.value })}
+                                            className="px-3 py-2 text-xs font-mono uppercase tracking-wider rounded-sm border border-white/10 hover:border-[#FF6B35]/50 hover:bg-[#FF6B35]/10 transition-colors"
+                                        >
+                                            {preset.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                                <input
+                                    type="checkbox"
+                                    id="isNDA"
+                                    checked={!!formData.isNDA}
+                                    onChange={(e) => setFormData({ ...formData, isNDA: e.target.checked })}
+                                    className="w-4 h-4 rounded border-white/20 bg-black/20 text-[#FF6B35] focus:ring-[#FF6B35]/50"
+                                />
+                                <label htmlFor="isNDA" className="text-sm font-medium text-zinc-300 flex items-center gap-2 cursor-pointer">
+                                    <Lock size={14} className="text-[#FF6B35]" />
+                                    Under NDA (Signed NDA) — show as locked on portfolio
+                                </label>
+                            </div>
 
                             <FormInput label="Cover Image URL" value={formData.image || ''}
                                 onChange={v => setFormData({ ...formData, image: v })} placeholder="Leave empty for auto-placeholder" />

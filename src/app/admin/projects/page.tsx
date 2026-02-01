@@ -5,8 +5,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Search, Plus, Trash2, Edit2, Lock, Eye, Code, X } from 'lucide-react';
 import { Project } from '@/lib/types/types';
 import ProjectForm from '@/components/admin/ProjectForm';
+import { useAdminKey } from '@/context/AdminContext';
 
 export default function ProjectsListPage() {
+    const adminKey = useAdminKey();
     const [projects, setProjects] = useState<Project[]>([]);
     const [showForm, setShowForm] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -23,9 +25,10 @@ export default function ProjectsListPage() {
         image: string;
         year: string;
         period: 'current' | 'personal' | 'university' | 'creative';
+        isNDA: boolean;
     }>({
         title: '', description: '', technologies: '', categories: '',
-        github: '', figma: '', live: '', other: '', image: '', year: '', period: 'current'
+        github: '', figma: '', live: '', other: '', image: '', year: '', period: 'current', isNDA: false
     });
 
     const fetchProjects = async () => {
@@ -47,9 +50,12 @@ export default function ProjectsListPage() {
         p.technologies.some(t => t.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
+    const stripNDAPrefix = (t: string) => t.replace(/^\(Signed NDA\)\s*/i, '').trim();
+
     const handleEdit = (project: Project) => {
+        const isNDA = project.title.includes('(Signed NDA)');
         setFormData({
-            title: project.title,
+            title: isNDA ? stripNDAPrefix(project.title) : project.title,
             description: project.description,
             technologies: project.technologies.join(', '),
             categories: project.categories.join(', '),
@@ -61,6 +67,7 @@ export default function ProjectsListPage() {
             year: project.year || '',
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             period: (project.period as any) || 'current',
+            isNDA,
         });
         setEditingId(project.id!);
         setShowForm(true);
@@ -68,7 +75,10 @@ export default function ProjectsListPage() {
 
     const handleDelete = async (id: number) => {
         if (!confirm('Delete this project?')) return;
-        await fetch(`/api/projects/${id}`, { method: 'DELETE' });
+        await fetch(`/api/projects/${id}`, {
+            method: 'DELETE',
+            headers: { 'x-admin-secret': adminKey },
+        });
         fetchProjects();
     };
 
@@ -89,14 +99,20 @@ export default function ProjectsListPage() {
             if (formData.live) links.live = formData.live;
             if (formData.other) links.other = formData.other;
 
+            const displayTitle = stripNDAPrefix(formData.title);
+            const title = formData.isNDA ? `(Signed NDA) ${displayTitle}` : displayTitle;
+
             const url = editingId ? `/api/projects/${editingId}` : '/api/projects';
             const method = editingId ? 'PUT' : 'POST';
 
             await fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-admin-secret': adminKey,
+                },
                 body: JSON.stringify({
-                    title: formData.title,
+                    title,
                     description: formData.description,
                     technologies,
                     links,
@@ -108,7 +124,7 @@ export default function ProjectsListPage() {
             });
             setShowForm(false);
             setEditingId(null);
-            setFormData({ title: '', description: '', technologies: '', categories: '', github: '', figma: '', live: '', other: '', image: '', year: '', period: 'current' });
+            setFormData({ title: '', description: '', technologies: '', categories: '', github: '', figma: '', live: '', other: '', image: '', year: '', period: 'current', isNDA: false });
             fetchProjects();
         } catch (e) { console.error(e); }
     };
