@@ -9,9 +9,6 @@ interface ProjectsListProps {
 }
 
 const ProjectsList = ({ projects, hasNDA }: ProjectsListProps) => {
-    // Reverse the projects as requested by user
-    const sortedProjects = [...projects].reverse();
-
     return (
         <motion.div
             key="list"
@@ -29,7 +26,7 @@ const ProjectsList = ({ projects, hasNDA }: ProjectsListProps) => {
                 <div className="col-span-3 md:col-span-2 text-right hidden md:block">Link</div>
             </div>
 
-            {sortedProjects.map((project, index) => {
+            {projects.map((project, index) => {
                 const isNDA = hasNDA(project.title);
 
                 return (

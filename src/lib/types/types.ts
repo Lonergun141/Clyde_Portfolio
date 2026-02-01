@@ -29,6 +29,7 @@ export interface Project {
 	year?: string;
 	period?: 'current' | 'university' | 'creative' | 'personal';
 	id?: number;
+	created_at?: string;
 }
 
 export interface ProjectCardProps {

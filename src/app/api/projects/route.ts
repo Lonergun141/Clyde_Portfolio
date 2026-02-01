@@ -6,9 +6,8 @@ export async function GET() {
     try {
         const projects = await sql`
             SELECT * FROM projects
-            ORDER BY created_at DESC
+            ORDER BY created_at DESC NULLS LAST, id DESC
         `;
-
         return NextResponse.json({ success: true, projects });
     } catch (error) {
         console.error('Error fetching projects:', error);

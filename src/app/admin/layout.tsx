@@ -5,14 +5,11 @@ import { usePathname } from 'next/navigation';
 import { LayoutDashboard, Database, Settings, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import AdminAuth from '@/components/admin/AdminAuth';
+import { AdminProvider, useAdminContext } from '@/context/AdminContext';
 
-export default function AdminLayout({
-    children,
-}: {
-    children: React.ReactNode
-}) {
+function AdminLayoutInner({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [adminKey, setAdminKey] = useState('');
+    const { adminKey, setAdminKey } = useAdminContext();
     const [authError, setAuthError] = useState('');
     const pathname = usePathname();
 
@@ -69,5 +66,13 @@ export default function AdminLayout({
                 {children}
             </div>
         </div>
+    );
+}
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <AdminProvider>
+            <AdminLayoutInner>{children}</AdminLayoutInner>
+        </AdminProvider>
     );
 }
