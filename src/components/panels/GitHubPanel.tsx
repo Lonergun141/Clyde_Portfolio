@@ -7,7 +7,7 @@ import {
     GitHubSummary,
     ContributionGraph,
     LanguagesList,
-    RecentCommits
+    //RecentCommits
 } from '@/components/github';
 
 export default function GitHubPanel() {
