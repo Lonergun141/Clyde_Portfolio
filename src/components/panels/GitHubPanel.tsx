@@ -7,7 +7,7 @@ import {
     GitHubSummary,
     ContributionGraph,
     LanguagesList,
-    RecentCommits
+    //RecentCommits
 } from '@/components/github';
 
 export default function GitHubPanel() {
@@ -43,7 +43,7 @@ export default function GitHubPanel() {
                             <>
                                 <ContributionGraph weeks={weeks} />
                                 <LanguagesList languages={languages} />
-                                <RecentCommits commits={commits} />
+                                {/* <RecentCommits commits={commits} /> */}
                             </>
                         )}
 
