@@ -8,5 +8,8 @@ export interface HexagonProps {
     isActive?: boolean;
     onHover?: () => void;
     delay?: number;
+    label?: string;
     size?: number;
+    gridX?: number;
+    gridY?: number;
 }

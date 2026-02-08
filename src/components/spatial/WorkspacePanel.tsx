@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Transition, Variants } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useNavigation } from '@/context/NavigationContext';
 
@@ -11,7 +11,7 @@ interface WorkspacePanelProps {
 }
 
 // Spring physics configuration for smooth, natural motion
-const springTransition = {
+const springTransition: Transition = {
     type: 'spring',
     damping: 30,
     stiffness: 300,
@@ -19,7 +19,7 @@ const springTransition = {
 };
 
 // Staggered content reveal variants
-const contentVariants = {
+const contentVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
         opacity: 1,
@@ -36,7 +36,7 @@ const contentVariants = {
     },
 };
 
-const headerVariants = {
+const headerVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
     visible: {
         opacity: 1,
@@ -48,7 +48,7 @@ const headerVariants = {
     },
 };
 
-const closeButtonVariants = {
+const closeButtonVariants: Variants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
         opacity: 1,
