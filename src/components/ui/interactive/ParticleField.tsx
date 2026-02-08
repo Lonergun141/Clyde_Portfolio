@@ -16,72 +16,72 @@ import * as THREE from 'three';
 import { useTheme } from 'next-themes';
 
 const ParticleSystem = () => {
-    const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === 'dark';
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
 
-    // [TWEAK] Number of particles. 
-    // Higher = denser field but more performance cost. 
-    // Lower = sparser field, faster performance.
-    // Try: 5000 for mobile, 15000 for high-end desktop.
-    const count = isDark ? 10000 : 8000; // More particles for starfield
+  // [TWEAK] Number of particles. 
+  // Higher = denser field but more performance cost. 
+  // Lower = sparser field, faster performance.
+  // Try: 5000 for mobile, 15000 for high-end desktop.
+  const count = isDark ? 10000 : 8000; // More particles for starfield
 
-    const mesh = useRef<THREE.Points>(null);
-    const { viewport } = useThree();
+  const mesh = useRef<THREE.Points>(null);
+  const { viewport } = useThree();
 
-    const particles = useMemo(() => {
-        const positions = new Float32Array(count * 3);
-        const sizes = new Float32Array(count);
-        const twinkle = new Float32Array(count); // Random offset for twinkling
+  const particles = useMemo(() => {
+    const positions = new Float32Array(count * 3);
+    const sizes = new Float32Array(count);
+    const twinkle = new Float32Array(count); // Random offset for twinkling
 
-        for (let i = 0; i < count; i++) {
-            // [TWEAK] Particle Spread / Distribution
-            positions[i * 3] = (Math.random() - 0.5) * 20; // x spread
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 20; // y spread
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 10; // z depth
+    for (let i = 0; i < count; i++) {
+      // [TWEAK] Particle Spread / Distribution
+      positions[i * 3] = (Math.random() - 0.5) * 20; // x spread
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 20; // y spread
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 10; // z depth
 
-            // [TWEAK] Base Size randomization
-            // In dark mode, more varied sizes for realistic stars
-            sizes[i] = isDark ? Math.random() * Math.random() : Math.random();
+      // [TWEAK] Base Size randomization
+      // In dark mode, more varied sizes for realistic stars
+      sizes[i] = isDark ? Math.random() * Math.random() : Math.random();
 
-            // Random phase for twinkling (dark mode only)
-            twinkle[i] = Math.random() * Math.PI * 2;
-        }
+      // Random phase for twinkling (dark mode only)
+      twinkle[i] = Math.random() * Math.PI * 2;
+    }
 
-        return { positions, sizes, twinkle };
-    }, [count, isDark]);
+    return { positions, sizes, twinkle };
+  }, [count, isDark]);
 
-    const uniforms = useMemo(() => ({
-        uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector2(0, 0) },
-        // [TWEAK] Particle Color - changes based on theme
-        uColor: { value: isDark ? new THREE.Color('#FFFFFF') : new THREE.Color('#60A5FA') },
-        uIsDark: { value: isDark ? 1.0 : 0.0 },
-    }), [isDark]);
+  const uniforms = useMemo(() => ({
+    uTime: { value: 0 },
+    uMouse: { value: new THREE.Vector2(0, 0) },
+    // [TWEAK] Particle Color - changes based on theme
+    uColor: { value: isDark ? new THREE.Color('#FFFFFF') : new THREE.Color('#60A5FA') },
+    uIsDark: { value: isDark ? 1.0 : 0.0 },
+  }), [isDark]);
 
-    // Update uniforms when theme changes
-    useEffect(() => {
-        if (mesh.current) {
-            (mesh.current.material as THREE.ShaderMaterial).uniforms.uColor.value =
-                isDark ? new THREE.Color('#FFFFFF') : new THREE.Color('#60A5FA');
-            (mesh.current.material as THREE.ShaderMaterial).uniforms.uIsDark.value = isDark ? 1.0 : 0.0;
-        }
-    }, [isDark]);
+  // Update uniforms when theme changes
+  useEffect(() => {
+    if (mesh.current) {
+      (mesh.current.material as THREE.ShaderMaterial).uniforms.uColor.value =
+        isDark ? new THREE.Color('#FFFFFF') : new THREE.Color('#60A5FA');
+      (mesh.current.material as THREE.ShaderMaterial).uniforms.uIsDark.value = isDark ? 1.0 : 0.0;
+    }
+  }, [isDark]);
 
-    useFrame((state) => {
-        const { clock, pointer } = state;
-        if (mesh.current) {
-            // Update time
-            (mesh.current.material as THREE.ShaderMaterial).uniforms.uTime.value = clock.getElapsedTime();
+  useFrame((state) => {
+    const { clock, pointer } = state;
+    if (mesh.current) {
+      // Update time
+      (mesh.current.material as THREE.ShaderMaterial).uniforms.uTime.value = clock.getElapsedTime();
 
-            // Update mouse position (lerp for smoothness)
-            const targetMouse = new THREE.Vector2(pointer.x * viewport.width / 2, pointer.y * viewport.height / 2);
-            // [TWEAK] Mouse Follow Smoothness/Lag
-            (mesh.current.material as THREE.ShaderMaterial).uniforms.uMouse.value.lerp(targetMouse, 0.1);
-        }
-    });
+      // Update mouse position (lerp for smoothness)
+      const targetMouse = new THREE.Vector2(pointer.x * viewport.width / 2, pointer.y * viewport.height / 2);
+      // [TWEAK] Mouse Follow Smoothness/Lag
+      (mesh.current.material as THREE.ShaderMaterial).uniforms.uMouse.value.lerp(targetMouse, 0.1);
+    }
+  });
 
-    // Custom Vertex Shader
-    const vertexShader = `
+  // Custom Vertex Shader
+  const vertexShader = `
     uniform float uTime;
     uniform vec2 uMouse;
     uniform float uIsDark;
@@ -138,8 +138,8 @@ const ParticleSystem = () => {
     }
   `;
 
-    // Custom Fragment Shader
-    const fragmentShader = `
+  // Custom Fragment Shader
+  const fragmentShader = `
     uniform vec3 uColor;
     uniform float uIsDark;
     varying float vAlpha;
@@ -171,51 +171,45 @@ const ParticleSystem = () => {
     }
   `;
 
-    return (
-        <points ref={mesh}>
-            <bufferGeometry>
-                <bufferAttribute
-                    attach="attributes-position"
-                    count={particles.positions.length / 3}
-                    array={particles.positions}
-                    itemSize={3}
-                />
-                <bufferAttribute
-                    attach="attributes-aScale"
-                    count={particles.sizes.length}
-                    array={particles.sizes}
-                    itemSize={1}
-                />
-                <bufferAttribute
-                    attach="attributes-aTwinkle"
-                    count={particles.twinkle.length}
-                    array={particles.twinkle}
-                    itemSize={1}
-                />
-            </bufferGeometry>
-            <shaderMaterial
-                blending={THREE.AdditiveBlending}
-                depthWrite={false}
-                transparent={true}
-                vertexShader={vertexShader}
-                fragmentShader={fragmentShader}
-                uniforms={uniforms}
-            />
-        </points>
-    );
+  return (
+    <points ref={mesh}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          args={[particles.positions, 3]}
+        />
+        <bufferAttribute
+          attach="attributes-aScale"
+          args={[particles.sizes, 1]}
+        />
+        <bufferAttribute
+          attach="attributes-aTwinkle"
+          args={[particles.twinkle, 1]}
+        />
+      </bufferGeometry>
+      <shaderMaterial
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+        transparent={true}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={uniforms}
+      />
+    </points>
+  );
 };
 
 export default function ParticleField() {
-    return (
-        <div className="absolute inset-0 z-10 w-full h-full">
-            <Canvas
-                camera={{ position: [0, 0, 8], fov: 45 }}
-                gl={{ antialias: true, alpha: true }}
-                dpr={[1, 2]}
-            >
-                <ParticleSystem />
-            </Canvas>
-        </div>
-    );
+  return (
+    <div className="absolute inset-0 z-10 w-full h-full">
+      <Canvas
+        camera={{ position: [0, 0, 8], fov: 45 }}
+        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 2]}
+      >
+        <ParticleSystem />
+      </Canvas>
+    </div>
+  );
 }
 

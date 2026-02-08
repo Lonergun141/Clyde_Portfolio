@@ -44,38 +44,33 @@
 	}
 
 	.dark {
-		/* Dark Mode: "Anodized" - Matte, light-absorbing, dense */
-		--background: 0 0% 8%;
-		/* #141414 - Matte Carbon */
-		--foreground: 0 0% 90%;
-		/* #E6E6E6 - Brushed Aluminum */
+		--background: 240 10% 3.9%;
+		--foreground: 0 0% 98%;
 
-		--card: 0 0% 8%;
-		--card-foreground: 0 0% 90%;
+		--card: 240 10% 3.9%;
+		--card-foreground: 0 0% 98%;
 
-		--popover: 0 0% 8%;
-		--popover-foreground: 0 0% 90%;
+		--popover: 240 10% 3.9%;
+		--popover-foreground: 0 0% 98%;
 
-		--primary: 0 0% 90%;
-		--primary-foreground: 0 0% 8%;
+		--primary: 0 0% 98%;
+		--primary-foreground: 240 5.9% 10%;
 
-		--secondary: 0 0% 15%;
-		/* #262626 - Darker Steel */
-		--secondary-foreground: 0 0% 90%;
+		--secondary: 240 3.7% 15.9%;
+		--secondary-foreground: 0 0% 98%;
 
-		--muted: 0 0% 25%;
-		--muted-foreground: 0 0% 50%;
+		--muted: 240 3.7% 15.9%;
+		--muted-foreground: 240 5% 64.9%;
 
-		--accent: 12 85% 55%;
-		/* International Safety Orange */
-		--accent-foreground: 0 0% 90%;
+		--accent: 240 3.7% 15.9%;
+		--accent-foreground: 0 0% 98%;
 
 		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 0 0% 90%;
+		--destructive-foreground: 0 0% 98%;
 
-		--border: 0 0% 20%;
-		--input: 0 0% 20%;
-		--ring: 0 0% 80%;
+		--border: 240 3.7% 15.9%;
+		--input: 240 3.7% 15.9%;
+		--ring: 240 4.9% 83.9%;
 	}
 }
 

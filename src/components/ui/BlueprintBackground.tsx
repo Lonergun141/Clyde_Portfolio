@@ -11,15 +11,22 @@ interface BlueprintBackgroundProps extends React.HTMLAttributes<HTMLDivElement> 
 export const BlueprintBackground = ({
     className,
     children,
-    gridSize = 40,
+    gridSize = 120,
     ...props
 }: BlueprintBackgroundProps) => {
+    const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
     return (
         <div
             className={cn(
                 "relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-white dark:bg-black transition-colors duration-500",
                 className
             )}
+            onMouseMove={handleMouseMove}
             {...props}
         >
             {/* Background Gradient */}
@@ -27,14 +34,15 @@ export const BlueprintBackground = ({
 
             {/* Grid Pattern */}
             <div
-                className="absolute inset-0 z-0 opacity-[0.15] dark:opacity-[0.07] pointer-events-none"
+                className="absolute inset-0 z-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none transition-opacity duration-300"
                 style={{
                     backgroundImage: `
                         linear-gradient(to right, #808080 1px, transparent 1px),
                         linear-gradient(to bottom, #808080 1px, transparent 1px)
                     `,
                     backgroundSize: `${gridSize}px ${gridSize}px`,
-                    maskImage: 'radial-gradient(ellipse at center, black 50%, transparent 100%)'
+                    maskImage: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
+                    WebkitMaskImage: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`
                 }}
             />
 
