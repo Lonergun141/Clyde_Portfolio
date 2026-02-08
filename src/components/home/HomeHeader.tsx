@@ -30,9 +30,9 @@ export default function HomeHeader() {
                 className="flex items-center gap-2 sm:gap-3"
             >
                 <div className="w-2 h-2 bg-accent" />
-                <span className="text-[8px] sm:text-[10px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
+                {/* <span className="text-[8px] sm:text-[10px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
                     Open for Work
-                </span>
+                </span> */}
             </motion.div>
 
             <motion.div

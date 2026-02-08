@@ -3,7 +3,7 @@ import sql from '@/lib/db';
 
 export async function PUT(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const adminSecret = request.headers.get('x-admin-secret');
@@ -15,7 +15,7 @@ export async function PUT(
             );
         }
 
-        const id = params.id;
+        const { id } = await params;
         const body = await request.json();
         const {
             title,
@@ -66,7 +66,7 @@ export async function PUT(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const adminSecret = request.headers.get('x-admin-secret');
@@ -78,7 +78,7 @@ export async function DELETE(
             );
         }
 
-        const id = params.id;
+        const { id } = await params;
 
         const result = await sql`
             DELETE FROM projects 
