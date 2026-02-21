@@ -29,16 +29,27 @@ const geistMono = localFont({
 export const metadata: Metadata = {
 	title: 'Clyde Gevero | Fullstack Developer & UI/UX Designer',
 	description: 'Fullstack developer and UI/UX designer specializing in React, TypeScript, and thoughtful interfaces. Available for projects.',
-	keywords: ['Fullstack Developer', 'UI/UX Designer', 'React', 'TypeScript', 'Portfolio', 'Clyde Gevero'],
-	authors: [{ name: 'Clyde Gevero' }],
+	keywords: [
+		'Clyde Gevero',
+		'Clyde',
+		'Gevero',
+		'Clyde Gevero Portfolio',
+		'Fullstack Developer',
+		'UI/UX Designer',
+		'React Developer',
+		'TypeScript Developer',
+		'Software Engineer Philippines'
+	],
+	authors: [{ name: 'Clyde Gevero', url: 'https://clydegevero.is-a.dev' }],
 	creator: 'Clyde Gevero',
+	metadataBase: new URL('https://clydegevero.is-a.dev'),
 	openGraph: {
 		type: 'website',
 		locale: 'en_US',
-		url: 'https://clyde-portfolio-beige.vercel.app/',
+		url: 'https://clydegevero.is-a.dev/',
 		title: 'Clyde Gevero | Fullstack Developer & UI/UX Designer',
-		description: 'Fullstack developer and UI/UX designer specializing in React, TypeScript, and thoughtful interfaces.',
-		siteName: 'Clyde Gevero Portfolio',
+		description: 'Portfolio of Clyde Gevero, a Fullstack developer and UI/UX designer specializing in React, TypeScript, and thoughtful interfaces.',
+		siteName: 'Clyde Gevero',
 	},
 	twitter: {
 		card: 'summary_large_image',
