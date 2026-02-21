@@ -14,6 +14,7 @@ import GitHubPanel from '@/components/panels/GitHubPanel';
 import ContactPanel from '@/components/panels/ContactPanel';
 import KeyboardHelpWrapper from '@/components/ui/KeyboardHelpWrapper';
 import ChatPanel from '@/components/panels/ChatPanel';
+import CustomCursor from '@/components/ui/CustomCursor';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -76,7 +77,7 @@ export default function RootLayout({
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}>
 				<ThemeProvider
 					attribute="class"
-					defaultTheme="system"
+					defaultTheme="light"
 					enableSystem
 				>
 					<ThemeTransitionProvider>
@@ -86,6 +87,7 @@ export default function RootLayout({
 								{children}
 
 								{/* Global Spatial Components */}
+								<CustomCursor />
 								<CommandPalette />
 								<KeyboardHelpWrapper />
 								<ProjectsPanel />
