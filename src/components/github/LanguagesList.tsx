@@ -51,14 +51,16 @@ export default function LanguagesList({ languages }: LanguagesListProps) {
                         <div className="flex-1 h-2 bg-muted/30 overflow-hidden">
                             <motion.div
                                 initial={{ width: 0 }}
-                                animate={{ width: `${lang.percentage}%` }}
+                                animate={{ width: `${Math.max(lang.percentage, lang.percentage > 0 ? 2 : 0)}%` }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
                                 className="h-full"
                                 style={{ backgroundColor: lang.color }}
                             />
                         </div>
-                        <span className="text-xs font-mono text-muted-foreground w-10 text-right">
-                            {lang.percentage}%
+                        <span className="text-xs font-mono text-muted-foreground w-12 text-right">
+                            {lang.percentage < 1 && lang.percentage > 0
+                                ? `${lang.percentage.toFixed(1)}%`
+                                : `${Math.round(lang.percentage)}%`}
                         </span>
                     </div>
                 ))}

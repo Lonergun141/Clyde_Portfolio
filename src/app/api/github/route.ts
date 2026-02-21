@@ -44,7 +44,7 @@ export async function GET() {
                         }
                     }
                 }
-                repositories(first: 20, orderBy: {field: UPDATED_AT, direction: DESC}, ownerAffiliations: [OWNER]) {
+                repositories(first: 100, orderBy: {field: UPDATED_AT, direction: DESC}, ownerAffiliations: [OWNER], isFork: false) {
                     nodes {
                         name
                         url
@@ -52,6 +52,15 @@ export async function GET() {
                         primaryLanguage {
                             name
                             color
+                        }
+                        languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+                            edges {
+                                size
+                                node {
+                                    name
+                                    color
+                                }
+                            }
                         }
                         diskUsage
                         defaultBranchRef {
@@ -133,24 +142,34 @@ export async function GET() {
         // Process language data
         const langCounts: Record<string, { size: number; color: string }> = {};
         for (const repo of user.repositories.nodes) {
-            if (repo.primaryLanguage) {
+            if (repo.languages?.edges) {
+                for (const edge of repo.languages.edges) {
+                    const name = edge.node.name;
+                    if (!langCounts[name]) {
+                        langCounts[name] = { size: 0, color: edge.node.color || '#8b949e' };
+                    }
+                    langCounts[name].size += edge.size;
+                }
+            } else if (repo.primaryLanguage) {
                 const name = repo.primaryLanguage.name;
                 if (!langCounts[name]) {
                     langCounts[name] = { size: 0, color: repo.primaryLanguage.color || '#8b949e' };
                 }
-                langCounts[name].size += repo.diskUsage || 1;
+                // fallback to diskUsage if languages array is empty
+                langCounts[name].size += (repo.diskUsage * 1024) || 1;
             }
         }
 
         const totalSize = Object.values(langCounts).reduce((a, b) => a + b.size, 0);
         const languages = Object.entries(langCounts)
+            .filter(([, data]) => data.size > 0)
             .map(([name, data]) => ({
                 name,
-                percentage: totalSize > 0 ? Math.round((data.size / totalSize) * 100) : 0,
+                percentage: totalSize > 0 ? parseFloat(((data.size / totalSize) * 100).toFixed(1)) : 0,
                 color: data.color,
             }))
             .sort((a, b) => b.percentage - a.percentage)
-            .slice(0, 6);
+            .slice(0, 8);
 
         // Extract commits from repositories
         const commits: { sha: string; message: string; repo: string; date: string; url: string }[] = [];

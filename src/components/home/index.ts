@@ -6,3 +6,4 @@ export { default as HomeFooter } from './HomeFooter';
 export { default as DockItem } from './DockItem';
 export { default as NavigationDock } from './NavigationDock';
 export { default as HexagonNav } from './navigation';
+export { default as ResumeContent } from './ResumeContent';
